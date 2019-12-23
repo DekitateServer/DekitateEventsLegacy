@@ -1,0 +1,30 @@
+name: DekitateEvents
+main: com.dekitateserver.events.DekitateEventsPlugin
+version: 1.0.0-SNAPSHOT
+author: ken_kentan
+website: https://www.dekitateserver.com
+depend: [DekitateCore]
+
+api-version: '1.13'
+
+commands:
+  event:
+    description: DekitateEvents
+    usage: /<command>
+    permission: event
+    permission-message: §cこのコマンドを実行する権限がありません.
+  gacha:
+    description: DekitateEvents
+    usage: /<command>
+    permission: event.gacha
+    permission-message: §cこのコマンドを実行する権限がありません.
+  key:
+    description: DekitateEvents
+    usage: /<command>
+    permission: event.key
+    permission-message: §cこのコマンドを実行する権限がありません.
+  loginbonus:
+    description: DekitateEvents
+    usage: /<command>
+    permission: event.loginbonus
+    permission-message: §cこのコマンドを実行する権限がありません.
