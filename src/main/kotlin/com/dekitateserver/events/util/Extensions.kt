@@ -1,10 +1,7 @@
 package com.dekitateserver.events.util
 
 import com.dekitateserver.events.DekitateEvents
-import com.dekitateserver.events.data.vo.GachaId
-import com.dekitateserver.events.data.vo.KeyId
-import com.dekitateserver.events.data.vo.LoginBonusId
-import com.dekitateserver.events.data.vo.PasswordId
+import com.dekitateserver.events.data.vo.*
 import org.bukkit.Bukkit
 import org.bukkit.Server
 import org.bukkit.command.CommandSender
@@ -14,6 +11,7 @@ import org.bukkit.inventory.ItemStack
 fun CommandSender.sendSuccessMessage(message: String) = sendMessage("${DekitateEvents.PREFIX}§a$message")
 fun CommandSender.sendWarnMessage(message: String) = sendMessage("${DekitateEvents.PREFIX}§e$message")
 
+fun CommandSender.sendParkourIdNotFound(parkourId: ParkourId) = sendWarnMessage("Parkour(${parkourId.value})は存在しません.")
 fun CommandSender.sendGachaIdNotFound(gachaId: GachaId) = sendWarnMessage("Gacha(${gachaId.value})は存在しません.")
 fun CommandSender.sendKeyIdNotFound(keyId: KeyId) = sendWarnMessage("Key(${keyId.value})は存在しません.")
 fun CommandSender.sendPasswordIdNotFound(passwordId: PasswordId) = sendWarnMessage("Password(${passwordId.value})は存在しません.")

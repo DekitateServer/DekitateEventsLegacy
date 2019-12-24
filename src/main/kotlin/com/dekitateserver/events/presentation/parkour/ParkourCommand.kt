@@ -14,6 +14,18 @@ class ParkourCommand(
         }
 
         when (args.first()) {
+            "create" -> sender.requireArguments(args, 2) {
+                parkourController.create(
+                        sender = sender,
+                        argParkourId = args[1]
+                )
+            }
+            "delete" -> sender.requireArguments(args, 2) {
+                parkourController.delete(
+                        sender = sender,
+                        argParkourId = args[1]
+                )
+            }
             else -> return false
         }
 
