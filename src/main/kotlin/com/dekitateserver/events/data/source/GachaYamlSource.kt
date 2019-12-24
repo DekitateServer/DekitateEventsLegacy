@@ -39,6 +39,11 @@ class GachaYamlSource(dataFolder: File) {
                     return@mapNotNull null
                 }
 
+                val name = config.getString("$gachaId.name")
+                if (name == null) {
+                    Log.warn("Gacha($gachaId)のnameがありません.")
+                    return@mapNotNull null
+                }
 
                 return@mapNotNull Gacha(
                         id = GachaId(gachaId),
