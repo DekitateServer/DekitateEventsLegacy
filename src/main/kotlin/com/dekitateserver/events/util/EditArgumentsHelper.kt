@@ -1,5 +1,6 @@
 package com.dekitateserver.events.util
 
+import org.bukkit.ChatColor
 import org.bukkit.Location
 import org.bukkit.Material
 import org.bukkit.entity.Player
@@ -31,8 +32,10 @@ object EditArgumentsHelper {
             return null
         }
 
-        return args.joinToString(separator = " ")
+        return ChatColor.translateAlternateColorCodes('&', args.joinToString(separator = " "))
     }
+
+    fun requireString(args: List<String>): String = getString(args) ?: throw IllegalArgumentException("この項目は必須です.")
 
     fun getItemInMainHand(player: Player): ItemStack {
         val itemInMainHand = player.inventory.itemInMainHand
