@@ -1,9 +1,11 @@
 package com.dekitateserver.events.presentation.password
 
 import com.dekitateserver.events.DekitateEventsPlugin
+import com.dekitateserver.events.data.vo.PasswordEditType
 import com.dekitateserver.events.data.vo.PasswordId
 import com.dekitateserver.events.domain.usecase.password.*
 import com.dekitateserver.events.util.selectPlayersOrError
+import com.dekitateserver.events.util.sendWarnMessage
 import kotlinx.coroutines.launch
 import org.bukkit.command.CommandSender
 
@@ -17,6 +19,7 @@ class PasswordController(plugin: DekitateEventsPlugin) {
     private val resetPasswordUseCase = ResetPasswordUseCase(plugin.passwordRepository)
     private val createPasswordUseCase = CreatePasswordUseCase(plugin.passwordRepository)
     private val deletePasswordUseCase = DeletePasswordUseCase(plugin.passwordRepository)
+    private val editPasswordUseCase = EditPasswordUseCase(plugin.passwordRepository)
     private val sendPasswordEditTypeListUseCase = SendPasswordEditTypeListUseCase()
     private val sendPasswordListUseCase = SendPasswordListUseCase(plugin.passwordRepository)
     private val sendPasswordInfoUseCase = SendPasswordInfoUseCase(plugin.passwordRepository)
@@ -66,7 +69,19 @@ class PasswordController(plugin: DekitateEventsPlugin) {
     }
 
     fun edit(sender: CommandSender, argPasswordId: String, argType: String, argArgs: List<String>) {
+        val passwordEditType = PasswordEditType.find(argType) ?: let {
+            sender.sendWarnMessage("存在しないPasswordEditTypeです. [type: $argType]")
+            return
+        }
 
+        pluginScope.launch {
+            editPasswordUseCase(
+                    sender = sender,
+                    passwordId = PasswordId(argPasswordId),
+                    type = passwordEditType,
+                    args = argArgs
+            )
+        }
     }
 
     fun sendEditTypeList(sender: CommandSender) {
