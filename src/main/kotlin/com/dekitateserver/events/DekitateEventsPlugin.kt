@@ -15,6 +15,8 @@ import com.dekitateserver.events.presentation.key.KeyController
 import com.dekitateserver.events.presentation.loginbonus.LoginBonusCommand
 import com.dekitateserver.events.presentation.loginbonus.LoginBonusController
 import com.dekitateserver.events.presentation.loginbonus.LoginBonusEventListener
+import com.dekitateserver.events.presentation.password.PasswordCommand
+import com.dekitateserver.events.presentation.password.PasswordController
 import com.dekitateserver.events.presentation.spawn.SpawnController
 import com.dekitateserver.events.presentation.spawn.SpawnEventListener
 import com.dekitateserver.events.util.Log
@@ -67,12 +69,14 @@ class DekitateEventsPlugin : DekitateEvents, DekitatePlugin() {
         val eventController = EventController(this)
         val gachaController = GachaController(this)
         val keyController = KeyController(this)
+        val passwordController = PasswordController(this)
         val spawnController = SpawnController(this)
         val loginBonusController = LoginBonusController(this)
 
         registerCommand(EventCommand(eventController))
         registerCommand(GachaCommand(gachaController))
         registerCommand(KeyCommand(keyController))
+        registerCommand(PasswordCommand(passwordController))
         registerCommand(LoginBonusCommand(loginBonusController))
 
         server.pluginManager.registerEvents(GachaEventListener(gachaController), this)

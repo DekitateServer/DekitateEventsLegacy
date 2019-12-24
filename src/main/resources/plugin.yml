@@ -23,6 +23,11 @@ commands:
     usage: /<command>
     permission: event.key
     permission-message: §cこのコマンドを実行する権限がありません.
+  password:
+    description: Passwordコマンド
+    usage: §e'/<command> help'でヘルプを確認してください.
+    permission: events.password
+    permission-message: §cこのコマンドを実行する権限がありません.
   loginbonus:
     description: DekitateEvents
     usage: /<command>
