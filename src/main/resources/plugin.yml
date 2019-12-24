@@ -9,18 +9,18 @@ api-version: '1.13'
 
 commands:
   event:
-    description: DekitateEvents
-    usage: /<command>
+    description: DekitateEventsコマンド
+    usage: §e'/<command> help'でヘルプを確認してください.
     permission: event
     permission-message: §cこのコマンドを実行する権限がありません.
   gacha:
-    description: DekitateEvents
-    usage: /<command>
+    description: Gachaコマンド
+    usage: §e'/<command> help'でヘルプを確認してください.
     permission: event.gacha
     permission-message: §cこのコマンドを実行する権限がありません.
   key:
-    description: DekitateEvents
-    usage: /<command>
+    description: Keyコマンド
+    usage: §e'/<command> help'でヘルプを確認してください.
     permission: event.key
     permission-message: §cこのコマンドを実行する権限がありません.
   password:
@@ -29,7 +29,7 @@ commands:
     permission: events.password
     permission-message: §cこのコマンドを実行する権限がありません.
   loginbonus:
-    description: DekitateEvents
-    usage: /<command>
+    description: LoginBonusコマンド
+    usage: §e'/<command> help'でヘルプを確認してください.
     permission: event.loginbonus
     permission-message: §cこのコマンドを実行する権限がありません.
