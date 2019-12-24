@@ -14,6 +14,13 @@ class ParkourCommand(
         }
 
         when (args.first()) {
+            "join" -> sender.requireArguments(args, 3) {
+                parkourController.join(
+                        sender = sender,
+                        argSelector = args[1],
+                        argParkourId = args[2]
+                )
+            }
             "create" -> sender.requireArguments(args, 3) {
                 parkourController.create(
                         sender = sender,
