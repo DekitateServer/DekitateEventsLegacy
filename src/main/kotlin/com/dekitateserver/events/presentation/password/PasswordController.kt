@@ -4,6 +4,7 @@ import com.dekitateserver.events.DekitateEventsPlugin
 import com.dekitateserver.events.data.vo.PasswordId
 import com.dekitateserver.events.domain.usecase.password.CreatePasswordUseCase
 import com.dekitateserver.events.domain.usecase.password.InputPasswordUseCase
+import com.dekitateserver.events.domain.usecase.password.ResetPasswordUseCase
 import com.dekitateserver.events.domain.usecase.password.SetPasswordUseCase
 import com.dekitateserver.events.util.selectPlayersOrError
 import kotlinx.coroutines.launch
@@ -16,6 +17,7 @@ class PasswordController(plugin: DekitateEventsPlugin) {
 
     private val inputPasswordUseCase = InputPasswordUseCase(plugin.passwordRepository)
     private val setPasswordUseCase = SetPasswordUseCase(plugin.passwordRepository)
+    private val resetPasswordUseCase = ResetPasswordUseCase(plugin.passwordRepository)
     private val createPasswordUseCase = CreatePasswordUseCase(plugin.passwordRepository)
 
     fun input(sender: CommandSender, argSelector: String, argPasswordId: String, argText: String) {
@@ -36,7 +38,11 @@ class PasswordController(plugin: DekitateEventsPlugin) {
     }
 
     fun reset(sender: CommandSender, argSelector: String, argPasswordId: String) {
+        val passwordId = PasswordId(argPasswordId)
 
+        server.selectPlayersOrError(sender, argSelector)?.forEach { player ->
+            resetPasswordUseCase(player, passwordId)
+        }
     }
 
     fun create(sender: CommandSender, argPasswordId: String) {
