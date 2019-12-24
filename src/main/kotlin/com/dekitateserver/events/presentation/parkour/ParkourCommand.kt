@@ -14,10 +14,11 @@ class ParkourCommand(
         }
 
         when (args.first()) {
-            "create" -> sender.requireArguments(args, 2) {
+            "create" -> sender.requireArguments(args, 3) {
                 parkourController.create(
                         sender = sender,
-                        argParkourId = args[1]
+                        argParkourId = args[1],
+                        argName = args[2]
                 )
             }
             "delete" -> sender.requireArguments(args, 2) {
@@ -48,7 +49,7 @@ class ParkourCommand(
                 "| §a/parkour join [player] [parkourId]",
                 "| §a/parkour clear [player] [parkourId]",
                 "| §a/parkour exit [player] [parkourId]",
-                "| §a/parkour create [parkourId]",
+                "| §a/parkour create [parkourId] [name]",
                 "| §a/parkour delete [parkourId]",
                 "| §a/parkour edit [parkourId] [type] <args..>",
                 "| §a/parkour edittype",

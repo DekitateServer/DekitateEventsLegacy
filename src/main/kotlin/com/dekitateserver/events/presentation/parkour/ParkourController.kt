@@ -18,11 +18,12 @@ class ParkourController(plugin: DekitateEventsPlugin) {
     private val deleteParkourUseCase = DeleteParkourUseCase(plugin.parkourRepository)
     private val editParkourUseCase = EditParkourUseCase(plugin.parkourRepository)
 
-    fun create(sender: CommandSender, argParkourId: String) {
+    fun create(sender: CommandSender, argParkourId: String, argName: String) {
         pluginScope.launch {
             createParkourUseCase(
                     sender = sender,
-                    parkourId = ParkourId(argParkourId)
+                    parkourId = ParkourId(argParkourId),
+                    name = argName
             )
         }
     }

@@ -1,5 +1,6 @@
 package com.dekitateserver.events.domain.usecase.parkour
 
+import com.dekitateserver.core.util.formatColorCodes
 import com.dekitateserver.events.data.ParkourRepository
 import com.dekitateserver.events.data.entity.Parkour
 import com.dekitateserver.events.data.vo.ParkourId
@@ -10,13 +11,16 @@ import org.bukkit.command.CommandSender
 class CreateParkourUseCase(
         private val parkourRepository: ParkourRepository
 ) {
-    suspend operator fun invoke(sender: CommandSender, parkourId: ParkourId) {
+    suspend operator fun invoke(sender: CommandSender, parkourId: ParkourId, name: String) {
         if (parkourRepository.has(parkourId)) {
             sender.sendWarnMessage("Parkour(${parkourId.value})は既に登録済みです.")
             return
         }
 
-        val parkour = Parkour(parkourId)
+        val parkour = Parkour(
+                id = parkourId,
+                name = name.formatColorCodes()
+        )
 
         if (parkourRepository.add(parkour)) {
             sender.sendSuccessMessage("Parkour(${parkourId.value})を作成しました.")

@@ -1,6 +1,6 @@
 package com.dekitateserver.events.util
 
-import org.bukkit.ChatColor
+import com.dekitateserver.core.util.formatColorCodes
 import org.bukkit.Location
 import org.bukkit.Material
 import org.bukkit.entity.Player
@@ -32,7 +32,7 @@ object EditArgumentsHelper {
             return null
         }
 
-        return ChatColor.translateAlternateColorCodes('&', args.joinToString(separator = " "))
+        return args.joinToString(separator = " ").formatColorCodes()
     }
 
     fun requireString(args: List<String>): String = getString(args) ?: throw IllegalArgumentException("この項目は必須です.")
