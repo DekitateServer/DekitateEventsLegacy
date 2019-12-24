@@ -19,6 +19,7 @@ class PasswordController(plugin: DekitateEventsPlugin) {
     private val deletePasswordUseCase = DeletePasswordUseCase(plugin.passwordRepository)
     private val sendPasswordListUseCase = SendPasswordListUseCase(plugin.passwordRepository)
     private val sendPasswordInfoUseCase = SendPasswordInfoUseCase(plugin.passwordRepository)
+    private val reloadPasswordUseCase = ReloadPasswordUseCase(plugin.passwordRepository)
 
     fun input(sender: CommandSender, argSelector: String, argPasswordId: String, argText: String) {
         val passwordId = PasswordId(argPasswordId)
@@ -83,6 +84,8 @@ class PasswordController(plugin: DekitateEventsPlugin) {
     }
 
     fun reload() {
-
+        pluginScope.launch {
+            reloadPasswordUseCase()
+        }
     }
 }
