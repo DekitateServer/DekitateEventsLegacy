@@ -8,7 +8,7 @@ import org.bukkit.Material
 
 data class Password(
         val id: PasswordId,
-        val default: String = "",
+        private var value: String,
         val blockMaterial: Material? = null,
         val blockLocation: Location? = null,
         val matchMessage: String? = "&b一致",
@@ -19,8 +19,6 @@ data class Password(
     val blockMaterialLocation = if (blockMaterial != null && blockLocation != null) {
         MaterialLocation(blockMaterial, blockLocation)
     } else null
-
-    private var value: String = default
 
     private val buffer = StringBuilder()
     val bufferText: String
@@ -44,6 +42,8 @@ data class Password(
             else -> PasswordInputResult.NOT_MATCH
         }
     }
+
+    fun get(): String = value
 
     fun set(password: String) {
         value = password
