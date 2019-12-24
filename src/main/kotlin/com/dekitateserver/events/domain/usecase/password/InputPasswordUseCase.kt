@@ -12,7 +12,10 @@ class InputPasswordUseCase(
     operator fun invoke(player: Player, passwordId: PasswordId, text: String) {
         val password = passwordRepository.getOrError(passwordId) ?: return
 
-        val resultMessage = when (password.input(text)) {
+        val result = password.input(text)
+        player.sendMessageIfNotNull(password.inputMessage?.replace("{buff}", password.bufferText))
+
+        val resultMessage = when (result) {
             PasswordInputResult.MATCH -> {
                 password.blockMaterialLocation?.let {
                     it.location.block.type = it.material
@@ -23,8 +26,6 @@ class InputPasswordUseCase(
             PasswordInputResult.NOT_MATCH -> password.notMatchMessage
             PasswordInputResult.CONTINUE -> return
         }
-
-        player.sendMessageIfNotNull(password.inputMessage?.replace("{buff}", password.bufferText))
 
         player.sendMessageIfNotNull(resultMessage)
     }
