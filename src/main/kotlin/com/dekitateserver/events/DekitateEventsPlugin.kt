@@ -36,6 +36,7 @@ class DekitateEventsPlugin : DekitateEvents, DekitatePlugin() {
     lateinit var signMetaRepository: SignMetaRepository
     lateinit var gachaRepository: GachaRepository
     lateinit var keyRepository: KeyRepository
+    lateinit var passwordRepository: PasswordRepository
     lateinit var loginBonusRepository: LoginBonusRepository
     lateinit var eventTicketHistoryRepository: EventTicketHistoryRepository
     lateinit var voteTicketHistoryRepository: VoteTicketHistoryRepository
@@ -60,6 +61,7 @@ class DekitateEventsPlugin : DekitateEvents, DekitatePlugin() {
         signMetaRepository = SignMetaRepository(this)
         gachaRepository = GachaRepository(this)
         keyRepository = KeyRepository(this)
+        passwordRepository = PasswordRepository(this)
         loginBonusRepository = LoginBonusRepository(this)
         eventTicketHistoryRepository = EventTicketHistoryRepository(this)
         voteTicketHistoryRepository = VoteTicketHistoryRepository(this)

@@ -11,8 +11,8 @@ data class Password(
         private var value: String,
         val blockMaterial: Material? = null,
         val blockLocation: Location? = null,
-        val matchMessage: String? = "&b一致",
-        val notMatchMessage: String? = "&c不一致",
+        val matchMessage: String? = "§b一致",
+        val notMatchMessage: String? = "§c不一致",
         val inputMessage: String? = "現在の入力> {buff}",
         val resetMessage: String? = "入力をリセットしました."
 ) {
