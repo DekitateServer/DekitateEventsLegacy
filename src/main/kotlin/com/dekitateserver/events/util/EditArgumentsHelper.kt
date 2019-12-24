@@ -16,6 +16,11 @@ object EditArgumentsHelper {
         }
     }
 
+    fun getInt(args: List<String>): Int? {
+        val text = args.firstOrNull() ?: return null
+        return text.toIntOrNull() ?: throw IllegalArgumentException("整数を指定してください.")
+    }
+
     fun getLong(args: List<String>): Long? {
         val text = args.firstOrNull() ?: return null
         return text.toLongOrNull() ?: throw IllegalArgumentException("整数を指定してください.")

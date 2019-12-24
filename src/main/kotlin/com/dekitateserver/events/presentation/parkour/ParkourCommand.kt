@@ -26,6 +26,14 @@ class ParkourCommand(
                         argParkourId = args[1]
                 )
             }
+            "edit" -> sender.requireArguments(args, 3) {
+                parkourController.edit(
+                        sender = sender,
+                        argParkourId = args[1],
+                        argType = args[2],
+                        argArgs = args.drop(3)
+                )
+            }
             else -> return false
         }
 
