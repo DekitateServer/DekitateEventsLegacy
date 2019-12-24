@@ -2,15 +2,19 @@ package com.dekitateserver.events.presentation.password
 
 import com.dekitateserver.events.DekitateEventsPlugin
 import com.dekitateserver.events.data.vo.PasswordId
+import com.dekitateserver.events.domain.usecase.password.CreatePasswordUseCase
 import com.dekitateserver.events.domain.usecase.password.InputPasswordUseCase
 import com.dekitateserver.events.util.selectPlayersOrError
+import kotlinx.coroutines.launch
 import org.bukkit.command.CommandSender
 
 class PasswordController(plugin: DekitateEventsPlugin) {
 
     private val server = plugin.server
+    private val pluginScope = plugin.pluginScope
 
     private val inputPasswordUseCase = InputPasswordUseCase(plugin.passwordRepository)
+    private val createPasswordUseCase = CreatePasswordUseCase(plugin.passwordRepository)
 
     fun input(sender: CommandSender, argSelector: String, argPasswordId: String, argText: String) {
         val passwordId = PasswordId(argPasswordId)
@@ -29,7 +33,12 @@ class PasswordController(plugin: DekitateEventsPlugin) {
     }
 
     fun create(sender: CommandSender, argPasswordId: String) {
-
+        pluginScope.launch {
+            createPasswordUseCase(
+                    sender = sender,
+                    passwordId = PasswordId(argPasswordId)
+            )
+        }
     }
 
     fun delete(sender: CommandSender, argPasswordId: String) {

@@ -28,6 +28,8 @@ class PasswordRepository(plugin: JavaPlugin) {
         return@let null
     }
 
+    fun has(passwordId: PasswordId): Boolean = passwordCacheMap.containsKey(passwordId)
+
     suspend fun add(password: Password): Boolean = withContext(Dispatchers.IO) {
         if (passwordCacheMap.containsKey(password.id)) {
             return@withContext false
