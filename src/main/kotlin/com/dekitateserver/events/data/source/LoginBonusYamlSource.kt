@@ -4,7 +4,6 @@ import com.dekitateserver.core.data.source.YamlStorage
 import com.dekitateserver.events.data.entity.LoginBonus
 import com.dekitateserver.events.data.vo.LoginBonusId
 import com.dekitateserver.events.util.Log
-import org.bukkit.configuration.file.YamlConfiguration
 import java.io.File
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -21,7 +20,7 @@ class LoginBonusYamlSource(dataFolder: File) {
         val loginBonusList = mutableListOf<LoginBonus>()
 
         try {
-            val config = YamlConfiguration.loadConfiguration(storage.requireFile())
+            val config = storage.loadYamlConfiguration()
 
             val loginBonusIdSet = config.root?.getKeys(false).orEmpty()
 

@@ -6,7 +6,6 @@ import com.dekitateserver.events.data.vo.KeyId
 import com.dekitateserver.events.util.Log
 import org.bukkit.Location
 import org.bukkit.Material
-import org.bukkit.configuration.file.YamlConfiguration
 import java.io.File
 
 class KeyYamlSource(dataFolder: File) {
@@ -16,7 +15,7 @@ class KeyYamlSource(dataFolder: File) {
         val keyList = mutableListOf<Key>()
 
         try {
-            val config = YamlConfiguration.loadConfiguration(storage.requireFile())
+            val config = storage.loadYamlConfiguration()
 
             val keyIdSet = config.root?.getKeys(false).orEmpty()
 
