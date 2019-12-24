@@ -46,6 +46,8 @@ class DekitateEventsPlugin : DekitateEvents, DekitatePlugin() {
     lateinit var gachaHistoryRepository: GachaHistoryRepository
     lateinit var loginBonusHistoryRepository: LoginBonusHistoryRepository
 
+    lateinit var parkourActionHistoryRepository: ParkourActionHistoryRepository
+
     override fun onEnable() {
         super.onEnable()
 
@@ -71,6 +73,8 @@ class DekitateEventsPlugin : DekitateEvents, DekitatePlugin() {
         voteTicketHistoryRepository = VoteTicketHistoryRepository(this)
         gachaHistoryRepository = GachaHistoryRepository(this)
         loginBonusHistoryRepository = LoginBonusHistoryRepository(this)
+
+        parkourActionHistoryRepository = ParkourActionHistoryRepository(this)
 
         val eventController = EventController(this)
         val parkourController = ParkourController(this)
