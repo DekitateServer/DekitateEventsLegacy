@@ -61,11 +61,19 @@ object EditArgumentsHelper {
         }
     }
 
-    fun getMaterial(args: List<String>): Material? {
+    fun getBlockMaterial(args: List<String>): Material? {
         if (args.isEmpty()) {
             return null
         }
 
-        return Material.matchMaterial(args.first()) ?: throw IllegalArgumentException("正しい素材を指定してください.")
+        val materialName = args.first()
+        val material = Material.matchMaterial(materialName)
+                ?: throw IllegalArgumentException("Material($materialName)は存在しません.")
+
+        if (!material.isBlock) {
+            throw IllegalArgumentException("Material($materialName)はブロックではありません.")
+        }
+
+        return material
     }
 }

@@ -17,7 +17,7 @@ class EditPasswordUseCase(
 
         val newPassword = try {
             when (type) {
-                PasswordEditType.BLOCK_MATERIAL -> password.copy(blockMaterial = EditArgumentsHelper.getMaterial(args))
+                PasswordEditType.BLOCK_MATERIAL -> password.copy(blockMaterial = EditArgumentsHelper.getBlockMaterial(args))
                 PasswordEditType.BLOCK_LOCATION -> {
                     val player = sender.toPlayerOrError() ?: return
                     password.copy(blockLocation = EditArgumentsHelper.getLocation(player, args))

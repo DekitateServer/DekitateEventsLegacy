@@ -29,7 +29,7 @@ class EditKeyUseCase(
                     val minutes = EditArgumentsHelper.getLong(args) ?: 0L
                     key.copy(expireMinutes = minutes)
                 }
-                KeyEditType.BLOCK_MATERIAL -> key.copy(blockMaterial = EditArgumentsHelper.getMaterial(args))
+                KeyEditType.BLOCK_MATERIAL -> key.copy(blockMaterial = EditArgumentsHelper.getBlockMaterial(args))
                 KeyEditType.BLOCK_LOCATION -> {
                     val player = sender.toPlayerOrError() ?: return
                     key.copy(blockLocation = EditArgumentsHelper.getLocation(player, args))
