@@ -86,7 +86,10 @@ class KeyController(plugin: DekitateEventsPlugin) {
     }
 
     fun sendInfo(sender: CommandSender, argKeyId: String) {
-        sendKeyInfoUseCase(sender, KeyId(argKeyId))
+        sendKeyInfoUseCase(
+                sender = sender,
+                keyId = KeyId(argKeyId)
+        )
     }
 
     fun reload() {
