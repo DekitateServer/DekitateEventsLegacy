@@ -17,6 +17,7 @@ class EditParkourUseCase(
 
         val newParkour = try {
             when (type) {
+                ParkourEditType.NAME -> parkour.copy(name = EditArgumentsHelper.requireString(args))
                 ParkourEditType.REWARD_EVENT_TICKET -> parkour.copy(rewardEventTicketAmount = EditArgumentsHelper.getInt(args)
                         ?: 0)
                 ParkourEditType.JOIN_LOCATION -> {

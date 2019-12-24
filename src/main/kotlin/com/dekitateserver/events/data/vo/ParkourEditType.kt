@@ -4,6 +4,7 @@ enum class ParkourEditType(
         val id: String,
         val description: String
 ) {
+    NAME("name", "[text] 名前(必須)"),
     REWARD_EVENT_TICKET("reward-event-ticket", "[amount] イベントチケット報酬"),
     JOIN_LOCATION("join-location", "[here/x y z <yaw pitch>] 参加TP位置"),
     JOIN_MESSAGE("join-msg", "[msg] 参加時に表示"),
