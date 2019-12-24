@@ -15,6 +15,8 @@ import com.dekitateserver.events.presentation.key.KeyController
 import com.dekitateserver.events.presentation.loginbonus.LoginBonusCommand
 import com.dekitateserver.events.presentation.loginbonus.LoginBonusController
 import com.dekitateserver.events.presentation.loginbonus.LoginBonusEventListener
+import com.dekitateserver.events.presentation.parkour.ParkourCommand
+import com.dekitateserver.events.presentation.parkour.ParkourController
 import com.dekitateserver.events.presentation.password.PasswordCommand
 import com.dekitateserver.events.presentation.password.PasswordController
 import com.dekitateserver.events.presentation.spawn.SpawnController
@@ -34,6 +36,7 @@ class DekitateEventsPlugin : DekitateEvents, DekitatePlugin() {
         get() = mariaDbPoolDataSource
 
     lateinit var signMetaRepository: SignMetaRepository
+    lateinit var parkourRepository: ParkourRepository
     lateinit var gachaRepository: GachaRepository
     lateinit var keyRepository: KeyRepository
     lateinit var passwordRepository: PasswordRepository
@@ -59,6 +62,7 @@ class DekitateEventsPlugin : DekitateEvents, DekitatePlugin() {
         )
 
         signMetaRepository = SignMetaRepository(this)
+        parkourRepository = ParkourRepository(this)
         gachaRepository = GachaRepository(this)
         keyRepository = KeyRepository(this)
         passwordRepository = PasswordRepository(this)
@@ -69,6 +73,7 @@ class DekitateEventsPlugin : DekitateEvents, DekitatePlugin() {
         loginBonusHistoryRepository = LoginBonusHistoryRepository(this)
 
         val eventController = EventController(this)
+        val parkourController = ParkourController(this)
         val gachaController = GachaController(this)
         val keyController = KeyController(this)
         val passwordController = PasswordController(this)
@@ -76,6 +81,7 @@ class DekitateEventsPlugin : DekitateEvents, DekitatePlugin() {
         val loginBonusController = LoginBonusController(this)
 
         registerCommand(EventCommand(eventController))
+        registerCommand(ParkourCommand(parkourController))
         registerCommand(GachaCommand(gachaController))
         registerCommand(KeyCommand(keyController))
         registerCommand(PasswordCommand(passwordController))

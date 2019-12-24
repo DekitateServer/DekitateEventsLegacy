@@ -4,7 +4,9 @@ import com.dekitateserver.core.command.AbstractCommand
 import org.bukkit.command.Command
 import org.bukkit.command.CommandSender
 
-class ParkourCommand : AbstractCommand("parkour") {
+class ParkourCommand(
+        private val parkourController: ParkourController
+) : AbstractCommand("parkour") {
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<String>): Boolean {
         if (args.isHelpCommand()) {
             sender.sendMessage(MESSAGES_HELP)
