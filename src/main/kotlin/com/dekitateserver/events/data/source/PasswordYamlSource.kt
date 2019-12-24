@@ -58,4 +58,6 @@ class PasswordYamlSource(dataFolder: File) {
 
         return storage.save(dataMap)
     }
+
+    fun delete(passwordId: PasswordId) = storage.save(mapOf(passwordId.value to null))
 }

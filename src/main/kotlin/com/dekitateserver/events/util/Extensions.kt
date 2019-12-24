@@ -4,6 +4,7 @@ import com.dekitateserver.events.DekitateEvents
 import com.dekitateserver.events.data.vo.GachaId
 import com.dekitateserver.events.data.vo.KeyId
 import com.dekitateserver.events.data.vo.LoginBonusId
+import com.dekitateserver.events.data.vo.PasswordId
 import org.bukkit.Bukkit
 import org.bukkit.Server
 import org.bukkit.command.CommandSender
@@ -15,6 +16,7 @@ fun CommandSender.sendWarnMessage(message: String) = sendMessage("${DekitateEven
 
 fun CommandSender.sendGachaIdNotFound(gachaId: GachaId) = sendWarnMessage("Gacha(${gachaId.value})は存在しません.")
 fun CommandSender.sendKeyIdNotFound(keyId: KeyId) = sendWarnMessage("Key(${keyId.value})は存在しません.")
+fun CommandSender.sendPasswordIdNotFound(passwordId: PasswordId) = sendWarnMessage("Password(${passwordId.value})は存在しません.")
 fun CommandSender.sendLoginBonusIdNotFound(loginBonusId: LoginBonusId) = sendWarnMessage("LoginBonus(${loginBonusId.value})は存在しません.")
 
 fun CommandSender.sendCommandBlockOnly() = sendWarnMessage("コマンドブロック専用コマンドです.")

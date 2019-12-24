@@ -56,6 +56,19 @@ class PasswordRepository(plugin: JavaPlugin) {
         }
     }
 
+    suspend fun remove(passwordId: PasswordId): Boolean = withContext(Dispatchers.IO) {
+        if (!passwordCacheMap.containsKey(passwordId)) {
+            return@withContext false
+        }
+
+        return@withContext if (passwordYamlSource.delete(passwordId)) {
+            passwordCacheMap.remove(passwordId)
+            true
+        } else {
+            false
+        }
+    }
+
     suspend fun refreshCache() = withContext(Dispatchers.IO) {
         passwordCacheMap.clear()
         createCache()
