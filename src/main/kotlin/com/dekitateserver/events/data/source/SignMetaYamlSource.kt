@@ -15,7 +15,7 @@ class SignMetaYamlSource(dataFolder: File) {
         val signMetaList = mutableListOf<SignMeta>()
 
         try {
-            val config = YamlConfiguration.loadConfiguration(storage.requireFile())
+            val config = storage.loadYamlConfiguration()
 
             val signMetaKeySet = config.root?.getKeys(false).orEmpty().map { it.toInt() }
 
@@ -46,8 +46,7 @@ class SignMetaYamlSource(dataFolder: File) {
     }
 
     fun save(signMeta: SignMeta): Boolean {
-        val signMetaKey = signMeta.key ?: YamlConfiguration.loadConfiguration(storage.requireFile())
-                .findAvailableKey()
+        val signMetaKey = signMeta.key ?: storage.loadYamlConfiguration().findAvailableKey()
 
         val dataMap = linkedMapOf<String, Any>().apply {
             put("$signMetaKey.Location", signMeta.location)

@@ -4,7 +4,6 @@ import com.dekitateserver.core.data.source.YamlStorage
 import com.dekitateserver.events.data.entity.Gacha
 import com.dekitateserver.events.data.vo.GachaId
 import com.dekitateserver.events.util.Log
-import org.bukkit.configuration.file.YamlConfiguration
 import java.io.File
 
 class GachaYamlSource(dataFolder: File) {
@@ -15,7 +14,7 @@ class GachaYamlSource(dataFolder: File) {
         val gachaList = mutableListOf<Gacha>()
 
         try {
-            val config = YamlConfiguration.loadConfiguration(storage.requireFile())
+            val config = storage.loadYamlConfiguration()
 
             val gachaIdSet = config.root?.getKeys(false).orEmpty()
 
