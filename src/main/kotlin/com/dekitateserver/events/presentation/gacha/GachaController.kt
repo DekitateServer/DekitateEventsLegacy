@@ -69,10 +69,10 @@ class GachaController(plugin: DekitateEventsPlugin) {
     }
 
     fun clickSign(player: Player, location: Location) {
-        val result = getGachaSignUseCase(location) ?: return
+        val getGachaSignUseCaseResult = getGachaSignUseCase(location) ?: return
 
         pluginScope.launch {
-            when (val cost = result.gachaCost) {
+            when (val cost = getGachaSignUseCaseResult.gachaCost) {
                 is GachaCost.EventTicket -> {
                     if (!takeEventTicketUseCase(player, cost.amount)) {
                         return@launch
@@ -91,7 +91,7 @@ class GachaController(plugin: DekitateEventsPlugin) {
                 GachaCost.Free -> Unit
             }
 
-            playGachaUseCase(player, result.gachaId)
+            playGachaUseCase(player, getGachaSignUseCaseResult.gachaId)
         }
     }
 
