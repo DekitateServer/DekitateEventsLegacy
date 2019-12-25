@@ -52,11 +52,13 @@ class EndParkourUseCase(
         parkourActionHistoryRepository.add(player, parkourId, ParkourAction.END, endDateTime)
 
         return EndParkourUseCaseResult(
-                spawnLocation = parkour.exitLocation
+                spawnLocation = parkour.exitLocation,
+                eventTicketAmount = parkour.rewardEventTicketAmount
         )
     }
 }
 
 data class EndParkourUseCaseResult(
-        val spawnLocation: Location?
+        val spawnLocation: Location?,
+        val eventTicketAmount: Int
 )

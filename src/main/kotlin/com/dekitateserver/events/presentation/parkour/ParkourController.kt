@@ -3,6 +3,7 @@ package com.dekitateserver.events.presentation.parkour
 import com.dekitateserver.events.DekitateEventsPlugin
 import com.dekitateserver.events.data.vo.ParkourEditType
 import com.dekitateserver.events.data.vo.ParkourId
+import com.dekitateserver.events.domain.usecase.eventticket.GiveEventTicketUseCase
 import com.dekitateserver.events.domain.usecase.parkour.*
 import com.dekitateserver.events.domain.usecase.spawn.SetSpawnUseCase
 import com.dekitateserver.events.util.selectPlayersOrError
@@ -38,6 +39,8 @@ class ParkourController(plugin: DekitateEventsPlugin) {
     private val sendParkourListUseCase = SendParkourListUseCase(plugin.parkourRepository)
 
     private val setSpawnUseCase = SetSpawnUseCase()
+
+    private val giveEventTicketUseCase = GiveEventTicketUseCase(plugin.eventTicketHistoryRepository)
 
     fun join(sender: CommandSender, argSelector: String, argParkourId: String) {
         val parkourId = ParkourId(argParkourId)
@@ -75,6 +78,11 @@ class ParkourController(plugin: DekitateEventsPlugin) {
                         player = player,
                         location = endParkourUseCaseResult.spawnLocation ?: return@forEach
                 )
+
+                val eventTicketAmount = endParkourUseCaseResult.eventTicketAmount
+                if (eventTicketAmount > 0) {
+                    giveEventTicketUseCase(player, eventTicketAmount)
+                }
             }
         }
     }

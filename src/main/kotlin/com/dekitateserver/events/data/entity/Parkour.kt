@@ -16,8 +16,6 @@ data class Parkour(
         val exitLocation: Location? = null,
         val exitMessage: String? = null
 ) {
-    val hasRewardEventTicket = rewardEventTicketAmount > 0
-
     val formattedJoinMessage = joinMessage?.format()
     val formattedJoinBroadcastMessage = joinBroadcastMessage?.format()
     val formattedStartMessage = startMessage?.format()
