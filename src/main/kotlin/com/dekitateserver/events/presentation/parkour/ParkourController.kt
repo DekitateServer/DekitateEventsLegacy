@@ -63,7 +63,12 @@ class ParkourController(plugin: DekitateEventsPlugin) {
 
         pluginScope.launch {
             server.selectPlayersOrError(sender, argSelector)?.forEach { player ->
-                endParkourUseCase(player, parkourId)
+                val endParkourUseCaseResult = endParkourUseCase(player, parkourId) ?: return@forEach
+
+                setSpawnUseCase(
+                        player = player,
+                        location = endParkourUseCaseResult.spawnLocation ?: return@forEach
+                )
             }
         }
     }
