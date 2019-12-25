@@ -54,7 +54,8 @@ class ParkourCommand(
         private val MESSAGES_HELP = arrayOf(
                 "----- DekitateEvents Parkourコマンドヘルプ -----",
                 "| §a/parkour join [player] [parkourId]",
-                "| §a/parkour clear [player] [parkourId]",
+                "| §a/parkour start [player] [parkourId]",
+                "| §a/parkour end [player] [parkourId]",
                 "| §a/parkour exit [player] [parkourId]",
                 "| §a/parkour create [parkourId] [name]",
                 "| §a/parkour delete [parkourId]",

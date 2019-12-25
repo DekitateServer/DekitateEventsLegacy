@@ -10,9 +10,9 @@ data class Parkour(
         val joinLocation: Location? = null,
         val joinMessage: String? = "{name}§rに§c挑戦§r!",
         val joinBroadcastMessage: String? = null,
-        val clearLocation: Location? = null,
-        val clearMessage: String? = "{name}§rを§bクリア§r!",
-        val clearBroadcastMessage: String? = null,
+        val startMessage: String? = "§aスタート時間を記録しました.",
+        val endMessage: String? = "{name}§rを§a{time}で§bクリア§r!",
+        val endBroadcastMessage: String? = null,
         val exitLocation: Location? = null,
         val exitMessage: String? = null
 ) {
@@ -20,8 +20,9 @@ data class Parkour(
 
     val formattedJoinMessage = joinMessage?.format()
     val formattedJoinBroadcastMessage = joinBroadcastMessage?.format()
-    val formattedClearMessage = clearMessage?.format()
-    val formattedClearBroadcastMessage = clearBroadcastMessage?.format()
+    val formattedStartMessage = startMessage?.format()
+    val formattedEndMessage = endMessage?.format()
+    val formattedEndBroadcastMessage = endBroadcastMessage?.format()
     val formattedExitMessage = exitMessage?.format()
 
     private fun String.format() = replace("{name}", name)

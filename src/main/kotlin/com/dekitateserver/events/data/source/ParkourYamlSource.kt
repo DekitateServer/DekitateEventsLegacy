@@ -33,9 +33,9 @@ class ParkourYamlSource(dataFolder: File) {
                         joinLocation = config.getSerializable("$id.Join.Location", Location::class.java),
                         joinMessage = config.getString("$id.Join.message"),
                         joinBroadcastMessage = config.getString("$id.Join.broadcastMessage"),
-                        clearLocation = config.getSerializable("$id.Clear.Location", Location::class.java),
-                        clearMessage = config.getString("$id.Clear.message"),
-                        clearBroadcastMessage = config.getString("$id.Clear.broadcastMessage"),
+                        startMessage = config.getString("$id.Start.message"),
+                        endMessage = config.getString("$id.End.message"),
+                        endBroadcastMessage = config.getString("$id.End.broadcastMessage"),
                         exitLocation = config.getSerializable("$id.Exit.Location", Location::class.java),
                         exitMessage = config.getString("$id.Exit.message")
                 )
@@ -61,9 +61,10 @@ class ParkourYamlSource(dataFolder: File) {
             put("$path.Join.message", parkour.joinMessage)
             put("$path.Join.broadcastMessage", parkour.joinBroadcastMessage)
 
-            put("$path.Clear.Location", parkour.clearLocation)
-            put("$path.Clear.message", parkour.clearMessage)
-            put("$path.Clear.broadcastMessage", parkour.clearBroadcastMessage)
+            put("$path.Start.message", parkour.startMessage)
+
+            put("$path.End.message", parkour.endMessage)
+            put("$path.End.broadcastMessage", parkour.endBroadcastMessage)
 
             put("$path.Exit.Location", parkour.exitLocation)
             put("$path.Exit.message", parkour.exitMessage)
