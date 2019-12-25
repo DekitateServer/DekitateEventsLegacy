@@ -20,6 +20,8 @@ import com.dekitateserver.events.presentation.parkour.ParkourController
 import com.dekitateserver.events.presentation.parkour.ParkourEventListener
 import com.dekitateserver.events.presentation.password.PasswordCommand
 import com.dekitateserver.events.presentation.password.PasswordController
+import com.dekitateserver.events.presentation.revive.ReviveController
+import com.dekitateserver.events.presentation.revive.ReviveEventListener
 import com.dekitateserver.events.presentation.spawn.SpawnController
 import com.dekitateserver.events.presentation.spawn.SpawnEventListener
 import com.dekitateserver.events.util.Log
@@ -84,6 +86,7 @@ class DekitateEventsPlugin : DekitateEvents, DekitatePlugin() {
         val passwordController = PasswordController(this)
         val spawnController = SpawnController(this)
         val loginBonusController = LoginBonusController(this)
+        val reviveController = ReviveController(this)
 
         registerCommand(EventCommand(eventController))
         registerCommand(ParkourCommand(parkourController))
@@ -96,6 +99,7 @@ class DekitateEventsPlugin : DekitateEvents, DekitatePlugin() {
         server.pluginManager.registerEvents(GachaEventListener(gachaController), this)
         server.pluginManager.registerEvents(SpawnEventListener(spawnController), this)
         server.pluginManager.registerEvents(LoginBonusEventListener(loginBonusController), this)
+        server.pluginManager.registerEvents(ReviveEventListener(reviveController), this)
 
         pluginScope.launch {
             logger.info("current thread1: ${Thread.currentThread().name}}")
