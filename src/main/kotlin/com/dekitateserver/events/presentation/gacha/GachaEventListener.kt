@@ -23,10 +23,8 @@ class GachaEventListener(
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     fun onSignChanged(event: SignChangeEvent) {
-        if (event.getLine(0) != GachaSignContracts.CREATE_SIGN_INDEX || !event.player.hasPermission("neko.event")) {
-            return
+        if (event.getLine(0) == GachaSignContracts.CREATE_SIGN_INDEX && event.player.hasPermission("neko.event")) {
+            gachaController.createSign(event)
         }
-
-        gachaController.createSign(event)
     }
 }
