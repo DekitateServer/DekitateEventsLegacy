@@ -65,7 +65,7 @@ class ParkourActionHistoryDao(dataSource: DataSource) : AbstractDao(dataSource) 
     fun selectLatestActionedDate(uuid: UUID, parkourId: ParkourId, action: ParkourAction): LocalDateTime? {
         try {
             connection {
-                val st = prepareStatement("SELECT actioned_date FROM $TABLE_NAME WHERE uuid=? AND parkour_id=? AND action=? ORDER BY actioned_date LIMIT 1")
+                val st = prepareStatement("SELECT actioned_date FROM $TABLE_NAME WHERE uuid=? AND parkour_id=? AND action=? ORDER BY actioned_date DESC LIMIT 1")
                 st.setUuid(1, uuid)
                 st.setString(2, parkourId.value)
                 st.setString(3, action.name)
