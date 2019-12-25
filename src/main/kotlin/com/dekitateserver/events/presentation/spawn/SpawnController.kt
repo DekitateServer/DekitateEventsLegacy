@@ -19,7 +19,7 @@ class SpawnController(plugin: DekitateEventsPlugin) {
     private val getSetSpawnSignUseCase = GetSetSpawnSignUseCase(plugin.signMetaRepository)
     private val createSpawnSignUseCase = CreateSpawnSignUseCase(plugin.signMetaRepository)
 
-    fun removeBedSpawnInEvents(player: Player) {
+    fun removeBedSpawnIfInEvents(player: Player) {
         if (player.bedSpawnLocation?.world?.name != DekitateEvents.NAME_EVENT_WORLD) {
             return
         }

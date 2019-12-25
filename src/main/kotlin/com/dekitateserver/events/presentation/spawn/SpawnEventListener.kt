@@ -34,7 +34,7 @@ class SpawnEventListener(
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     fun onPlayerChangedWorld(event: PlayerChangedWorldEvent) {
         if (event.player.gameMode == GameMode.ADVENTURE && event.from.name == DekitateEvents.NAME_EVENT_WORLD) {
-            spawnController.removeBedSpawnInEvents(event.player)
+            spawnController.removeBedSpawnIfInEvents(event.player)
         }
     }
 }
