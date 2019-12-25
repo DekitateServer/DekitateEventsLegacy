@@ -23,6 +23,10 @@ class ParkourController(plugin: DekitateEventsPlugin) {
             plugin.parkourRepository,
             plugin.parkourActionHistoryRepository
     )
+    private val endParkourUseCase = EndParkourUseCase(
+            plugin.parkourRepository,
+            plugin.parkourActionHistoryRepository
+    )
     private val createParkourUseCase = CreateParkourUseCase(plugin.parkourRepository)
     private val deleteParkourUseCase = DeleteParkourUseCase(plugin.parkourRepository)
     private val editParkourUseCase = EditParkourUseCase(plugin.parkourRepository)
@@ -50,6 +54,16 @@ class ParkourController(plugin: DekitateEventsPlugin) {
         pluginScope.launch {
             server.selectPlayersOrError(sender, argSelector)?.forEach { player ->
                 startParkourUseCase(player, parkourId)
+            }
+        }
+    }
+
+    fun end(sender: CommandSender, argSelector: String, argParkourId: String) {
+        val parkourId = ParkourId(argParkourId)
+
+        pluginScope.launch {
+            server.selectPlayersOrError(sender, argSelector)?.forEach { player ->
+                endParkourUseCase(player, parkourId)
             }
         }
     }
