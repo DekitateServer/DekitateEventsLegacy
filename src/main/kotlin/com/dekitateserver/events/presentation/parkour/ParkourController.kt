@@ -1,6 +1,7 @@
 package com.dekitateserver.events.presentation.parkour
 
 import com.dekitateserver.events.DekitateEventsPlugin
+import com.dekitateserver.events.data.vo.ParkourAction
 import com.dekitateserver.events.data.vo.ParkourEditType
 import com.dekitateserver.events.data.vo.ParkourId
 import com.dekitateserver.events.domain.usecase.eventticket.GiveEventTicketUseCase
@@ -10,6 +11,7 @@ import com.dekitateserver.events.util.selectPlayersOrError
 import com.dekitateserver.events.util.sendWarnMessage
 import kotlinx.coroutines.launch
 import org.bukkit.command.CommandSender
+import org.bukkit.event.block.SignChangeEvent
 
 class ParkourController(plugin: DekitateEventsPlugin) {
 
@@ -39,6 +41,7 @@ class ParkourController(plugin: DekitateEventsPlugin) {
     private val sendParkourListUseCase = SendParkourListUseCase(plugin.parkourRepository)
     private val sendParkourInfoUseCase = SendParkourInfoUseCase(plugin.parkourRepository)
     private val reloadParkourUseCategory = ReloadParkourUseCase(plugin.parkourRepository)
+    private val createParkourSignUseCase = CreateParkourSignUseCase(plugin.parkourRepository, plugin.signMetaRepository)
 
     private val setSpawnUseCase = SetSpawnUseCase()
 
@@ -158,5 +161,21 @@ class ParkourController(plugin: DekitateEventsPlugin) {
         pluginScope.launch {
             reloadParkourUseCategory()
         }
+    }
+
+    fun createSign(event: SignChangeEvent) {
+        val action = try {
+            ParkourAction.valueOf(event.getLine(2).orEmpty().toUpperCase())
+        } catch (e: IllegalArgumentException) {
+            event.player.sendWarnMessage("そのようなParkourActionは存在しません.")
+            return
+        }
+
+        createParkourSignUseCase(
+                location = event.block.location,
+                player = event.player,
+                parkourId = ParkourId(event.getLine(1).orEmpty()),
+                action = action
+        )
     }
 }
