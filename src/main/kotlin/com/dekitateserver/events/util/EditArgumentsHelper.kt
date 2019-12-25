@@ -1,5 +1,6 @@
 package com.dekitateserver.events.util
 
+import com.dekitateserver.core.util.formatColorCodes
 import org.bukkit.Location
 import org.bukkit.Material
 import org.bukkit.entity.Player
@@ -16,6 +17,11 @@ object EditArgumentsHelper {
         }
     }
 
+    fun getInt(args: List<String>): Int? {
+        val text = args.firstOrNull() ?: return null
+        return text.toIntOrNull() ?: throw IllegalArgumentException("整数を指定してください.")
+    }
+
     fun getLong(args: List<String>): Long? {
         val text = args.firstOrNull() ?: return null
         return text.toLongOrNull() ?: throw IllegalArgumentException("整数を指定してください.")
@@ -26,8 +32,10 @@ object EditArgumentsHelper {
             return null
         }
 
-        return args.joinToString(separator = " ")
+        return args.joinToString(separator = " ").formatColorCodes()
     }
+
+    fun requireString(args: List<String>): String = getString(args) ?: throw IllegalArgumentException("この項目は必須です.")
 
     fun getItemInMainHand(player: Player): ItemStack {
         val itemInMainHand = player.inventory.itemInMainHand

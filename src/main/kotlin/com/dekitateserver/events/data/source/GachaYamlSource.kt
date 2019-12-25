@@ -39,10 +39,15 @@ class GachaYamlSource(dataFolder: File) {
                     return@mapNotNull null
                 }
 
+                val name = config.getString("$gachaId.name")
+                if (name == null) {
+                    Log.warn("Gacha($gachaId)のnameがありません.")
+                    return@mapNotNull null
+                }
 
                 return@mapNotNull Gacha(
                         id = GachaId(gachaId),
-                        name = config.getString("$gachaId.name") ?: "gacha",
+                        name = name,
                         itemList = itemList,
                         winMessage = config.getString("$gachaId.winMessage"),
                         loseMessage = config.getString("$gachaId.loseMessage"),

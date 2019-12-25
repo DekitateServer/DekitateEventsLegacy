@@ -26,11 +26,9 @@ class SpawnEventListener(
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     fun onSignChanged(event: SignChangeEvent) {
-        if (event.getLine(0) != SpawnSignContracts.CREATE_SIGN_INDEX || !event.player.hasPermission("neko.event")) {
-            return
+        if (event.getLine(0) == SpawnSignContracts.CREATE_SIGN_INDEX && event.player.hasPermission("neko.event")) {
+            spawnController.createSign(event)
         }
-
-        spawnController.createSign(event)
     }
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)

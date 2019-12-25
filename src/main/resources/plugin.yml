@@ -13,6 +13,11 @@ commands:
     usage: §e'/<command> help'でヘルプを確認してください.
     permission: event
     permission-message: §cこのコマンドを実行する権限がありません.
+  parkour:
+    description: Parkourコマンド
+    usage: §e'/<command> help'でヘルプを確認してください.
+    permission: event.parkour
+    permission-message: §cこのコマンドを実行する権限がありません.
   gacha:
     description: Gachaコマンド
     usage: §e'/<command> help'でヘルプを確認してください.
