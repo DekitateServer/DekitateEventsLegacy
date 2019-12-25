@@ -26,7 +26,7 @@ class CreateParkourSignUseCase(
 
         val signMeta = signMetaRepository.getOrNew(location).apply {
             put(KEY_SIGN_META_PARKOUR_ID, parkourId.value)
-            put(KEY_SIGN_META_PARKOUR_ACTION, action)
+            put(KEY_SIGN_META_PARKOUR_ACTION, action.name)
         }
 
         val actionLine: String = when (action) {

@@ -183,7 +183,7 @@ class ParkourController(plugin: DekitateEventsPlugin) {
 
     fun createSign(event: SignChangeEvent) {
         val action = try {
-            ParkourAction.valueOf(event.getLine(2).orEmpty().toUpperCase())
+            ParkourAction.valueOf(event.getLine(3).orEmpty().toUpperCase())
         } catch (e: IllegalArgumentException) {
             event.player.sendWarnMessage("そのようなParkourActionは存在しません.")
             return

@@ -5,7 +5,6 @@ import com.dekitateserver.events.config.ConfigKeys
 import com.dekitateserver.events.config.Configuration
 import com.dekitateserver.events.data.*
 import com.dekitateserver.events.data.vo.GachaCost
-import com.dekitateserver.events.data.vo.ParkourAction
 import com.dekitateserver.events.presentation.event.EventCommand
 import com.dekitateserver.events.presentation.event.EventController
 import com.dekitateserver.events.presentation.gacha.GachaCommand
@@ -18,6 +17,7 @@ import com.dekitateserver.events.presentation.loginbonus.LoginBonusController
 import com.dekitateserver.events.presentation.loginbonus.LoginBonusEventListener
 import com.dekitateserver.events.presentation.parkour.ParkourCommand
 import com.dekitateserver.events.presentation.parkour.ParkourController
+import com.dekitateserver.events.presentation.parkour.ParkourEventListener
 import com.dekitateserver.events.presentation.password.PasswordCommand
 import com.dekitateserver.events.presentation.password.PasswordController
 import com.dekitateserver.events.presentation.spawn.SpawnController
@@ -92,6 +92,7 @@ class DekitateEventsPlugin : DekitateEvents, DekitatePlugin() {
         registerCommand(PasswordCommand(passwordController))
         registerCommand(LoginBonusCommand(loginBonusController))
 
+        server.pluginManager.registerEvents(ParkourEventListener(parkourController), this)
         server.pluginManager.registerEvents(GachaEventListener(gachaController), this)
         server.pluginManager.registerEvents(SpawnEventListener(spawnController), this)
         server.pluginManager.registerEvents(LoginBonusEventListener(loginBonusController), this)
@@ -121,8 +122,6 @@ class DekitateEventsPlugin : DekitateEvents, DekitatePlugin() {
         ConfigurationSerialization.registerClass(GachaCost.EventTicket::class.java)
         ConfigurationSerialization.registerClass(GachaCost.VoteTicket::class.java)
         ConfigurationSerialization.registerClass(GachaCost.Key::class.java)
-
-        ConfigurationSerialization.registerClass(ParkourAction::class.java)
     }
 
     private fun createMariaDbPoolDataSource(url: String, user: String, password: String) = MariaDbPoolDataSource(url).apply {

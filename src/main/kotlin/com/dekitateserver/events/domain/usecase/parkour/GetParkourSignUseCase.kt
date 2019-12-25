@@ -13,11 +13,11 @@ class GetParkourSignUseCase(
         val signMeta = signMetaRepository.getOrError(location) ?: return null
 
         val parkourId = signMeta.getOrError(KEY_SIGN_META_PARKOUR_ID) ?: return null
-        val parkourAction = signMeta.getOrError<ParkourAction>(KEY_SIGN_META_PARKOUR_ACTION) ?: return null
+        val parkourAction = signMeta.getOrError(KEY_SIGN_META_PARKOUR_ACTION) ?: return null
 
         return GetParkourSignUseCaseResult(
                 parkourId = ParkourId(parkourId),
-                parkourAction = parkourAction
+                parkourAction = ParkourAction.valueOf(parkourAction)
         )
     }
 }
