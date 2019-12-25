@@ -5,6 +5,7 @@ import com.dekitateserver.events.config.ConfigKeys
 import com.dekitateserver.events.config.Configuration
 import com.dekitateserver.events.data.*
 import com.dekitateserver.events.data.vo.GachaCost
+import com.dekitateserver.events.data.vo.ParkourAction
 import com.dekitateserver.events.presentation.event.EventCommand
 import com.dekitateserver.events.presentation.event.EventController
 import com.dekitateserver.events.presentation.gacha.GachaCommand
@@ -120,6 +121,8 @@ class DekitateEventsPlugin : DekitateEvents, DekitatePlugin() {
         ConfigurationSerialization.registerClass(GachaCost.EventTicket::class.java)
         ConfigurationSerialization.registerClass(GachaCost.VoteTicket::class.java)
         ConfigurationSerialization.registerClass(GachaCost.Key::class.java)
+
+        ConfigurationSerialization.registerClass(ParkourAction::class.java)
     }
 
     private fun createMariaDbPoolDataSource(url: String, user: String, password: String) = MariaDbPoolDataSource(url).apply {
