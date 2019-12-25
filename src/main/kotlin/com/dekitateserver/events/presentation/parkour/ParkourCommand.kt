@@ -64,6 +64,7 @@ class ParkourCommand(
                 )
             }
             "edittype" -> parkourController.sendEditTypeList(sender)
+            "list" -> parkourController.sendList(sender)
             else -> return false
         }
 
