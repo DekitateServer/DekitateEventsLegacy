@@ -71,6 +71,7 @@ class ParkourCommand(
                         argParkourId = args[1]
                 )
             }
+            "reload" -> parkourController.reload()
             else -> return false
         }
 
