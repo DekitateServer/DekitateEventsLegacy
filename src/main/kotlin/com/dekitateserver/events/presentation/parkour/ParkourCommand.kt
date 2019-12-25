@@ -63,6 +63,7 @@ class ParkourCommand(
                         argArgs = args.drop(3)
                 )
             }
+            "edittype" -> parkourController.sendEditTypeList(sender)
             else -> return false
         }
 
