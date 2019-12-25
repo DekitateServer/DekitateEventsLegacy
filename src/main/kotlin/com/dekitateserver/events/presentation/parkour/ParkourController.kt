@@ -10,7 +10,9 @@ import com.dekitateserver.events.domain.usecase.spawn.SetSpawnUseCase
 import com.dekitateserver.events.util.selectPlayersOrError
 import com.dekitateserver.events.util.sendWarnMessage
 import kotlinx.coroutines.launch
+import org.bukkit.Location
 import org.bukkit.command.CommandSender
+import org.bukkit.entity.Player
 import org.bukkit.event.block.SignChangeEvent
 
 class ParkourController(plugin: DekitateEventsPlugin) {
@@ -41,6 +43,7 @@ class ParkourController(plugin: DekitateEventsPlugin) {
     private val sendParkourListUseCase = SendParkourListUseCase(plugin.parkourRepository)
     private val sendParkourInfoUseCase = SendParkourInfoUseCase(plugin.parkourRepository)
     private val reloadParkourUseCategory = ReloadParkourUseCase(plugin.parkourRepository)
+    private val getParkourSignUseCase = GetParkourSignUseCase(plugin.signMetaRepository)
     private val createParkourSignUseCase = CreateParkourSignUseCase(plugin.parkourRepository, plugin.signMetaRepository)
 
     private val setSpawnUseCase = SetSpawnUseCase()
@@ -163,6 +166,21 @@ class ParkourController(plugin: DekitateEventsPlugin) {
         }
     }
 
+    fun clickSign(player: Player, location: Location) {
+        val getParkourSignUseCaseResult = getParkourSignUseCase(location) ?: return
+
+        pluginScope.launch {
+            val parkourId = getParkourSignUseCaseResult.parkourId
+
+            when (getParkourSignUseCaseResult.parkourAction) {
+                ParkourAction.JOIN -> joinParkourUseCase(player, parkourId)
+                ParkourAction.START -> startParkourUseCase(player, parkourId)
+                ParkourAction.END -> endParkourUseCase(player, parkourId)
+                ParkourAction.EXIT -> exitParkourUseCase(player, parkourId)
+            }
+        }
+    }
+
     fun createSign(event: SignChangeEvent) {
         val action = try {
             ParkourAction.valueOf(event.getLine(2).orEmpty().toUpperCase())
@@ -171,11 +189,13 @@ class ParkourController(plugin: DekitateEventsPlugin) {
             return
         }
 
-        createParkourSignUseCase(
+        val signLines = createParkourSignUseCase(
                 location = event.block.location,
                 player = event.player,
                 parkourId = ParkourId(event.getLine(1).orEmpty()),
                 action = action
-        )
+        ) ?: return
+
+        signLines.apply(event)
     }
 }
