@@ -3,10 +3,7 @@ package com.dekitateserver.events.presentation.parkour
 import com.dekitateserver.events.DekitateEventsPlugin
 import com.dekitateserver.events.data.vo.ParkourEditType
 import com.dekitateserver.events.data.vo.ParkourId
-import com.dekitateserver.events.domain.usecase.parkour.CreateParkourUseCase
-import com.dekitateserver.events.domain.usecase.parkour.DeleteParkourUseCase
-import com.dekitateserver.events.domain.usecase.parkour.EditParkourUseCase
-import com.dekitateserver.events.domain.usecase.parkour.JoinParkourUseCase
+import com.dekitateserver.events.domain.usecase.parkour.*
 import com.dekitateserver.events.domain.usecase.spawn.SetSpawnUseCase
 import com.dekitateserver.events.util.selectPlayersOrError
 import com.dekitateserver.events.util.sendWarnMessage
@@ -19,6 +16,10 @@ class ParkourController(plugin: DekitateEventsPlugin) {
     private val pluginScope = plugin.pluginScope
 
     private val joinParkourUseCase = JoinParkourUseCase(
+            plugin.parkourRepository,
+            plugin.parkourActionHistoryRepository
+    )
+    private val startParkourUseCase = StartParkourUseCase(
             plugin.parkourRepository,
             plugin.parkourActionHistoryRepository
     )
@@ -39,6 +40,16 @@ class ParkourController(plugin: DekitateEventsPlugin) {
                         player = player,
                         location = joinParkourUseCaseResult.spawnLocation ?: return@forEach
                 )
+            }
+        }
+    }
+
+    fun start(sender: CommandSender, argSelector: String, argParkourId: String) {
+        val parkourId = ParkourId(argParkourId)
+
+        pluginScope.launch {
+            server.selectPlayersOrError(sender, argSelector)?.forEach { player ->
+                startParkourUseCase(player, parkourId)
             }
         }
     }
