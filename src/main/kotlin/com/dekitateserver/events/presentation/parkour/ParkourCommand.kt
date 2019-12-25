@@ -65,6 +65,12 @@ class ParkourCommand(
             }
             "edittype" -> parkourController.sendEditTypeList(sender)
             "list" -> parkourController.sendList(sender)
+            "info" -> sender.requireArguments(args, 2) {
+                parkourController.sendInfo(
+                        sender = sender,
+                        argParkourId = args[1]
+                )
+            }
             else -> return false
         }
 

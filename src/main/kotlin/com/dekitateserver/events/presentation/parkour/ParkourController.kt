@@ -37,6 +37,7 @@ class ParkourController(plugin: DekitateEventsPlugin) {
     private val editParkourUseCase = EditParkourUseCase(plugin.parkourRepository)
     private val sendParkourEditTypeListUseCase = SendParkourEditTypeListUseCase()
     private val sendParkourListUseCase = SendParkourListUseCase(plugin.parkourRepository)
+    private val sendParkourInfoUseCase = SendParkourInfoUseCase(plugin.parkourRepository)
 
     private val setSpawnUseCase = SetSpawnUseCase()
 
@@ -143,5 +144,12 @@ class ParkourController(plugin: DekitateEventsPlugin) {
 
     fun sendList(sender: CommandSender) {
         sendParkourListUseCase(sender)
+    }
+
+    fun sendInfo(sender: CommandSender, argParkourId: String) {
+        sendParkourInfoUseCase(
+                sender = sender,
+                parkourId = ParkourId(argParkourId)
+        )
     }
 }
