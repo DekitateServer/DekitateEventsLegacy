@@ -11,7 +11,7 @@ data class Parkour(
         val joinMessage: String? = "{name}§rに§c挑戦§r!",
         val joinBroadcastMessage: String? = null,
         val startMessage: String? = "§aスタート時間を記録しました.",
-        val endMessage: String? = "{name}§rを§a{time}で§bクリア§r!",
+        val endMessage: String? = "{name}§r§bを §a{time} §bでクリア§r!",
         val endBroadcastMessage: String? = null,
         val exitLocation: Location? = null,
         val exitMessage: String? = null

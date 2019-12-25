@@ -26,12 +26,9 @@ class EditParkourUseCase(
                 }
                 ParkourEditType.JOIN_MESSAGE -> parkour.copy(joinMessage = EditArgumentsHelper.getString(args))
                 ParkourEditType.JOIN_BROADCAST_MESSAGE -> parkour.copy(joinBroadcastMessage = EditArgumentsHelper.getString(args))
-                ParkourEditType.CLEAR_LOCATION -> {
-                    val player = sender.toPlayerOrError() ?: return
-                    parkour.copy(clearLocation = EditArgumentsHelper.getLocation(player, args))
-                }
-                ParkourEditType.CLEAR_MESSAGE -> parkour.copy(clearMessage = EditArgumentsHelper.getString(args))
-                ParkourEditType.CLEAR_BROADCAST_MESSAGE -> parkour.copy(clearBroadcastMessage = EditArgumentsHelper.getString(args))
+                ParkourEditType.START_MESSAGE -> parkour.copy(startMessage = EditArgumentsHelper.getString(args))
+                ParkourEditType.END_MESSAGE -> parkour.copy(endMessage = EditArgumentsHelper.getString(args))
+                ParkourEditType.END_BROADCAST_MESSAGE -> parkour.copy(endBroadcastMessage = EditArgumentsHelper.getString(args))
                 ParkourEditType.EXIT_LOCATION -> {
                     val player = sender.toPlayerOrError() ?: return
                     parkour.copy(exitLocation = EditArgumentsHelper.getLocation(player, args))

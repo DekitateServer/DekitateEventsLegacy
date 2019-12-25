@@ -9,9 +9,9 @@ enum class ParkourEditType(
     JOIN_LOCATION("join-location", "[here/x y z <yaw pitch>] 参加TP位置"),
     JOIN_MESSAGE("join-msg", "[msg] 参加時に表示"),
     JOIN_BROADCAST_MESSAGE("join-broadcast-msg", "[msg] 参加時に全員に表示"),
-    CLEAR_LOCATION("clear-location", "[here/x y z <yaw pitch>] クリアTP位置"),
-    CLEAR_MESSAGE("clear-msg", "[msg] クリア時に表示"),
-    CLEAR_BROADCAST_MESSAGE("clear-broadcast-msg", "[msg] クリア時に全員に表示"),
+    START_MESSAGE("start-msg", "[msg] スタート時に表示"),
+    END_MESSAGE("end-msg", "[msg] 終了時に表示"),
+    END_BROADCAST_MESSAGE("end-broadcast-msg", "[msg] 終了時に全員に表示"),
     EXIT_LOCATION("exit-location", "[here/x y z <yaw pitch>] 退出TP位置"),
     EXIT_MESSAGE("exit-msg", "[msg] 退出時に表示");
 
