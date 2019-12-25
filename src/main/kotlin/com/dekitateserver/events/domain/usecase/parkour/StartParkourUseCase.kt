@@ -13,12 +13,12 @@ class StartParkourUseCase(
         private val parkourActionHistoryRepository: ParkourActionHistoryRepository
 ) {
     suspend operator fun invoke(player: Player, parkourId: ParkourId) {
-        val actionedDateTime = LocalDateTime.now()
+        val startDateTime = LocalDateTime.now()
 
         val parkour = parkourRepository.getOrError(parkourId) ?: return
 
         player.sendMessageIfNotNull(parkour.formattedStartMessage)
 
-        parkourActionHistoryRepository.add(player, parkourId, ParkourAction.START, actionedDateTime)
+        parkourActionHistoryRepository.add(player, parkourId, ParkourAction.START, startDateTime)
     }
 }

@@ -35,6 +35,13 @@ class ParkourCommand(
                         argParkourId = args[2]
                 )
             }
+            "exit" -> sender.requireArguments(args, 3) {
+                parkourController.exit(
+                        sender = sender,
+                        argSelector = args[1],
+                        argParkourId = args[2]
+                )
+            }
             "create" -> sender.requireArguments(args, 3) {
                 parkourController.create(
                         sender = sender,
