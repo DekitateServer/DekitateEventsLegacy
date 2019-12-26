@@ -14,7 +14,7 @@ data class Dungeon(
         val joinMessage: String? = "{name}§rに§c参加§rしました!",
         val joinBroadcastMessage: String? = null,
         val completeLocation: Location? = null,
-        val completeMessage: String? = "§dクリアおめでとう! §rまた§c挑戦§rしてね!",
+        val completeMessage: String? = "§aタイム\"{time}\"§rで§dクリア! §rまた§c挑戦§rしてね!",
         val completeBroadcastMessage: String? = null,
         val isEnabledCompleteSound: Boolean = true,
         val exitLocation: Location? = null,

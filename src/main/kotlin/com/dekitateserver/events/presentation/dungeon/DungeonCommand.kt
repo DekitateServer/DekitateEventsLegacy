@@ -22,6 +22,13 @@ class DungeonCommand(
                         argDungeonId = args[2]
                 )
             }
+            "complete" -> sender.requireArguments(args, 3) {
+                dungeonController.complete(
+                        sender = sender,
+                        argSelector = args[1],
+                        argDungeonId = args[2]
+                )
+            }
             "create" -> sender.requireArguments(args, 3) {
                 dungeonController.create(
                         sender = sender,
@@ -56,6 +63,7 @@ class DungeonCommand(
                 "----- DekitateEvents Dungeonコマンドヘルプ -----",
                 "| §c/dungeon join [player] [dungeonId]",
                 "| §c/dungeon complete [player] [dungeonId]",
+                "| §c/dungeon exit [player] [dungeonId]",
                 "| §c/dungeon lock [dungeonId] [seconds]",
                 "| §c/dungeon unlock [dungeonId]",
                 "| §c/dungeon create [dungeonId] [name]",
