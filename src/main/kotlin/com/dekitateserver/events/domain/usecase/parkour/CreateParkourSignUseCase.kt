@@ -18,7 +18,7 @@ class CreateParkourSignUseCase(
         private val signMetaRepository: SignMetaRepository
 ) : AbstractParkourSignUseCase() {
 
-    operator fun invoke(location: Location, player: Player, parkourId: ParkourId, action: ParkourAction): SignLines? {
+    operator fun invoke(location: Location, player: Player, parkourId: ParkourId, action: ParkourAction): CreateParkourSignUseCaseResult? {
         val parkour = parkourRepository.get(parkourId) ?: let {
             player.sendParkourIdNotFound(parkourId)
             return null
@@ -46,12 +46,18 @@ class CreateParkourSignUseCase(
         return if (isAddSuccessful) {
             player.sendSuccessMessage("看板を作成しました")
 
-            SignLines(
+            val signLines = SignLines(
                     line0 = ParkourSignContracts.SIGN_INDEX,
                     line1 = parkour.name,
                     line2 = "",
                     line3 = actionLine
             )
+
+            CreateParkourSignUseCaseResult(signLines)
         } else null
     }
 }
+
+data class CreateParkourSignUseCaseResult(
+        val signLines: SignLines
+)

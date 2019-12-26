@@ -189,13 +189,13 @@ class ParkourController(plugin: DekitateEventsPlugin) {
             return
         }
 
-        val signLines = createParkourSignUseCase(
+        val createParkourSignUseCaseResult = createParkourSignUseCase(
                 location = event.block.location,
                 player = event.player,
                 parkourId = ParkourId(event.getLine(1).orEmpty()),
                 action = action
         ) ?: return
 
-        signLines.apply(event)
+        createParkourSignUseCaseResult.signLines.apply(event)
     }
 }
