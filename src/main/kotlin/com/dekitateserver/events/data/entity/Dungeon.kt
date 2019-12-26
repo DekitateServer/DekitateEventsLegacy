@@ -10,7 +10,7 @@ data class Dungeon(
         val name: String,
         val rewardEventTicketAmount: Int = 0,
         val rewardGachaId: GachaId? = null,
-        val joinLocation: Location?,
+        val joinLocation: Location? = null,
         val joinMessage: String? = "{name}§rに§c参加§rしました!",
         val joinBroadcastMessage: String? = null,
         val completeLocation: Location? = null,
