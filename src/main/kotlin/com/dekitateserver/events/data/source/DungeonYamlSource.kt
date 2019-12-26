@@ -45,7 +45,7 @@ class DungeonYamlSource(dataFolder: File) {
                         lockEndDateTime = config.getString("$id.Lock.endDateTime")?.let { LocalDateTime.parse(it) },
                         lockMessage = config.getString("$id.Lock.message"),
                         lockBroadcastMessage = config.getString("$id.Lock.broadcastMessage"),
-                        unLockBroadcastMessage = config.getString("$id.UnLock.broadcastMessage")
+                        unlockBroadcastMessage = config.getString("$id.Unlock.broadcastMessage")
                 )
             }
 
@@ -82,7 +82,7 @@ class DungeonYamlSource(dataFolder: File) {
             put("$path.Lock.message", dungeon.lockMessage)
             put("$path.Lock.broadcastMessage", dungeon.lockBroadcastMessage)
 
-            put("$path.UnLock.broadcastMessage", dungeon.unLockBroadcastMessage)
+            put("$path.Unlock.broadcastMessage", dungeon.unlockBroadcastMessage)
         }
 
         return storage.save(dataMap)

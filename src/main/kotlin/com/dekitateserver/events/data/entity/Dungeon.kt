@@ -22,7 +22,7 @@ data class Dungeon(
         val lockEndDateTime: LocalDateTime? = null,
         val lockMessage: String? = "{name}§rは§cロック中§rです! §b{time}§rお待ちください...",
         val lockBroadcastMessage: String? = null,
-        val unLockBroadcastMessage: String? = null
+        val unlockBroadcastMessage: String? = null
 ) {
     val formattedJoinMessage = joinMessage?.format()
     val formattedJoinBroadcastMessage = joinBroadcastMessage?.format()
@@ -31,7 +31,7 @@ data class Dungeon(
     val formattedExitMessage = exitMessage?.format()
     val formattedLockMessage = lockMessage?.format()
     val formattedLockBroadcastMessage = lockBroadcastMessage?.format()
-    val formattedUnLockBroadcastMessage = unLockBroadcastMessage?.format()
+    val formattedUnlockBroadcastMessage = unlockBroadcastMessage?.format()
 
     private fun String.format() = replace("{name}", name)
 }
