@@ -18,7 +18,7 @@ class SignMeta(
 
     fun getStringOrError(key: String): String? = getOrErrorInternal<String>(key)
 
-    fun <T : ConfigurationSerializable> getStringOrError(key: String): T? = getOrErrorInternal<T>(key)
+    fun <T : ConfigurationSerializable> getOrError(key: String): T? = getOrErrorInternal<T>(key)
 
     @Suppress("UNCHECKED_CAST")
     private fun <T> getOrErrorInternal(key: String): T? = with(_dataMap) {
