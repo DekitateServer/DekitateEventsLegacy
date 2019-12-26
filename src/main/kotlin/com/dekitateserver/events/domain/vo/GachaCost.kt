@@ -7,7 +7,7 @@ sealed class GachaCost : ConfigurationSerializable {
     object Free : GachaCost() {
         override fun serialize(): Map<String, Any> = emptyMap()
 
-        @Suppress("UNUSED")
+        @Suppress("UNUSED", "UNUSED_PARAMETER")
         @JvmStatic
         fun deserialize(map: Map<String, Any?>) = Free
     }
