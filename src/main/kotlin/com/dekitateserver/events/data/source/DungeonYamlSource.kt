@@ -7,6 +7,7 @@ import com.dekitateserver.events.data.vo.GachaId
 import com.dekitateserver.events.util.Log
 import org.bukkit.Location
 import java.io.File
+import java.time.LocalDateTime
 
 class DungeonYamlSource(dataFolder: File) {
 
@@ -41,6 +42,7 @@ class DungeonYamlSource(dataFolder: File) {
                         isEnabledCompleteSound = config.getBoolean("$id.Complete.enabledSound"),
                         exitLocation = config.getSerializable("$id.Exit.Location", Location::class.java),
                         exitMessage = config.getString("$id.Exit.message"),
+                        lockEndDateTime = config.getString("$id.Lock.endDateTime")?.let { LocalDateTime.parse(it) },
                         lockMessage = config.getString("$id.Lock.message"),
                         lockBroadcastMessage = config.getString("$id.Lock.broadcastMessage"),
                         unLockBroadcastMessage = config.getString("$id.UnLock.broadcastMessage")
@@ -76,6 +78,7 @@ class DungeonYamlSource(dataFolder: File) {
             put("$path.Exit.Location", dungeon.exitLocation)
             put("$path.Exit.message", dungeon.exitMessage)
 
+            put("$path.Lock.endDateTime", dungeon.lockEndDateTime?.toString())
             put("$path.Lock.message", dungeon.lockMessage)
             put("$path.Lock.broadcastMessage", dungeon.lockBroadcastMessage)
 

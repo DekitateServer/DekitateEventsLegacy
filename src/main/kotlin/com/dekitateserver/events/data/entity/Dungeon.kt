@@ -3,6 +3,7 @@ package com.dekitateserver.events.data.entity
 import com.dekitateserver.events.data.vo.DungeonId
 import com.dekitateserver.events.data.vo.GachaId
 import org.bukkit.Location
+import java.time.LocalDateTime
 
 data class Dungeon(
         val id: DungeonId,
@@ -18,6 +19,7 @@ data class Dungeon(
         val isEnabledCompleteSound: Boolean = true,
         val exitLocation: Location? = null,
         val exitMessage: String? = null,
+        val lockEndDateTime: LocalDateTime? = null,
         val lockMessage: String? = "{name}§rは§cロック中§rです! §b{time}§rお待ちください...",
         val lockBroadcastMessage: String? = null,
         val unLockBroadcastMessage: String? = null
