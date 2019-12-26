@@ -6,17 +6,39 @@ import com.dekitateserver.events.data.vo.DungeonId
 import com.dekitateserver.events.domain.usecase.dungeon.CreateDungeonUseCase
 import com.dekitateserver.events.domain.usecase.dungeon.DeleteDungeonUseCase
 import com.dekitateserver.events.domain.usecase.dungeon.EditDungeonUseCase
+import com.dekitateserver.events.domain.usecase.dungeon.JoinDungeonUseCase
+import com.dekitateserver.events.domain.usecase.spawn.SetSpawnUseCase
+import com.dekitateserver.events.util.selectPlayersOrError
 import com.dekitateserver.events.util.sendWarnMessage
 import kotlinx.coroutines.launch
 import org.bukkit.command.CommandSender
 
 class DungeonController(plugin: DekitateEventsPlugin) {
 
+    private val server = plugin.server
     private val pluginScope = plugin.pluginScope
 
+    private val joinDungeonUseCase = JoinDungeonUseCase(plugin.dungeonRepository, plugin.dungeonActionHistoryRepository)
     private val createDungeonUseCase = CreateDungeonUseCase(plugin.dungeonRepository)
     private val deleteDungeonUseCase = DeleteDungeonUseCase(plugin.dungeonRepository)
     private val editDungeonUseCase = EditDungeonUseCase(plugin.dungeonRepository)
+
+    private val setSpawnUseCase = SetSpawnUseCase()
+
+    fun join(sender: CommandSender, argSelector: String, argDungeonId: String) {
+        val dungeonId = DungeonId(argDungeonId)
+
+        pluginScope.launch {
+            server.selectPlayersOrError(sender, argSelector)?.forEach { player ->
+                val joinDungeonUseCaseResult = joinDungeonUseCase(player, dungeonId) ?: return@forEach
+
+                setSpawnUseCase(
+                        player = player,
+                        location = joinDungeonUseCaseResult.spawnLocation ?: return@forEach
+                )
+            }
+        }
+    }
 
     fun create(sender: CommandSender, argDungeonId: String, argName: String) {
         pluginScope.launch {

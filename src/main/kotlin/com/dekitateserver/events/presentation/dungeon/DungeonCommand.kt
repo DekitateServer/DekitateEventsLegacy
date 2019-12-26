@@ -15,6 +15,13 @@ class DungeonCommand(
         }
 
         when (args.first()) {
+            "join" -> sender.requireArguments(args, 3) {
+                dungeonController.join(
+                        sender = sender,
+                        argSelector = args[1],
+                        argDungeonId = args[2]
+                )
+            }
             "create" -> sender.requireArguments(args, 3) {
                 dungeonController.create(
                         sender = sender,
