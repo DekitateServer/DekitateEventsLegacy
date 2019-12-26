@@ -78,6 +78,11 @@ class DungeonRepository(plugin: JavaPlugin) {
         return update(dungeon)
     }
 
+    suspend fun unlock(dungeonId: DungeonId): Boolean {
+        val dungeon = getOrError(dungeonId)?.copy(lockEndDateTime = null) ?: return false
+        return update(dungeon)
+    }
+
     suspend fun refreshCache() = withContext(Dispatchers.IO) {
         dungeonCacheMap.clear()
         createCache()
@@ -87,6 +92,6 @@ class DungeonRepository(plugin: JavaPlugin) {
         dungeonCacheMap.putAll(
                 dungeonYamlSource.getAll().associateBy { it.id }
         )
-        Log.info("${dungeonCacheMap.size}個のParkourを読み込みました")
+        Log.info("${dungeonCacheMap.size}個のDungeonを読み込みました")
     }
 }
