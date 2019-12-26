@@ -22,6 +22,12 @@ class DungeonCommand(
                         argName = args[2]
                 )
             }
+            "delete" -> sender.requireArguments(args, 2) {
+                dungeonController.delete(
+                        sender = sender,
+                        argDungeonId = args[1]
+                )
+            }
             else -> return false
         }
 

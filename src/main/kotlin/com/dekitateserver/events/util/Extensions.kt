@@ -11,6 +11,7 @@ import org.bukkit.inventory.ItemStack
 fun CommandSender.sendSuccessMessage(message: String) = sendMessage("${DekitateEvents.PREFIX}§a$message")
 fun CommandSender.sendWarnMessage(message: String) = sendMessage("${DekitateEvents.PREFIX}§e$message")
 
+fun CommandSender.sendDungeonIdNotFound(dungeonId: DungeonId) = sendWarnMessage("Dungeon(${dungeonId.value})は存在しません")
 fun CommandSender.sendParkourIdNotFound(parkourId: ParkourId) = sendWarnMessage("Parkour(${parkourId.value})は存在しません")
 fun CommandSender.sendGachaIdNotFound(gachaId: GachaId) = sendWarnMessage("Gacha(${gachaId.value})は存在しません")
 fun CommandSender.sendKeyIdNotFound(keyId: KeyId) = sendWarnMessage("Key(${keyId.value})は存在しません")
