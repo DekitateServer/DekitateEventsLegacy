@@ -32,7 +32,7 @@ data class Gacha(
 
     init {
         require(itemList.sumByDouble { it.probability } == 1.0) {
-            "Gacha(${id.value})の合計確率が100%ではありません."
+            "Gacha(${id.value})の合計確率が100%ではありません"
         }
     }
 
@@ -48,6 +48,6 @@ data class Gacha(
             }
         }
 
-        throw IllegalStateException("Gacha(${id.value})'s probability is broken.")
+        throw IllegalStateException("Gacha(${id.value})'s probability is broken")
     }
 }

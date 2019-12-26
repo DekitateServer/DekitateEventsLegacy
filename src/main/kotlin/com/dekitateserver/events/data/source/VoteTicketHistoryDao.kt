@@ -34,7 +34,7 @@ class VoteTicketHistoryDao(dataSource: DataSource) : AbstractDao(dataSource) {
                 st.close()
             }
         } catch (e: SQLException) {
-            Log.error("Failed to create table", e)
+            Log.error("Failed to create table($TABLE_NAME)", e)
         }
     }
 
@@ -70,7 +70,7 @@ class VoteTicketHistoryDao(dataSource: DataSource) : AbstractDao(dataSource) {
                 return amount
             }
         } catch (e: SQLException) {
-            Log.error("Failed to get amount between", e)
+            Log.error("Failed to select vote ticket amount", e)
         }
 
         return -1

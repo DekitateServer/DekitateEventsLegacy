@@ -24,7 +24,7 @@ class ParkourRepository(plugin: JavaPlugin) {
     fun getAll(): List<Parkour> = parkourCacheMap.values.toList()
 
     fun getOrError(parkourId: ParkourId): Parkour? = parkourCacheMap[parkourId] ?: let {
-        Log.error("Parkour(${parkourId.value})が見つかりません.")
+        Log.error("Parkour(${parkourId.value})が見つかりません")
         return@let null
     }
 
@@ -78,6 +78,6 @@ class ParkourRepository(plugin: JavaPlugin) {
         parkourCacheMap.putAll(
                 parkourYamlSource.getAll().associateBy { it.id }
         )
-        Log.info("${parkourCacheMap.size}個のParkourを読み込みました.")
+        Log.info("${parkourCacheMap.size}個のParkourを読み込みました")
     }
 }

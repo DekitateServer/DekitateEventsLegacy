@@ -39,7 +39,7 @@ class SignMetaYamlSource(dataFolder: File) {
 
             signMetaList.addAll(list)
         } catch (e: Exception) {
-            Log.error("SignMetaの読み込みに失敗しました.", e)
+            Log.error("SignMetaの読み込みに失敗しました", e)
         }
 
         return signMetaList

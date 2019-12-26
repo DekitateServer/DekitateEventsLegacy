@@ -24,7 +24,7 @@ class PasswordRepository(plugin: JavaPlugin) {
     fun getAll(): List<Password> = passwordCacheMap.values.toList()
 
     fun getOrError(passwordId: PasswordId): Password? = passwordCacheMap[passwordId] ?: let {
-        Log.error("Password(${passwordId.value})が見つかりません.")
+        Log.error("Password(${passwordId.value})が見つかりません")
         return@let null
     }
 
@@ -78,6 +78,6 @@ class PasswordRepository(plugin: JavaPlugin) {
         passwordCacheMap.putAll(
                 passwordYamlSource.getAll().associateBy { it.id }
         )
-        Log.info("${passwordCacheMap.size}個のPasswordを読み込みました.")
+        Log.info("${passwordCacheMap.size}個のPasswordを読み込みました")
     }
 }

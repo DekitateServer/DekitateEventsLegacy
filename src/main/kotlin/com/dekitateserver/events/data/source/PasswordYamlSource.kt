@@ -35,7 +35,7 @@ class PasswordYamlSource(dataFolder: File) {
 
             passwordList.addAll(list)
         } catch (e: Exception) {
-            Log.error("Passwordの読み込みに失敗しました.", e)
+            Log.error("Passwordの読み込みに失敗しました", e)
         }
 
         return passwordList

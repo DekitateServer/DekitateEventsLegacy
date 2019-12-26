@@ -24,7 +24,7 @@ class SignMetaRepository(plugin: JavaPlugin) {
     fun getOrNew(location: Location): SignMeta = signMetaCacheMap.getOrDefault(location, SignMeta(location))
 
     fun getOrError(location: Location): SignMeta? = signMetaCacheMap[location] ?: let {
-        Log.error("SignMeta($location)が見つかりません.")
+        Log.error("SignMeta($location)が見つかりません")
         return@let null
     }
 
@@ -41,6 +41,6 @@ class SignMetaRepository(plugin: JavaPlugin) {
         val signMetaMap = signMetaYamlSource.getAll().associateBy { it.location }
         signMetaCacheMap.putAll(signMetaMap)
 
-        Log.info("${signMetaCacheMap.size}個のSignMetaを読み込みました.")
+        Log.info("${signMetaCacheMap.size}個のSignMetaを読み込みました")
     }
 }

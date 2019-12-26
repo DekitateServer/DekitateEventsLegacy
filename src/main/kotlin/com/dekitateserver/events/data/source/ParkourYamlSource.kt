@@ -22,7 +22,7 @@ class ParkourYamlSource(dataFolder: File) {
             val list = parkourIdSet.mapNotNull { id ->
                 val name = config.getString("$id.name")
                 if (name == null) {
-                    Log.warn("Parkour($id)のnameがありません.")
+                    Log.warn("Parkour($id)のnameがありません")
                     return@mapNotNull null
                 }
 
@@ -43,7 +43,7 @@ class ParkourYamlSource(dataFolder: File) {
 
             parkourList.addAll(list)
         } catch (e: Exception) {
-            Log.error("Parkourの読み込みに失敗しました.", e)
+            Log.error("Parkourの読み込みに失敗しました", e)
         }
 
         return parkourList

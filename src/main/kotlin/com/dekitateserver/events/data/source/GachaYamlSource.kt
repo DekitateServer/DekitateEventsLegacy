@@ -35,13 +35,13 @@ class GachaYamlSource(dataFolder: File) {
                 }.normalizeProbability()
 
                 if (itemList.isEmpty()) {
-                    Log.warn("Gacha($gachaId)の'Items'が空です.")
+                    Log.warn("Gacha($gachaId)の'Items'が空です")
                     return@mapNotNull null
                 }
 
                 val name = config.getString("$gachaId.name")
                 if (name == null) {
-                    Log.warn("Gacha($gachaId)のnameがありません.")
+                    Log.warn("Gacha($gachaId)のnameがありません")
                     return@mapNotNull null
                 }
 
@@ -58,7 +58,7 @@ class GachaYamlSource(dataFolder: File) {
 
             gachaList.addAll(list)
         } catch (e: Exception) {
-            Log.error("Gachaの読み込みに失敗しました.", e)
+            Log.error("Gachaの読み込みに失敗しました", e)
         }
 
         return gachaList
@@ -67,7 +67,7 @@ class GachaYamlSource(dataFolder: File) {
     private fun List<Gacha.Item>.normalizeProbability(): List<Gacha.Item> {
         val sumProbability = sumByDouble { it.probability }
         if (sumProbability > 1.0) {
-            Log.warn("Gachaの合計確率が100%を超えています.[sumProbability: $sumProbability]")
+            Log.warn("Gachaの合計確率が100%を超えています [sumProbability: $sumProbability]")
             return emptyList()
         }
 

@@ -42,6 +42,6 @@ class LoginBonusRepository(plugin: DekitateEventsPlugin) {
         loginBonusCacheList.addAll(
                 loginBonusYamlSource.getAll()
         )
-        Log.info("${loginBonusCacheList.size}個のLoginBonusを読み込みました.")
+        Log.info("${loginBonusCacheList.size}個のLoginBonusを読み込みました")
     }
 }

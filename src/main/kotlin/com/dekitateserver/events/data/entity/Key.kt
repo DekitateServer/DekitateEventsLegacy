@@ -20,8 +20,8 @@ data class Key(
         val blockLocation: Location? = null,
         val matchMessage: String? = "§b一致",
         val notMatchMessage: String? = "§c不一致",
-        val expiredMessage: String? = "§e期限切れです.",
-        val shortAmountMessage: String? = "§6数が足りません."
+        val expiredMessage: String? = "§e期限切れ",
+        val shortAmountMessage: String? = "§6数が足りません"
 ) {
     companion object {
         private val DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")

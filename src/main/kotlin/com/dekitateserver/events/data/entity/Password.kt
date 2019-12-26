@@ -14,7 +14,7 @@ data class Password(
         val matchMessage: String? = "§b一致",
         val notMatchMessage: String? = "§c不一致",
         val inputMessage: String? = "現在の入力> {buff}",
-        val resetMessage: String? = "入力をリセットしました."
+        val resetMessage: String? = "入力をリセットしました"
 ) {
     val blockMaterialLocation = if (blockMaterial != null && blockLocation != null) {
         MaterialLocation(blockMaterial, blockLocation)

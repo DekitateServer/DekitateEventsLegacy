@@ -24,7 +24,7 @@ class GachaRepository(plugin: JavaPlugin) {
     fun getAll(): List<Gacha> = gachaCacheMap.values.toList()
 
     fun getOrError(gachaId: GachaId): Gacha? = gachaCacheMap[gachaId] ?: let {
-        Log.error("Gacha(${gachaId.value})が見つかりません.")
+        Log.error("Gacha(${gachaId.value})が見つかりません")
         return@let null
     }
 
@@ -37,6 +37,6 @@ class GachaRepository(plugin: JavaPlugin) {
         gachaCacheMap.putAll(
                 gachaYamlSource.getAll().associateBy { it.id }
         )
-        Log.info("${gachaCacheMap.size}個のGachaを読み込みました.")
+        Log.info("${gachaCacheMap.size}個のGachaを読み込みました")
     }
 }

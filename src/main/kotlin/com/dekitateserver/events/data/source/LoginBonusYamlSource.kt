@@ -38,7 +38,7 @@ class LoginBonusYamlSource(dataFolder: File) {
 
             loginBonusList.addAll(list)
         } catch (e: Exception) {
-            Log.error("LoginBonusの読み込みに失敗しました.", e)
+            Log.error("LoginBonusの読み込みに失敗しました", e)
         }
 
         return loginBonusList

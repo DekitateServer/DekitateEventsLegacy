@@ -24,7 +24,7 @@ class KeyRepository(plugin: JavaPlugin) {
     fun getAll(): List<Key> = keyCacheMap.values.toList()
 
     fun getOrError(keyId: KeyId): Key? = keyCacheMap[keyId] ?: let {
-        Log.error("Key(${keyId.value})が見つかりません.")
+        Log.error("Key(${keyId.value})が見つかりません")
         return@let null
     }
 
@@ -78,6 +78,6 @@ class KeyRepository(plugin: JavaPlugin) {
         keyCacheMap.putAll(
                 keyYamlSource.getAll().associateBy { it.id }
         )
-        Log.info("${keyCacheMap.size}個のKeyを読み込みました.")
+        Log.info("${keyCacheMap.size}個のKeyを読み込みました")
     }
 }

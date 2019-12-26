@@ -34,7 +34,7 @@ class EventTicketHistoryDao(dataSource: DataSource) : AbstractDao(dataSource) {
                 st.close()
             }
         } catch (e: SQLException) {
-            Log.error("Failed to create table", e)
+            Log.error("Failed to create table($TABLE_NAME)", e)
         }
     }
 
@@ -49,7 +49,7 @@ class EventTicketHistoryDao(dataSource: DataSource) : AbstractDao(dataSource) {
                 return count > 0
             }
         } catch (e: SQLException) {
-            Log.error("Failed to insert a event ticket log", e)
+            Log.error("Failed to insert a event ticket history", e)
         }
 
         return false
@@ -70,7 +70,7 @@ class EventTicketHistoryDao(dataSource: DataSource) : AbstractDao(dataSource) {
                 return amount
             }
         } catch (e: SQLException) {
-            Log.error("Failed to get amount between", e)
+            Log.error("Failed to select event ticket amount", e)
         }
 
         return -1

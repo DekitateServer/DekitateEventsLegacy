@@ -10,7 +10,7 @@ data class Parkour(
         val joinLocation: Location? = null,
         val joinMessage: String? = "{name}§rに§c挑戦§r!",
         val joinBroadcastMessage: String? = null,
-        val startMessage: String? = "§aスタート時間を記録しました.",
+        val startMessage: String? = "§aスタート時間を記録しました",
         val endMessage: String? = "{name}§r§bを §a{time} §bでクリア§r!",
         val endBroadcastMessage: String? = null,
         val exitLocation: Location? = null,

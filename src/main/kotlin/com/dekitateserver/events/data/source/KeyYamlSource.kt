@@ -23,7 +23,7 @@ class KeyYamlSource(dataFolder: File) {
                 val keyId = KeyId(id)
 
                 val itemStack = config.getItemStack("$id.ItemStack") ?: let {
-                    Log.warn("Key($id)のItemStackがnullです.")
+                    Log.warn("Key($id)のItemStackがnullです")
                     return@mapNotNull null
                 }
 
@@ -43,7 +43,7 @@ class KeyYamlSource(dataFolder: File) {
 
             keyList.addAll(list)
         } catch (e: Exception) {
-            Log.error("Keyの読み込みに失敗しました.", e)
+            Log.error("Keyの読み込みに失敗しました", e)
         }
 
         return keyList

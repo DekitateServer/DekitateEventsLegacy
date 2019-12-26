@@ -23,7 +23,7 @@ class SignMeta(
     @Suppress("UNCHECKED_CAST")
     private fun <T> getOrErrorInternal(key: String): T? = with(_dataMap) {
         if (!containsKey(key)) {
-            Log.error("SignMeta($location)に'$key'がありません.")
+            Log.error("SignMeta($location)に'$key'がありません")
             return null
         }
 

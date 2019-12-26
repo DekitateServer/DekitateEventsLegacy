@@ -34,7 +34,7 @@ class LoginBonusHistoryDao(dataSource: DataSource) : AbstractDao(dataSource) {
                 st.close()
             }
         } catch (e: SQLException) {
-            Log.error("Failed to create table", e)
+            Log.error("Failed to create table($TABLE_NAME)", e)
         }
     }
 
@@ -66,7 +66,7 @@ class LoginBonusHistoryDao(dataSource: DataSource) : AbstractDao(dataSource) {
                 return result.next() && result.getInt(1) == 1
             }
         } catch (e: SQLException) {
-            Log.error("Failed to select", e)
+            Log.error("Failed to select exists login bonus log", e)
         }
 
         return false
