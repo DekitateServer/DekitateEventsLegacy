@@ -5,7 +5,7 @@ import org.bukkit.entity.Player
 class RemoveBedSpawnUseCase {
 
     companion object {
-        private const val MESSAGE_BED_SPAWN_REMOVED = "§eセーブポイントが自動的に消去されました."
+        private const val MESSAGE_BED_SPAWN_REMOVED = "§eセーブポイントが自動的に消去されました"
     }
 
     operator fun invoke(player: Player) {

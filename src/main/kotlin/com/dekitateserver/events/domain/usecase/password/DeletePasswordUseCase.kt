@@ -17,9 +17,9 @@ class DeletePasswordUseCase(
         }
 
         if (passwordRepository.remove(passwordId)) {
-            sender.sendSuccessMessage("Password(${passwordId.value})を消去しました.")
+            sender.sendSuccessMessage("Password(${passwordId.value})を消去しました")
         } else {
-            sender.sendWarnMessage("Password(${passwordId.value})の消去に失敗しました.")
+            sender.sendWarnMessage("Password(${passwordId.value})の消去に失敗しました")
         }
     }
 }

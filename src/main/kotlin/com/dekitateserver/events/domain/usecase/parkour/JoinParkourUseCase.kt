@@ -32,7 +32,7 @@ class JoinParkourUseCase(
             player.broadcastMessageWithoutMe(message)
         }
 
-        Log.info("${player.name}がParkour(${parkourId.value})に参加.")
+        Log.info("${player.name}がParkour(${parkourId.value})に参加")
 
         parkourActionHistoryRepository.add(player, parkourId, ParkourAction.JOIN, joinDateTime)
 

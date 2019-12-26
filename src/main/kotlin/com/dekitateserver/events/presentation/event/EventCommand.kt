@@ -44,7 +44,7 @@ class EventCommand(
                 "---------- DekitateEvents コマンドヘルプ ----------",
                 "| §e/event ticket [player] [ticketType] [amount]",
                 "| §e/event setspawn [player] [x y z]",
-                "| §7[]は必須,<>は任意,()は説明です.",
+                "| §7[]は必須,<>は任意,()は説明",
                 "---------------------------------------"
         )
     }

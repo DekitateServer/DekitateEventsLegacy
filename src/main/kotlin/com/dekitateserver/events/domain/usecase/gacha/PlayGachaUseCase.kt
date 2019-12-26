@@ -43,7 +43,7 @@ class PlayGachaUseCase(
 
             sound = WIN_SOUND
 
-            Log.info("Gacha(${gacha.id.value})の'${item.name}'を${player.name}に実行しました.")
+            Log.info("Gacha(${gacha.id.value})の'${item.name}'を${player.name}に実行しました")
 
             gachaHistoryRepository.add(player, gachaId, item.id)
         } else {

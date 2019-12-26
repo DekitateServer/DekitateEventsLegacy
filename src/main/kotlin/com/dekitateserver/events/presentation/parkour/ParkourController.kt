@@ -131,7 +131,7 @@ class ParkourController(plugin: DekitateEventsPlugin) {
 
     fun edit(sender: CommandSender, argParkourId: String, argType: String, argArgs: List<String>) {
         val parkourEditType = ParkourEditType.find(argType) ?: let {
-            sender.sendWarnMessage("存在しないParkourEditTypeです. [type: $argType]")
+            sender.sendWarnMessage("存在しないParkourEditTypeです [type: $argType]")
             return
         }
 
@@ -185,7 +185,7 @@ class ParkourController(plugin: DekitateEventsPlugin) {
         val action = try {
             ParkourAction.valueOf(event.getLine(3).orEmpty().toUpperCase())
         } catch (e: IllegalArgumentException) {
-            event.player.sendWarnMessage("そのようなParkourActionは存在しません.")
+            event.player.sendWarnMessage("そのようなParkourActionは存在しません")
             return
         }
 

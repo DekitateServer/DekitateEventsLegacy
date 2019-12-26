@@ -87,7 +87,7 @@ class PasswordCommand(
                 "| §9/password info [passwordId]",
                 "| §9/password reload",
                 "| §9/password help",
-                "| §7[]は必須,<>は任意,()は説明です.",
+                "| §7[]は必須,<>は任意,()は説明",
                 "---------------------------------------"
         )
     }

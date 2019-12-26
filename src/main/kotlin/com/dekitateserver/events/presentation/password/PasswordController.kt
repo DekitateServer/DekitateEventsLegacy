@@ -70,7 +70,7 @@ class PasswordController(plugin: DekitateEventsPlugin) {
 
     fun edit(sender: CommandSender, argPasswordId: String, argType: String, argArgs: List<String>) {
         val passwordEditType = PasswordEditType.find(argType) ?: let {
-            sender.sendWarnMessage("存在しないPasswordEditTypeです. [type: $argType]")
+            sender.sendWarnMessage("存在しないPasswordEditTypeです [type: $argType]")
             return
         }
 

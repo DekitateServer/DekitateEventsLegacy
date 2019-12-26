@@ -30,7 +30,7 @@ class EventController(plugin: DekitateEventsPlugin) {
                 "event" -> playerList.forEach { giveEventTicketUseCase(it, amount) }
                 "vote" -> playerList.forEach { giveVoteTicketUseCase(it, amount) }
                 else -> {
-                    Log.warn("正しいチケットタイプ(event|vote)を指定してください.")
+                    Log.warn("正しいチケットタイプ(event|vote)を指定してください")
                     return@launch
                 }
             }

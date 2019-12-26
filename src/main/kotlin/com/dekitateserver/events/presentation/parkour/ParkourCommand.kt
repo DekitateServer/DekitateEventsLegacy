@@ -95,7 +95,7 @@ class ParkourCommand(
                 "| §a/parkour info [parkourId]",
                 "| §a/parkour reload",
                 "| §a/parkour help",
-                "| §7[]は必須,<>は任意,()は説明です.",
+                "| §7[]は必須,<>は任意,()は説明",
                 "---------------------------------------"
         )
     }

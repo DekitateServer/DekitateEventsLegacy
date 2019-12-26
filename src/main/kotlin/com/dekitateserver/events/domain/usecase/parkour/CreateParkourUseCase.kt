@@ -13,7 +13,7 @@ class CreateParkourUseCase(
 ) {
     suspend operator fun invoke(sender: CommandSender, parkourId: ParkourId, name: String) {
         if (parkourRepository.has(parkourId)) {
-            sender.sendWarnMessage("Parkour(${parkourId.value})は既に登録済みです.")
+            sender.sendWarnMessage("Parkour(${parkourId.value})は既に登録済みです")
             return
         }
 
@@ -23,9 +23,9 @@ class CreateParkourUseCase(
         )
 
         if (parkourRepository.add(parkour)) {
-            sender.sendSuccessMessage("Parkour(${parkourId.value})を作成しました.")
+            sender.sendSuccessMessage("Parkour(${parkourId.value})を作成しました")
         } else {
-            sender.sendWarnMessage("Parkour(${parkourId.value})の作成に失敗しました.")
+            sender.sendWarnMessage("Parkour(${parkourId.value})の作成に失敗しました")
         }
     }
 }

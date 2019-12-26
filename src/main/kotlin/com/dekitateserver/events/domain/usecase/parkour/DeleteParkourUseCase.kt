@@ -17,9 +17,9 @@ class DeleteParkourUseCase(
         }
 
         if (parkourRepository.remove(parkourId)) {
-            sender.sendSuccessMessage("Parkour(${parkourId.value})を消去しました.")
+            sender.sendSuccessMessage("Parkour(${parkourId.value})を消去しました")
         } else {
-            sender.sendWarnMessage("Parkour(${parkourId.value})の消去に失敗しました.")
+            sender.sendWarnMessage("Parkour(${parkourId.value})の消去に失敗しました")
         }
     }
 }

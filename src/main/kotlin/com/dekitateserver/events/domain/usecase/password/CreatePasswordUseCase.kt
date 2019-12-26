@@ -12,16 +12,16 @@ class CreatePasswordUseCase(
 ) {
     suspend operator fun invoke(sender: CommandSender, passwordId: PasswordId) {
         if (passwordRepository.has(passwordId)) {
-            sender.sendWarnMessage("Password(${passwordId.value})は既に登録済みです.")
+            sender.sendWarnMessage("Password(${passwordId.value})は既に登録済みです")
             return
         }
 
         val password = Password(passwordId, "")
 
         if (passwordRepository.add(password)) {
-            sender.sendSuccessMessage("Password(${passwordId.value})を作成しました.")
+            sender.sendSuccessMessage("Password(${passwordId.value})を作成しました")
         } else {
-            sender.sendWarnMessage("Password(${passwordId.value})の作成に失敗しました.")
+            sender.sendWarnMessage("Password(${passwordId.value})の作成に失敗しました")
         }
     }
 }

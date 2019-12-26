@@ -34,7 +34,7 @@ class CreateParkourSignUseCase(
             ParkourAction.END -> "§b§nクリア"
             ParkourAction.EXIT -> "§1§n退出"
             ParkourAction.START -> {
-                player.sendWarnMessage("ParkourAction($action)は看板に非対応です.")
+                player.sendWarnMessage("ParkourAction($action)は看板に非対応です")
                 return null
             }
         }
@@ -44,7 +44,7 @@ class CreateParkourSignUseCase(
         }
 
         return if (isAddSuccessful) {
-            player.sendSuccessMessage("看板を作成しました.")
+            player.sendSuccessMessage("看板を作成しました")
 
             SignLines(
                     line0 = ParkourSignContracts.SIGN_INDEX,

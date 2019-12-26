@@ -28,14 +28,14 @@ class EditPasswordUseCase(
                 PasswordEditType.RESET_MESSAGE -> password.copy(resetMessage = EditArgumentsHelper.getString(args))
             }
         } catch (e: IllegalArgumentException) {
-            sender.sendWarnMessage(e.message ?: "不明なエラーです.")
+            sender.sendWarnMessage(e.message ?: "不明なエラーです")
             return
         }
 
         if (passwordRepository.update(newPassword)) {
-            sender.sendSuccessMessage("Password(${passwordId.value})を更新しました.")
+            sender.sendSuccessMessage("Password(${passwordId.value})を更新しました")
         } else {
-            sender.sendWarnMessage("Password(${passwordId.value})の更新に失敗しました.")
+            sender.sendWarnMessage("Password(${passwordId.value})の更新に失敗しました")
         }
     }
 }

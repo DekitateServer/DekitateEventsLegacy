@@ -12,7 +12,7 @@ class SetPasswordUseCase(
 
         password.set(text)
 
-        Log.info("Password(${passwordId.value})を'$text'に設定しました.")
+        Log.info("Password(${passwordId.value})を'$text'に設定しました")
 
         passwordRepository.update(password)
     }

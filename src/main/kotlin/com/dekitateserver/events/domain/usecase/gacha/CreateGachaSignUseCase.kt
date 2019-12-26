@@ -19,7 +19,7 @@ class CreateGachaSignUseCase(
         private val signMetaRepository: SignMetaRepository
 ) : AbstractGachaSignUseCase() {
 
-    operator fun invoke(location: Location, player: Player, gachaId: GachaId, gachaCost: GachaCost): SignLines? {
+    operator fun invoke(location: Location, player: Player, gachaId: GachaId, gachaCost: GachaCost): CreateGachaSignUseCaseResult? {
         val gacha = gachaRepository.get(gachaId) ?: let {
             player.sendGachaIdNotFound(gachaId)
             return null
@@ -45,14 +45,20 @@ class CreateGachaSignUseCase(
         }
 
         return if (isAddSuccessful) {
-            player.sendSuccessMessage("看板を作成しました.")
+            player.sendSuccessMessage("看板を作成しました")
 
-            SignLines(
+            val signLines = SignLines(
                     line0 = GachaSignContracts.SIGN_INDEX,
                     line1 = gacha.name,
                     line2 = "",
                     line3 = costDetailLine
             )
+
+            CreateGachaSignUseCaseResult(signLines)
         } else null
     }
 }
+
+data class CreateGachaSignUseCaseResult(
+        val signLines: SignLines
+)

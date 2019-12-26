@@ -53,7 +53,7 @@ class GachaCommand(
                 "| §d/gacha info [gachaId]",
                 "| §d/gacha reload",
                 "| §d/gacha help",
-                "| §7[]は必須,<>は任意,()は説明です.",
+                "| §7[]は必須,<>は任意,()は説明",
                 "---------------------------------------"
         )
     }

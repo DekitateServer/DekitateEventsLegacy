@@ -36,7 +36,7 @@ class LoginBonusCommand(
                 "| §6/loginbonus list",
                 "| §6/loginbonus reload",
                 "| §6/loginbonus help",
-                "| §7[]は必須,<>は任意,()は説明です.",
+                "| §7[]は必須,<>は任意,()は説明",
                 "---------------------------------------"
         )
     }

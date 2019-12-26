@@ -17,7 +17,7 @@ class DemoGachaUseCase(
         }
 
         if (times !in 1..1000000) {
-            sender.sendWarnMessage("回数は1-1000000の範囲で入力してください.")
+            sender.sendWarnMessage("回数は1-1000000の範囲で入力してください")
             return
         }
 

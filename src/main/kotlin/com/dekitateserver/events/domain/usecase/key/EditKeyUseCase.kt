@@ -40,14 +40,14 @@ class EditKeyUseCase(
                 KeyEditType.SHORT_AMOUNT_MESSAGE -> key.copy(shortAmountMessage = EditArgumentsHelper.getString(args))
             }
         } catch (e: IllegalArgumentException) {
-            sender.sendWarnMessage(e.message ?: "不明なエラーです.")
+            sender.sendWarnMessage(e.message ?: "不明なエラーです")
             return
         }
 
         if (keyRepository.update(newKey)) {
-            sender.sendSuccessMessage("Key(${keyId.value})を更新しました.")
+            sender.sendSuccessMessage("Key(${keyId.value})を更新しました")
         } else {
-            sender.sendWarnMessage("Key(${keyId.value})の更新に失敗しました.")
+            sender.sendWarnMessage("Key(${keyId.value})の更新に失敗しました")
         }
     }
 }

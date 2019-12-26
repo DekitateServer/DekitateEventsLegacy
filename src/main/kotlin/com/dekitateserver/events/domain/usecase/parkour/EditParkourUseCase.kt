@@ -36,14 +36,14 @@ class EditParkourUseCase(
                 ParkourEditType.EXIT_MESSAGE -> parkour.copy(exitMessage = EditArgumentsHelper.getString(args))
             }
         } catch (e: IllegalArgumentException) {
-            sender.sendWarnMessage(e.message ?: "不明なエラーです.")
+            sender.sendWarnMessage(e.message ?: "不明なエラーです")
             return
         }
 
         if (parkourRepository.update(newParkour)) {
-            sender.sendSuccessMessage("Parkour(${parkourId.value})を更新しました.")
+            sender.sendSuccessMessage("Parkour(${parkourId.value})を更新しました")
         } else {
-            sender.sendWarnMessage("Parkour(${parkourId.value})の更新に失敗しました.")
+            sender.sendWarnMessage("Parkour(${parkourId.value})の更新に失敗しました")
         }
     }
 }

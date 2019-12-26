@@ -32,7 +32,7 @@ class EndParkourUseCase(
             val duration = Duration.between(startDateTime, endDateTime)
             DurationFormatUtils.formatDuration(duration.toMillis(), "mm:ss.SSS")
         } else {
-            Log.warn("${player.name}のParkour(${parkourId.value})スタート時間取得に失敗.")
+            Log.warn("${player.name}のParkour(${parkourId.value})スタート時間取得に失敗")
             "unknown"
         }
 
@@ -47,7 +47,7 @@ class EndParkourUseCase(
             player.broadcastMessageWithoutMe(message)
         }
 
-        Log.info("${player.name}がParkour(${parkourId.value})をクリア.")
+        Log.info("${player.name}がParkour(${parkourId.value})をクリア")
 
         parkourActionHistoryRepository.add(player, parkourId, ParkourAction.END, endDateTime)
 

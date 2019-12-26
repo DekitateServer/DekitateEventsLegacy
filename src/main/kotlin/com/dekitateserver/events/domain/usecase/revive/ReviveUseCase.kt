@@ -11,7 +11,7 @@ import org.bukkit.entity.Player
 class ReviveUseCase {
     operator fun invoke(player: Player, location: Location, experience: Int) {
         if (experience < 1) {
-            Log.error("復活経験値が1未満です[experience: $experience]")
+            Log.error("復活経験値が1未満です [experience: $experience]")
             return
         }
 

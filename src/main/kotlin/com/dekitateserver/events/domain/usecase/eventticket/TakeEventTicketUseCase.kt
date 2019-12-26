@@ -13,7 +13,7 @@ class TakeEventTicketUseCase(
         private val voteTicketHistoryRepository: VoteTicketHistoryRepository
 ) {
     companion object {
-        private const val MESSAGE_SHORT_AMOUNT = "${EventTicket.DISPLAY_NAME}§eが{amount}枚§c不足§eしています."
+        private const val MESSAGE_SHORT_AMOUNT = "${EventTicket.DISPLAY_NAME}§eが{amount}枚§c不足§eしています"
 
         // for countIn
         private val EVENT_TICKET = EventTicket()
@@ -21,7 +21,7 @@ class TakeEventTicketUseCase(
 
     suspend operator fun invoke(player: Player, amount: Int): Boolean {
         if (amount < 1) {
-            Log.error("1枚以上を指定して下さい. [amount: ${amount}]")
+            Log.error("1枚以上を指定して下さい [amount: ${amount}]")
             return false
         }
 

@@ -63,7 +63,7 @@ class KeyController(plugin: DekitateEventsPlugin) {
 
     fun edit(sender: CommandSender, argKeyId: String, argType: String, argArgs: List<String>) {
         val keyEditType = KeyEditType.find(argType) ?: let {
-            sender.sendWarnMessage("存在しないKeyEditTypeです. [type: $argType]")
+            sender.sendWarnMessage("存在しないKeyEditTypeです [type: $argType]")
             return
         }
 

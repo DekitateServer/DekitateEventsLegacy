@@ -28,8 +28,12 @@ class SpawnController(plugin: DekitateEventsPlugin) {
     }
 
     fun clickSign(player: Player, location: Location) {
-        val setspawnLocation = getSetSpawnSignUseCase(location) ?: return
-        setSpawnUseCase(player, setspawnLocation)
+        val getSetSpawnSignUseCaseResult = getSetSpawnSignUseCase(location) ?: return
+
+        setSpawnUseCase(
+                player = player,
+                location = getSetSpawnSignUseCaseResult.location
+        )
     }
 
     fun createSign(event: SignChangeEvent) {
@@ -37,11 +41,11 @@ class SpawnController(plugin: DekitateEventsPlugin) {
 
         val xyz = event.getLine(1).orEmpty().split(" ")
         if (xyz.size < 3) {
-            player.sendWarnMessage("座標パラメータが不足しています.")
+            player.sendWarnMessage("座標パラメータが不足しています")
             return
         }
 
-        val signLines = createSpawnSignUseCase(
+        val createSpawnSignUseCaseResult = createSpawnSignUseCase(
                 location = event.block.location,
                 player = event.player,
                 x = xyz[0].toDoubleOrError() ?: return,
@@ -51,6 +55,6 @@ class SpawnController(plugin: DekitateEventsPlugin) {
 
         ) ?: return
 
-        signLines.apply(event)
+        createSpawnSignUseCaseResult.signLines.apply(event)
     }
 }

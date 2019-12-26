@@ -17,9 +17,9 @@ class DeleteKeyUseCase(
         }
 
         if (keyRepository.remove(keyId)) {
-            sender.sendSuccessMessage("Key(${keyId.value})を消去しました.")
+            sender.sendSuccessMessage("Key(${keyId.value})を消去しました")
         } else {
-            sender.sendWarnMessage("Key(${keyId.value})の消去に失敗しました.")
+            sender.sendWarnMessage("Key(${keyId.value})の消去に失敗しました")
         }
     }
 }

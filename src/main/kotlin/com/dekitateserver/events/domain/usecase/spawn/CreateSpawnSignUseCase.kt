@@ -12,7 +12,7 @@ class CreateSpawnSignUseCase(
         private val signMetaRepository: SignMetaRepository
 ) : AbstractSpawnSignUseCase() {
 
-    operator fun invoke(location: Location, player: Player, x: Double, y: Double, z: Double, comment: String?): SignLines? {
+    operator fun invoke(location: Location, player: Player, x: Double, y: Double, z: Double, comment: String?): CreateSpawnSignUseCaseResult? {
         val signMeta = signMetaRepository.getOrNew(location).apply {
             put(KEY_SIGN_META_SETSPAWN_LOCATION, Location(location.world, x, y, z))
         }
@@ -22,14 +22,20 @@ class CreateSpawnSignUseCase(
         }
 
         return if (isAddSuccessful) {
-            player.sendSuccessMessage("看板を作成しました.")
+            player.sendSuccessMessage("看板を作成しました")
 
-            SignLines(
+            val signLines = SignLines(
                     line0 = SpawnSignContracts.SIGN_INDEX,
                     line1 = "",
                     line2 = comment ?: "",
                     line3 = ""
             )
+
+            CreateSpawnSignUseCaseResult(signLines)
         } else null
     }
 }
+
+data class CreateSpawnSignUseCaseResult(
+        val signLines: SignLines
+)

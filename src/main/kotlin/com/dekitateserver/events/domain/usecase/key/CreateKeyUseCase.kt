@@ -15,21 +15,21 @@ class CreateKeyUseCase(
         val itemStack = try {
             EditArgumentsHelper.getItemInMainHand(player)
         } catch (e: IllegalArgumentException) {
-            player.sendWarnMessage(e.message ?: "未知のエラーです.")
+            player.sendWarnMessage(e.message ?: "未知のエラー")
             return
         }
 
         if (keyRepository.has(keyId)) {
-            player.sendWarnMessage("Key(${keyId.value})は既に登録済みです.")
+            player.sendWarnMessage("Key(${keyId.value})は既に登録済みです")
             return
         }
 
         val key = Key(keyId, itemStack.clone())
 
         if (keyRepository.add(key)) {
-            player.sendSuccessMessage("Key(${keyId.value})を作成しました.")
+            player.sendSuccessMessage("Key(${keyId.value})を作成しました")
         } else {
-            player.sendWarnMessage("Key(${keyId.value})の作成に失敗しました.")
+            player.sendWarnMessage("Key(${keyId.value})の作成に失敗しました")
         }
     }
 }

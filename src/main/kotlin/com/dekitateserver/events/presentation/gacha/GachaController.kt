@@ -108,20 +108,20 @@ class GachaController(plugin: DekitateEventsPlugin) {
                     keyId = KeyId(event.getLine(3).orEmpty())
             )
             else -> {
-                Log.error("GachaCost(${event.getLine(2)})は存在しません.")
-                Log.error("free, event, vote, keyを指定してください.")
+                Log.error("GachaCost(${event.getLine(2)})は存在しません")
+                Log.error("(free|event|vote|key)を指定してください")
 
                 return
             }
         }
 
-        val signLines = createGachaSignUseCase(
+        val createGachaSignUseCaseResult = createGachaSignUseCase(
                 location = event.block.location,
                 player = event.player,
                 gachaId = GachaId(event.getLine(1).orEmpty()),
                 gachaCost = gachaCost
         ) ?: return
 
-        signLines.apply(event)
+        createGachaSignUseCaseResult.signLines.apply(event)
     }
 }
