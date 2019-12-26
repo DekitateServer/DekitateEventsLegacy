@@ -15,7 +15,7 @@ class CreateReviveSignUseCase(
 
     operator fun invoke(location: Location, player: Player, x: Double, y: Double, z: Double, experience: Int): CreateReviveSignUseCaseResult? {
         if (experience < 1) {
-            player.sendWarnMessage("経験値は1以上で指定してください.")
+            player.sendWarnMessage("経験値は1以上で指定してください")
             return null
         }
 
@@ -29,7 +29,7 @@ class CreateReviveSignUseCase(
         }
 
         return if (isAddSuccessful) {
-            player.sendSuccessMessage("看板を作成しました.")
+            player.sendSuccessMessage("看板を作成しました")
 
             val signLines = SignLines(
                     line0 = ReviveSignContracts.SIGN_INDEX,
