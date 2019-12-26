@@ -9,6 +9,6 @@ class GetSetSpawnSignUseCase(
 
     operator fun invoke(location: Location): Location? {
         val signMeta = signMetaRepository.getOrError(location) ?: return null
-        return signMeta.getOrError<Location>(KEY_SIGN_META_SETSPAWN_LOCATION)
+        return signMeta.getStringOrError<Location>(KEY_SIGN_META_SETSPAWN_LOCATION)
     }
 }
