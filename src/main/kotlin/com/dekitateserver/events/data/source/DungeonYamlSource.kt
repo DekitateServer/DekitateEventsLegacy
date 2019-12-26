@@ -64,7 +64,7 @@ class DungeonYamlSource(dataFolder: File) {
             put("$path.name", dungeon.name)
 
             put("$path.Reward.eventTicketAmount", dungeon.rewardEventTicketAmount)
-            put("$path.Reward.gachaId", dungeon.rewardGachaId)
+            put("$path.Reward.gachaId", dungeon.rewardGachaId?.value)
 
             put("$path.Join.Location", dungeon.joinLocation)
             put("$path.Join.message", dungeon.joinMessage)

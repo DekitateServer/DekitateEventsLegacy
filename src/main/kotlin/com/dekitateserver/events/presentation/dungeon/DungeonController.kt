@@ -9,10 +9,15 @@ import com.dekitateserver.events.domain.usecase.gacha.PlayGachaUseCase
 import com.dekitateserver.events.domain.usecase.spawn.SetSpawnUseCase
 import com.dekitateserver.events.util.selectPlayersOrError
 import com.dekitateserver.events.util.sendWarnMessage
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.bukkit.command.CommandSender
 
 class DungeonController(plugin: DekitateEventsPlugin) {
+
+    companion object {
+        private const val DELAY_COMPLETE_GACHA = 10000L
+    }
 
     private val server = plugin.server
     private val pluginScope = plugin.pluginScope
@@ -51,20 +56,27 @@ class DungeonController(plugin: DekitateEventsPlugin) {
             server.selectPlayersOrError(sender, argSelector)?.forEach { player ->
                 val completeDungeonUseCaseResult = completeDungeonUseCase(player, dungeonId) ?: return@forEach
 
-                setSpawnUseCase(
-                        player = player,
-                        location = completeDungeonUseCaseResult.spawnLocation ?: return@forEach
-                )
+                if (completeDungeonUseCaseResult.spawnLocation != null) {
+                    setSpawnUseCase(
+                            player = player,
+                            location = completeDungeonUseCaseResult.spawnLocation
+                    )
+                }
 
                 val eventTicketAmount = completeDungeonUseCaseResult.eventTicketAmount
                 if (eventTicketAmount > 0) {
                     giveEventTicketUseCase(player, eventTicketAmount)
                 }
 
-                playGachaUseCase(
-                        player = player,
-                        gachaId = completeDungeonUseCaseResult.gachaId ?: return@forEach
-                )
+                if (completeDungeonUseCaseResult.gachaId != null) {
+                    launch {
+                        delay(DELAY_COMPLETE_GACHA)
+                        playGachaUseCase(
+                                player = player,
+                                gachaId = completeDungeonUseCaseResult.gachaId
+                        )
+                    }
+                }
             }
         }
     }

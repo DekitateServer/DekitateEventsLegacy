@@ -11,6 +11,7 @@ import com.dekitateserver.events.data.vo.GachaId
 import com.dekitateserver.events.util.Log
 import org.apache.commons.lang.time.DurationFormatUtils
 import org.bukkit.Location
+import org.bukkit.Sound
 import org.bukkit.entity.Player
 import java.time.Duration
 import java.time.LocalDateTime
@@ -25,6 +26,10 @@ class CompleteDungeonUseCase(
         val dungeon = dungeonRepository.getOrError(dungeonId) ?: return null
 
         player.teleportIfNotNull(dungeon.completeLocation)
+
+        if (dungeon.isEnabledCompleteSound) {
+            player.playSound(player.location, Sound.UI_TOAST_CHALLENGE_COMPLETE, 1.2f, 0.0f)
+        }
 
         // calc complete time
         val joinDateTime = dungeonActionHistoryRepository.getLatestActionedDateTime(player, dungeonId, DungeonAction.JOIN)
