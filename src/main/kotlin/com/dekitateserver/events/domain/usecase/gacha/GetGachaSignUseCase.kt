@@ -12,7 +12,7 @@ class GetGachaSignUseCase(
     operator fun invoke(location: Location): GetGachaSignUseCaseResult? {
         val signMeta = signMetaRepository.getOrError(location) ?: return null
 
-        val gachaId = signMeta.getOrError(KEY_SIGN_META_GACHA_ID) ?: return null
+        val gachaId = signMeta.getStringOrError(KEY_SIGN_META_GACHA_ID) ?: return null
         val gachaCost = signMeta.getOrError<GachaCost>(KEY_SIGN_META_GACHA_COST) ?: return null
 
         return GetGachaSignUseCaseResult(GachaId(gachaId), gachaCost)

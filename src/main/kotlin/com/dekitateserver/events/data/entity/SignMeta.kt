@@ -14,7 +14,9 @@ class SignMeta(
     val dataMap: Map<String, Any>
         get() = _dataMap.toMap()
 
-    fun getOrError(key: String): String? = getOrErrorInternal<String>(key)
+    fun getIntOrError(key: String): Int? = getOrErrorInternal<Int>(key)
+
+    fun getStringOrError(key: String): String? = getOrErrorInternal<String>(key)
 
     fun <T : ConfigurationSerializable> getOrError(key: String): T? = getOrErrorInternal<T>(key)
 
@@ -26,6 +28,10 @@ class SignMeta(
         }
 
         return get(key) as T
+    }
+
+    fun put(key: String, value: Int) {
+        _dataMap[key] = value
     }
 
     fun put(key: String, value: String) {
