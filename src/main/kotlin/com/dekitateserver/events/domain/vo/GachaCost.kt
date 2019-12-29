@@ -1,4 +1,4 @@
-package com.dekitateserver.events.data.vo
+package com.dekitateserver.events.domain.vo
 
 import org.bukkit.configuration.serialization.ConfigurationSerializable
 
