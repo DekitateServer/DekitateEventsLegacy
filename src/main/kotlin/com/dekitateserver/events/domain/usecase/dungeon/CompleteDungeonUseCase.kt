@@ -2,36 +2,58 @@ package com.dekitateserver.events.domain.usecase.dungeon
 
 import com.dekitateserver.core.util.broadcastMessageWithoutMe
 import com.dekitateserver.core.util.sendMessageIfNotNull
-import com.dekitateserver.core.util.teleportIfNotNull
-import com.dekitateserver.events.domain.repository.DungeonActionHistoryRepository
-import com.dekitateserver.events.domain.repository.DungeonRepository
+import com.dekitateserver.events.domain.repository.*
+import com.dekitateserver.events.domain.usecase.eventticket.GiveEventTicketUseCase
+import com.dekitateserver.events.domain.usecase.gacha.PlayGachaUseCase
+import com.dekitateserver.events.domain.usecase.spawn.SetSpawnUseCase
 import com.dekitateserver.events.domain.vo.DungeonAction
 import com.dekitateserver.events.domain.vo.DungeonId
-import com.dekitateserver.events.domain.vo.GachaId
 import com.dekitateserver.events.util.Log
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import org.apache.commons.lang.time.DurationFormatUtils
-import org.bukkit.Location
+import org.bukkit.Server
 import org.bukkit.Sound
 import org.bukkit.entity.Player
 import java.time.Duration
 import java.time.LocalDateTime
 
 class CompleteDungeonUseCase(
+        server: Server,
+        private val gachaScope: CoroutineScope,
         private val dungeonRepository: DungeonRepository,
-        private val dungeonActionHistoryRepository: DungeonActionHistoryRepository
+        private val dungeonActionHistoryRepository: DungeonActionHistoryRepository,
+        gachaRepository: GachaRepository,
+        gachaHistoryRepository: GachaHistoryRepository,
+        eventTicketHistoryRepository: EventTicketHistoryRepository
 ) {
-    suspend operator fun invoke(player: Player, dungeonId: DungeonId): CompleteDungeonUseCaseResult? {
+    companion object {
+        private const val DELAY_GACHA_MILLIS = 10000L
+    }
+
+    private val setSpawnUseCase = SetSpawnUseCase()
+
+    private val giveEventTicketUseCase = GiveEventTicketUseCase(eventTicketHistoryRepository)
+
+    private val playGachaUseCase = PlayGachaUseCase(server, gachaRepository, gachaHistoryRepository)
+
+    suspend operator fun invoke(player: Player, dungeonId: DungeonId) {
         val completeDateTime = LocalDateTime.now()
 
-        val dungeon = dungeonRepository.getOrError(dungeonId) ?: return null
+        val dungeon = dungeonRepository.getOrError(dungeonId) ?: return
 
-        player.teleportIfNotNull(dungeon.completeLocation)
+        val completeLocation = dungeon.completeLocation
+        if (completeLocation != null) {
+            player.teleport(completeLocation)
+            setSpawnUseCase(player, completeLocation)
+        }
 
         if (dungeon.isEnabledCompleteSound) {
             player.playSound(player.location, Sound.UI_TOAST_CHALLENGE_COMPLETE, 1.2f, 0.0f)
         }
 
-        // calc complete time
+        // calc join-complete time
         val joinDateTime = dungeonActionHistoryRepository.getLatestActionedDateTime(player, dungeonId, DungeonAction.JOIN)
 
         val time = if (joinDateTime != null) {
@@ -55,18 +77,21 @@ class CompleteDungeonUseCase(
 
         Log.info("${player.name}がDungeon(${dungeonId.value})をクリア")
 
-        dungeonActionHistoryRepository.add(player, dungeonId, DungeonAction.COMPLETE, completeDateTime)
+        if (dungeon.hasEventTicketReward) {
+            giveEventTicketUseCase(
+                    player = player,
+                    amount = dungeon.rewardEventTicketAmount
+            )
+        }
 
-        return CompleteDungeonUseCaseResult(
-                spawnLocation = dungeon.completeLocation,
-                eventTicketAmount = dungeon.rewardEventTicketAmount,
-                gachaId = dungeon.rewardGachaId
-        )
+        val gachaId = dungeon.rewardGachaId
+        if (gachaId != null) {
+            gachaScope.launch {
+                delay(DELAY_GACHA_MILLIS)
+                playGachaUseCase(player, gachaId)
+            }
+        }
+
+        dungeonActionHistoryRepository.add(player, dungeonId, DungeonAction.COMPLETE, completeDateTime)
     }
 }
-
-data class CompleteDungeonUseCaseResult(
-        val spawnLocation: Location?,
-        val eventTicketAmount: Int,
-        val gachaId: GachaId?
-)

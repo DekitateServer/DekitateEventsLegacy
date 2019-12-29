@@ -24,6 +24,8 @@ data class Dungeon(
         val lockBroadcastMessage: String? = null,
         val unlockBroadcastMessage: String? = null
 ) {
+    val hasEventTicketReward = rewardEventTicketAmount > 0
+
     val formattedJoinMessage = joinMessage?.format()
     val formattedJoinBroadcastMessage = joinBroadcastMessage?.format()
     val formattedCompleteMessage = completeMessage?.format()
