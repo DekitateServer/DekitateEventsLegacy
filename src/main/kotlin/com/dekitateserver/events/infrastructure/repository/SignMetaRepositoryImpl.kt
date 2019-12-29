@@ -1,6 +1,7 @@
-package com.dekitateserver.events.data
+package com.dekitateserver.events.infrastructure.repository
 
-import com.dekitateserver.events.data.entity.SignMeta
+import com.dekitateserver.events.domain.entity.SignMeta
+import com.dekitateserver.events.domain.repository.SignMetaRepository
 import com.dekitateserver.events.infrastructure.source.SignMetaYamlSource
 import com.dekitateserver.events.util.Log
 import kotlinx.coroutines.Dispatchers
@@ -9,7 +10,7 @@ import org.bukkit.Location
 import org.bukkit.plugin.java.JavaPlugin
 import java.util.concurrent.ConcurrentHashMap
 
-class SignMetaRepository(plugin: JavaPlugin) {
+class SignMetaRepositoryImpl(plugin: JavaPlugin) : SignMetaRepository {
 
     private val signMetaYamlSource = SignMetaYamlSource(plugin.dataFolder)
 
@@ -19,16 +20,16 @@ class SignMetaRepository(plugin: JavaPlugin) {
         createCache()
     }
 
-    fun get(location: Location): SignMeta? = signMetaCacheMap[location]
+    override fun get(location: Location): SignMeta? = signMetaCacheMap[location]
 
-    fun getOrNew(location: Location): SignMeta = signMetaCacheMap.getOrDefault(location, SignMeta(location))
+    override fun getOrNew(location: Location): SignMeta = signMetaCacheMap.getOrDefault(location, SignMeta(location))
 
-    fun getOrError(location: Location): SignMeta? = signMetaCacheMap[location] ?: let {
+    override fun getOrError(location: Location): SignMeta? = signMetaCacheMap[location] ?: let {
         Log.error("SignMeta($location)が見つかりません")
         return@let null
     }
 
-    suspend fun add(signMeta: SignMeta): Boolean = withContext(Dispatchers.IO) {
+    override suspend fun add(signMeta: SignMeta): Boolean = withContext(Dispatchers.IO) {
         val isSuccessful = signMetaYamlSource.save(signMeta)
         if (isSuccessful) {
             signMetaCacheMap[signMeta.location] = signMeta

@@ -1,11 +1,11 @@
 package com.dekitateserver.events.domain.usecase.gacha
 
-import com.dekitateserver.events.data.SignMetaRepository
 import com.dekitateserver.events.domain.repository.GachaRepository
 import com.dekitateserver.events.domain.repository.KeyRepository
 import com.dekitateserver.events.domain.vo.GachaCost
 import com.dekitateserver.events.domain.vo.GachaId
 import com.dekitateserver.events.domain.vo.SignLines
+import com.dekitateserver.events.infrastructure.repository.SignMetaRepository
 import com.dekitateserver.events.presentation.gacha.GachaSignContracts
 import com.dekitateserver.events.util.sendGachaIdNotFound
 import com.dekitateserver.events.util.sendSuccessMessage

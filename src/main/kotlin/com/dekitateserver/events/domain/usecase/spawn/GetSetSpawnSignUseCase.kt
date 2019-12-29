@@ -1,6 +1,6 @@
 package com.dekitateserver.events.domain.usecase.spawn
 
-import com.dekitateserver.events.data.SignMetaRepository
+import com.dekitateserver.events.infrastructure.repository.SignMetaRepository
 import org.bukkit.Location
 
 class GetSetSpawnSignUseCase(

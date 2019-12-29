@@ -1,4 +1,4 @@
-package com.dekitateserver.events.data.entity
+package com.dekitateserver.events.domain.entity
 
 import com.dekitateserver.events.util.Log
 import org.bukkit.Location

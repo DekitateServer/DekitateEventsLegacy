@@ -3,7 +3,6 @@ package com.dekitateserver.events
 import com.dekitateserver.core.DekitatePlugin
 import com.dekitateserver.events.config.ConfigKeys
 import com.dekitateserver.events.config.Configuration
-import com.dekitateserver.events.data.SignMetaRepository
 import com.dekitateserver.events.data.VoteTicketHistoryRepository
 import com.dekitateserver.events.domain.repository.*
 import com.dekitateserver.events.domain.vo.GachaCost
@@ -69,7 +68,7 @@ class DekitateEventsPlugin : DekitateEvents, DekitatePlugin() {
                 password = configuration.get(ConfigKeys.DATABASE_PASSWORD)
         )
 
-        signMetaRepository = SignMetaRepository(this)
+        signMetaRepository = SignMetaRepositoryImpl(this)
         parkourRepository = ParkourRepositoryImpl(this)
         gachaRepository = GachaRepositoryImpl(this)
         keyRepository = KeyRepositoryImpl(this)
