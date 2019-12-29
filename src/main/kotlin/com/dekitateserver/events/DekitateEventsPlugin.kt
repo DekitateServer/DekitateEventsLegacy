@@ -71,7 +71,7 @@ class DekitateEventsPlugin : DekitateEvents, DekitatePlugin() {
         signMetaRepository = SignMetaRepository(this)
         parkourRepository = ParkourRepositoryImpl(this)
         gachaRepository = GachaRepositoryImpl(this)
-        keyRepository = KeyRepository(this)
+        keyRepository = KeyRepositoryImpl(this)
         passwordRepository = PasswordRepository(this)
         loginBonusRepository = LoginBonusRepository(this)
         eventTicketHistoryRepository = EventTicketHistoryRepositoryImpl(this)

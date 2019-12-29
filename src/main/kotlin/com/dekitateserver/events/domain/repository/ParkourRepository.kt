@@ -5,13 +5,13 @@ import com.dekitateserver.events.domain.vo.ParkourId
 
 interface ParkourRepository {
 
+    fun has(parkourId: ParkourId): Boolean
+
     fun get(parkourId: ParkourId): Parkour?
 
     fun getAll(): List<Parkour>
 
     fun getOrError(parkourId: ParkourId): Parkour?
-
-    fun has(parkourId: ParkourId): Boolean
 
     suspend fun add(parkour: Parkour): Boolean
 

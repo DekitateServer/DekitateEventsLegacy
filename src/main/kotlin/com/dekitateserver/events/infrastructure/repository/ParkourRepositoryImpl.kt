@@ -20,6 +20,8 @@ class ParkourRepositoryImpl(plugin: JavaPlugin) : ParkourRepository {
         createCache()
     }
 
+    override fun has(parkourId: ParkourId): Boolean = parkourCacheMap.containsKey(parkourId)
+
     override fun get(parkourId: ParkourId): Parkour? = parkourCacheMap[parkourId]
 
     override fun getAll(): List<Parkour> = parkourCacheMap.values.toList()
@@ -32,8 +34,6 @@ class ParkourRepositoryImpl(plugin: JavaPlugin) : ParkourRepository {
 
         return parkour
     }
-
-    override fun has(parkourId: ParkourId): Boolean = parkourCacheMap.containsKey(parkourId)
 
     override suspend fun add(parkour: Parkour): Boolean = withContext(Dispatchers.IO) {
         if (parkourCacheMap.containsKey(parkour.id)) {

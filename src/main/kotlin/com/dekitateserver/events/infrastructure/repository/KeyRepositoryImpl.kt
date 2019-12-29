@@ -1,6 +1,7 @@
-package com.dekitateserver.events.data
+package com.dekitateserver.events.infrastructure.repository
 
-import com.dekitateserver.events.data.entity.Key
+import com.dekitateserver.events.domain.entity.Key
+import com.dekitateserver.events.domain.repository.KeyRepository
 import com.dekitateserver.events.domain.vo.KeyId
 import com.dekitateserver.events.infrastructure.source.KeyYamlSource
 import com.dekitateserver.events.util.Log
@@ -9,7 +10,7 @@ import kotlinx.coroutines.withContext
 import org.bukkit.plugin.java.JavaPlugin
 import java.util.concurrent.ConcurrentHashMap
 
-class KeyRepository(plugin: JavaPlugin) {
+class KeyRepositoryImpl(plugin: JavaPlugin) : KeyRepository {
 
     private val keyYamlSource = KeyYamlSource(plugin.dataFolder)
 
@@ -19,18 +20,18 @@ class KeyRepository(plugin: JavaPlugin) {
         createCache()
     }
 
-    fun get(keyId: KeyId): Key? = keyCacheMap[keyId]
+    override fun get(keyId: KeyId): Key? = keyCacheMap[keyId]
 
-    fun getAll(): List<Key> = keyCacheMap.values.toList()
+    override fun getAll(): List<Key> = keyCacheMap.values.toList()
 
-    fun getOrError(keyId: KeyId): Key? = keyCacheMap[keyId] ?: let {
+    override fun getOrError(keyId: KeyId): Key? = keyCacheMap[keyId] ?: let {
         Log.error("Key(${keyId.value})が見つかりません")
         return@let null
     }
 
-    fun has(keyId: KeyId): Boolean = keyCacheMap.containsKey(keyId)
+    override fun has(keyId: KeyId): Boolean = keyCacheMap.containsKey(keyId)
 
-    suspend fun add(key: Key): Boolean = withContext(Dispatchers.IO) {
+    override suspend fun add(key: Key): Boolean = withContext(Dispatchers.IO) {
         if (keyCacheMap.containsKey(key.id)) {
             return@withContext false
         }
@@ -43,7 +44,7 @@ class KeyRepository(plugin: JavaPlugin) {
         }
     }
 
-    suspend fun update(key: Key): Boolean = withContext(Dispatchers.IO) {
+    override suspend fun update(key: Key): Boolean = withContext(Dispatchers.IO) {
         if (!keyCacheMap.containsKey(key.id)) {
             return@withContext false
         }
@@ -56,7 +57,7 @@ class KeyRepository(plugin: JavaPlugin) {
         }
     }
 
-    suspend fun remove(keyId: KeyId): Boolean = withContext(Dispatchers.IO) {
+    override suspend fun remove(keyId: KeyId): Boolean = withContext(Dispatchers.IO) {
         if (!keyCacheMap.containsKey(keyId)) {
             return@withContext false
         }
@@ -69,7 +70,7 @@ class KeyRepository(plugin: JavaPlugin) {
         }
     }
 
-    suspend fun refreshCache() = withContext(Dispatchers.IO) {
+    override suspend fun refreshCache() = withContext(Dispatchers.IO) {
         keyCacheMap.clear()
         createCache()
     }
