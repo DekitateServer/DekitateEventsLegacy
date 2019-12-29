@@ -94,8 +94,8 @@ class GachaController(plugin: DekitateEventsPlugin) {
         }
 
         val createGachaSignUseCaseResult = createGachaSignUseCase(
-                player = player,
                 location = location,
+                player = player,
                 gachaId = GachaId(argGachaId),
                 gachaCost = gachaCost
         ) ?: return null

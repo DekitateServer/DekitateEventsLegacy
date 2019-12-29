@@ -4,12 +4,12 @@ import com.dekitateserver.events.DekitateEventsPlugin
 import com.dekitateserver.events.domain.usecase.revive.CreateReviveSignUseCase
 import com.dekitateserver.events.domain.usecase.revive.GetReviveSignUseCase
 import com.dekitateserver.events.domain.usecase.revive.ReviveUseCase
+import com.dekitateserver.events.domain.vo.SignLines
 import com.dekitateserver.events.util.sendWarnMessage
 import com.dekitateserver.events.util.toDoubleOrError
 import com.dekitateserver.events.util.toIntOrError
 import org.bukkit.Location
 import org.bukkit.entity.Player
-import org.bukkit.event.block.SignChangeEvent
 
 class ReviveController(plugin: DekitateEventsPlugin) {
 
@@ -27,25 +27,23 @@ class ReviveController(plugin: DekitateEventsPlugin) {
         )
     }
 
-    fun createSign(event: SignChangeEvent) {
-        val player = event.player
-
-        val xyz = event.getLine(1).orEmpty().split(" ")
+    fun createSign(player: Player, location: Location, argLocation: String, arcExperience: String): SignLines? {
+        val xyz = argLocation.split(" ")
         if (xyz.size < 3) {
             player.sendWarnMessage("座標パラメータが不足しています")
-            return
+            return null
         }
 
         val createReviveSignUseCaseResult = createReviveSignUseCase(
-                location = event.block.location,
-                player = event.player,
-                x = xyz[0].toDoubleOrError() ?: return,
-                y = xyz[1].toDoubleOrError() ?: return,
-                z = xyz[2].toDoubleOrError() ?: return,
-                experience = event.getLine(2).orEmpty().toIntOrError() ?: return
+                location = location,
+                player = player,
+                x = xyz[0].toDoubleOrError() ?: return null,
+                y = xyz[1].toDoubleOrError() ?: return null,
+                z = xyz[2].toDoubleOrError() ?: return null,
+                experience = arcExperience.toIntOrError() ?: return null
 
-        ) ?: return
+        ) ?: return null
 
-        createReviveSignUseCaseResult.signLines.apply(event)
+        return createReviveSignUseCaseResult.signLines
     }
 }

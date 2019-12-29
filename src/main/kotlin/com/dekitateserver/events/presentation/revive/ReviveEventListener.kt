@@ -24,7 +24,12 @@ class ReviveEventListener(
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     fun onSignChanged(event: SignChangeEvent) {
         if (event.getLine(0) == ReviveSignContracts.CREATE_SIGN_INDEX && event.player.hasPermission("neko.event")) {
-            reviveController.createSign(event)
+            reviveController.createSign(
+                    player = event.player,
+                    location = event.block.location,
+                    argLocation = event.getLine(1).orEmpty(),
+                    arcExperience = event.getLine(2).orEmpty()
+            )?.apply(event)
         }
     }
 }
