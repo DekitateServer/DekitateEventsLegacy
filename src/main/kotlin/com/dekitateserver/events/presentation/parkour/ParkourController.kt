@@ -42,7 +42,12 @@ class ParkourController(plugin: DekitateEventsPlugin) {
     private val sendParkourListUseCase = SendParkourListUseCase(plugin.parkourRepository)
     private val sendParkourInfoUseCase = SendParkourInfoUseCase(plugin.parkourRepository)
     private val reloadParkourUseCategory = ReloadParkourUseCase(plugin.parkourRepository)
-    private val getParkourSignUseCase = GetParkourSignUseCase(plugin.signMetaRepository)
+    private val clickParkourSignUseCase = ClickParkourSignUseCase(
+            plugin.parkourRepository,
+            plugin.signMetaRepository,
+            plugin.parkourActionHistoryRepository,
+            plugin.eventTicketHistoryRepository
+    )
     private val createParkourSignUseCase = CreateParkourSignUseCase(plugin.parkourRepository, plugin.signMetaRepository)
 
     fun join(sender: CommandSender, argSelector: String, argParkourId: String) {
@@ -142,17 +147,8 @@ class ParkourController(plugin: DekitateEventsPlugin) {
     }
 
     fun clickSign(player: Player, location: Location) {
-        val getParkourSignUseCaseResult = getParkourSignUseCase(location) ?: return
-
         pluginScope.launch {
-            val parkourId = getParkourSignUseCaseResult.parkourId
-
-            when (getParkourSignUseCaseResult.parkourAction) {
-                ParkourAction.JOIN -> joinParkourUseCase(player, parkourId)
-                ParkourAction.START -> startParkourUseCase(player, parkourId)
-                ParkourAction.END -> endParkourUseCase(player, parkourId)
-                ParkourAction.EXIT -> exitParkourUseCase(player, parkourId)
-            }
+            clickParkourSignUseCase(player, location)
         }
     }
 

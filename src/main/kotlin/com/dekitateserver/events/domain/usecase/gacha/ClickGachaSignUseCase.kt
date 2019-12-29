@@ -31,7 +31,7 @@ class ClickGachaSignUseCase(
     suspend operator fun invoke(player: Player, location: Location) {
         val signMeta = signMetaRepository.getOrError(location) ?: return
 
-        val gachaId = signMeta.getStringOrError(KEY_SIGN_META_GACHA_ID) ?: return
+        val gachaIdString = signMeta.getStringOrError(KEY_SIGN_META_GACHA_ID) ?: return
         val gachaCost = signMeta.getOrError<GachaCost>(KEY_SIGN_META_GACHA_COST) ?: return
 
         val isSuccessful = when (gachaCost) {
@@ -44,7 +44,7 @@ class ClickGachaSignUseCase(
         if (isSuccessful) {
             playGachaUseCase(
                     player = player,
-                    gachaId = GachaId(gachaId)
+                    gachaId = GachaId(gachaIdString)
             )
         }
     }
