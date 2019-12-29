@@ -17,14 +17,5 @@ enum class ParkourEditType(
 
     companion object {
         fun find(id: String) = values().find { it.id == id }
-
-        val HELP_MESSAGES = mutableListOf("--------- ParkourEditType ---------").apply {
-            values().forEach {
-                add("| §9${it.id} ${it.description}")
-            }
-
-            add("| §7必須: [], 任意: <>")
-            add("---------------------------------------")
-        }.toTypedArray()
     }
 }

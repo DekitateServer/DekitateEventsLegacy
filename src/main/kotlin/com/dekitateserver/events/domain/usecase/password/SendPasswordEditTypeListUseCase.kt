@@ -6,15 +6,15 @@ import org.bukkit.command.CommandSender
 class SendPasswordEditTypeListUseCase {
 
     operator fun invoke(sender: CommandSender) {
-        val messageList = mutableListOf("--------- PasswordEditType ---------")
+        val messages = mutableListOf("--------- PasswordEditType ---------").apply {
+            PasswordEditType.values().forEach {
+                add("| §9${it.id} ${it.description}")
+            }
 
-        PasswordEditType.values().forEach {
-            messageList.add("| §9${it.id} ${it.description}")
-        }
+            add("| §7必須: [], 任意: <>")
+            add("---------------------------------------")
+        }.toTypedArray()
 
-        messageList.add("| §7必須: [], 任意: <>")
-        messageList.add("---------------------------------------")
-
-        sender.sendMessage(messageList.toTypedArray())
+        sender.sendMessage(messages)
     }
 }
