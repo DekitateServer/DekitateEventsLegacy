@@ -1,8 +1,8 @@
 package com.dekitateserver.events.domain.usecase.parkour
 
-import com.dekitateserver.events.data.ParkourRepository
-import com.dekitateserver.events.data.vo.ParkourEditType
-import com.dekitateserver.events.data.vo.ParkourId
+import com.dekitateserver.events.domain.repository.ParkourRepository
+import com.dekitateserver.events.domain.vo.ParkourEditType
+import com.dekitateserver.events.domain.vo.ParkourId
 import com.dekitateserver.events.util.*
 import org.bukkit.command.CommandSender
 
@@ -18,8 +18,9 @@ class EditParkourUseCase(
         val newParkour = try {
             when (type) {
                 ParkourEditType.NAME -> parkour.copy(name = EditArgumentsHelper.requireString(args))
-                ParkourEditType.REWARD_EVENT_TICKET -> parkour.copy(rewardEventTicketAmount = EditArgumentsHelper.getInt(args)
-                        ?: 0)
+                ParkourEditType.REWARD_EVENT_TICKET -> parkour.copy(
+                        rewardEventTicketAmount = EditArgumentsHelper.getInt(args) ?: 0
+                )
                 ParkourEditType.JOIN_LOCATION -> {
                     val player = sender.toPlayerOrError() ?: return
                     parkour.copy(joinLocation = EditArgumentsHelper.getLocation(player, args))

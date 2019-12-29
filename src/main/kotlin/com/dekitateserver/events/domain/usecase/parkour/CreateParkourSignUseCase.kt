@@ -1,10 +1,10 @@
 package com.dekitateserver.events.domain.usecase.parkour
 
-import com.dekitateserver.events.data.ParkourRepository
 import com.dekitateserver.events.data.SignMetaRepository
-import com.dekitateserver.events.data.vo.ParkourAction
-import com.dekitateserver.events.data.vo.ParkourId
 import com.dekitateserver.events.data.vo.SignLines
+import com.dekitateserver.events.domain.repository.ParkourRepository
+import com.dekitateserver.events.domain.vo.ParkourAction
+import com.dekitateserver.events.domain.vo.ParkourId
 import com.dekitateserver.events.presentation.parkour.ParkourSignContracts
 import com.dekitateserver.events.util.sendParkourIdNotFound
 import com.dekitateserver.events.util.sendSuccessMessage

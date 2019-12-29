@@ -1,6 +1,6 @@
-package com.dekitateserver.events.data.entity
+package com.dekitateserver.events.domain.entity
 
-import com.dekitateserver.events.data.vo.ParkourId
+import com.dekitateserver.events.domain.vo.ParkourId
 import org.bukkit.Location
 
 data class Parkour(
@@ -16,6 +16,8 @@ data class Parkour(
         val exitLocation: Location? = null,
         val exitMessage: String? = null
 ) {
+    val hasEventTicketReward = rewardEventTicketAmount > 0
+
     val formattedJoinMessage = joinMessage?.format()
     val formattedJoinBroadcastMessage = joinBroadcastMessage?.format()
     val formattedStartMessage = startMessage?.format()

@@ -2,8 +2,8 @@ package com.dekitateserver.events.domain.usecase.eventticket
 
 import com.dekitateserver.events.data.EventTicketHistoryRepository
 import com.dekitateserver.events.data.VoteTicketHistoryRepository
-import com.dekitateserver.events.data.entity.EventTicket
 import com.dekitateserver.events.data.entity.VoteTicket
+import com.dekitateserver.events.domain.entity.EventTicket
 import com.dekitateserver.events.util.Log
 import org.bukkit.entity.Player
 import org.bukkit.inventory.PlayerInventory

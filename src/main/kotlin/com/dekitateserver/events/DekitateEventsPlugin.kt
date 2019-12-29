@@ -4,7 +4,11 @@ import com.dekitateserver.core.DekitatePlugin
 import com.dekitateserver.events.config.ConfigKeys
 import com.dekitateserver.events.config.Configuration
 import com.dekitateserver.events.data.*
+import com.dekitateserver.events.data.repository.ParkourActionHistoryRepositoryImpl
+import com.dekitateserver.events.data.repository.ParkourRepositoryImpl
 import com.dekitateserver.events.data.vo.GachaCost
+import com.dekitateserver.events.domain.repository.ParkourActionHistoryRepository
+import com.dekitateserver.events.domain.repository.ParkourRepository
 import com.dekitateserver.events.presentation.event.EventCommand
 import com.dekitateserver.events.presentation.event.EventController
 import com.dekitateserver.events.presentation.gacha.GachaCommand
@@ -67,7 +71,7 @@ class DekitateEventsPlugin : DekitateEvents, DekitatePlugin() {
         )
 
         signMetaRepository = SignMetaRepository(this)
-        parkourRepository = ParkourRepository(this)
+        parkourRepository = ParkourRepositoryImpl(this)
         gachaRepository = GachaRepository(this)
         keyRepository = KeyRepository(this)
         passwordRepository = PasswordRepository(this)
@@ -77,7 +81,7 @@ class DekitateEventsPlugin : DekitateEvents, DekitatePlugin() {
         gachaHistoryRepository = GachaHistoryRepository(this)
         loginBonusHistoryRepository = LoginBonusHistoryRepository(this)
 
-        parkourActionHistoryRepository = ParkourActionHistoryRepository(this)
+        parkourActionHistoryRepository = ParkourActionHistoryRepositoryImpl(this)
 
         val eventController = EventController(this)
         val parkourController = ParkourController(this)

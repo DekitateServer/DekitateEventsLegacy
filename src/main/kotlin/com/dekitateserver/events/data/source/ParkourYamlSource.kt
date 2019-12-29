@@ -1,8 +1,8 @@
 package com.dekitateserver.events.data.source
 
 import com.dekitateserver.core.data.source.YamlStorage
-import com.dekitateserver.events.data.entity.Parkour
-import com.dekitateserver.events.data.vo.ParkourId
+import com.dekitateserver.events.domain.entity.Parkour
+import com.dekitateserver.events.domain.vo.ParkourId
 import com.dekitateserver.events.util.Log
 import org.bukkit.Location
 import java.io.File

@@ -1,12 +1,10 @@
 package com.dekitateserver.events.presentation.parkour
 
 import com.dekitateserver.events.DekitateEventsPlugin
-import com.dekitateserver.events.data.vo.ParkourAction
-import com.dekitateserver.events.data.vo.ParkourEditType
-import com.dekitateserver.events.data.vo.ParkourId
-import com.dekitateserver.events.domain.usecase.eventticket.GiveEventTicketUseCase
 import com.dekitateserver.events.domain.usecase.parkour.*
-import com.dekitateserver.events.domain.usecase.spawn.SetSpawnUseCase
+import com.dekitateserver.events.domain.vo.ParkourAction
+import com.dekitateserver.events.domain.vo.ParkourEditType
+import com.dekitateserver.events.domain.vo.ParkourId
 import com.dekitateserver.events.util.selectPlayersOrError
 import com.dekitateserver.events.util.sendWarnMessage
 import kotlinx.coroutines.launch
@@ -30,7 +28,8 @@ class ParkourController(plugin: DekitateEventsPlugin) {
     )
     private val endParkourUseCase = EndParkourUseCase(
             plugin.parkourRepository,
-            plugin.parkourActionHistoryRepository
+            plugin.parkourActionHistoryRepository,
+            plugin.eventTicketHistoryRepository
     )
     private val exitParkourUseCase = ExitParkourUseCase(
             plugin.parkourRepository,
@@ -46,21 +45,12 @@ class ParkourController(plugin: DekitateEventsPlugin) {
     private val getParkourSignUseCase = GetParkourSignUseCase(plugin.signMetaRepository)
     private val createParkourSignUseCase = CreateParkourSignUseCase(plugin.parkourRepository, plugin.signMetaRepository)
 
-    private val setSpawnUseCase = SetSpawnUseCase()
-
-    private val giveEventTicketUseCase = GiveEventTicketUseCase(plugin.eventTicketHistoryRepository)
-
     fun join(sender: CommandSender, argSelector: String, argParkourId: String) {
         val parkourId = ParkourId(argParkourId)
 
         pluginScope.launch {
             server.selectPlayersOrError(sender, argSelector)?.forEach { player ->
-                val joinParkourUseCaseResult = joinParkourUseCase(player, parkourId) ?: return@forEach
-
-                setSpawnUseCase(
-                        player = player,
-                        location = joinParkourUseCaseResult.spawnLocation ?: return@forEach
-                )
+                joinParkourUseCase(player, parkourId)
             }
         }
     }
@@ -80,17 +70,7 @@ class ParkourController(plugin: DekitateEventsPlugin) {
 
         pluginScope.launch {
             server.selectPlayersOrError(sender, argSelector)?.forEach { player ->
-                val endParkourUseCaseResult = endParkourUseCase(player, parkourId) ?: return@forEach
-
-                setSpawnUseCase(
-                        player = player,
-                        location = endParkourUseCaseResult.spawnLocation ?: return@forEach
-                )
-
-                val eventTicketAmount = endParkourUseCaseResult.eventTicketAmount
-                if (eventTicketAmount > 0) {
-                    giveEventTicketUseCase(player, eventTicketAmount)
-                }
+                endParkourUseCase(player, parkourId)
             }
         }
     }
@@ -100,12 +80,7 @@ class ParkourController(plugin: DekitateEventsPlugin) {
 
         pluginScope.launch {
             server.selectPlayersOrError(sender, argSelector)?.forEach { player ->
-                val exitParkourUseCaseResult = exitParkourUseCase(player, parkourId) ?: return@forEach
-
-                setSpawnUseCase(
-                        player = player,
-                        location = exitParkourUseCaseResult.spawnLocation ?: return@forEach
-                )
+                exitParkourUseCase(player, parkourId)
             }
         }
     }

@@ -1,12 +1,11 @@
 package com.dekitateserver.events.domain.usecase.parkour
 
 import com.dekitateserver.core.util.sendMessageIfNotNull
-import com.dekitateserver.core.util.teleportIfNotNull
-import com.dekitateserver.events.data.ParkourActionHistoryRepository
-import com.dekitateserver.events.data.ParkourRepository
-import com.dekitateserver.events.data.vo.ParkourAction
-import com.dekitateserver.events.data.vo.ParkourId
-import org.bukkit.Location
+import com.dekitateserver.events.domain.repository.ParkourActionHistoryRepository
+import com.dekitateserver.events.domain.repository.ParkourRepository
+import com.dekitateserver.events.domain.usecase.spawn.SetSpawnUseCase
+import com.dekitateserver.events.domain.vo.ParkourAction
+import com.dekitateserver.events.domain.vo.ParkourId
 import org.bukkit.entity.Player
 import java.time.LocalDateTime
 
@@ -14,22 +13,21 @@ class ExitParkourUseCase(
         private val parkourRepository: ParkourRepository,
         private val parkourActionHistoryRepository: ParkourActionHistoryRepository
 ) {
-    suspend operator fun invoke(player: Player, parkourId: ParkourId): ExitParkourUseCaseResult? {
-        val parkour = parkourRepository.getOrError(parkourId) ?: return null
+    private val setSpawnUseCase = SetSpawnUseCase()
 
-        player.teleportIfNotNull(parkour.exitLocation)
+    suspend operator fun invoke(player: Player, parkourId: ParkourId) {
+        val parkour = parkourRepository.getOrError(parkourId) ?: return
+
+        val exitLocation = parkour.exitLocation
+        if (exitLocation != null) {
+            player.teleport(exitLocation)
+            setSpawnUseCase(player, exitLocation)
+        }
+
         val exitDateTime = LocalDateTime.now()
 
         player.sendMessageIfNotNull(parkour.formattedExitMessage)
 
         parkourActionHistoryRepository.add(player, parkourId, ParkourAction.EXIT, exitDateTime)
-
-        return ExitParkourUseCaseResult(
-                spawnLocation = parkour.exitLocation
-        )
     }
 }
-
-data class ExitParkourUseCaseResult(
-        val spawnLocation: Location?
-)

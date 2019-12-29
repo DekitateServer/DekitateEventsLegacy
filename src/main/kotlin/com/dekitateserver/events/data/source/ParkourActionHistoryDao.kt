@@ -1,8 +1,8 @@
 package com.dekitateserver.events.data.source
 
 import com.dekitateserver.core.data.source.AbstractDao
-import com.dekitateserver.events.data.vo.ParkourAction
-import com.dekitateserver.events.data.vo.ParkourId
+import com.dekitateserver.events.domain.vo.ParkourAction
+import com.dekitateserver.events.domain.vo.ParkourId
 import com.dekitateserver.events.util.Log
 import java.sql.SQLException
 import java.sql.Timestamp
