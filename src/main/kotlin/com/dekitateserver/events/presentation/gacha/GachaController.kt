@@ -1,10 +1,7 @@
 package com.dekitateserver.events.presentation.gacha
 
 import com.dekitateserver.events.DekitateEventsPlugin
-import com.dekitateserver.events.domain.usecase.eventticket.TakeEventTicketUseCase
 import com.dekitateserver.events.domain.usecase.gacha.*
-import com.dekitateserver.events.domain.usecase.key.UseKeyUseCase
-import com.dekitateserver.events.domain.usecase.voteticket.TakeVoteTicketUseCase
 import com.dekitateserver.events.domain.vo.GachaCost
 import com.dekitateserver.events.domain.vo.GachaId
 import com.dekitateserver.events.domain.vo.KeyId
@@ -27,14 +24,16 @@ class GachaController(plugin: DekitateEventsPlugin) {
     private val sendGachaListUseCase = SendGachaListUseCase(plugin.gachaRepository)
     private val sendGachaInfoUseCase = SendGachaInfoUseCase(plugin.gachaRepository)
     private val reloadGachaUseCase = ReloadGachaUseCase(plugin.gachaRepository)
-    private val getGachaSignUseCase = GetGachaSignUseCase(plugin.signMetaRepository)
+    private val clickGachaSignUseCase = ClickGachaSignUseCase(
+            plugin.server,
+            plugin.gachaRepository,
+            plugin.keyRepository,
+            plugin.gachaHistoryRepository,
+            plugin.eventTicketHistoryRepository,
+            plugin.voteTicketHistoryRepository,
+            plugin.signMetaRepository
+    )
     private val createGachaSignUseCase = CreateGachaSignUseCase(plugin.gachaRepository, plugin.keyRepository, plugin.signMetaRepository)
-
-    private val takeEventTicketUseCase = TakeEventTicketUseCase(plugin.eventTicketHistoryRepository, plugin.voteTicketHistoryRepository)
-
-    private val takeVoteTicketUseCase = TakeVoteTicketUseCase(plugin.voteTicketHistoryRepository)
-
-    private val useKeyUseCase = UseKeyUseCase(plugin.keyRepository)
 
     fun play(sender: CommandSender, argSelector: String, argGachaId: String) {
         val gachaId = GachaId(argGachaId)
@@ -69,29 +68,8 @@ class GachaController(plugin: DekitateEventsPlugin) {
     }
 
     fun clickSign(player: Player, location: Location) {
-        val getGachaSignUseCaseResult = getGachaSignUseCase(location) ?: return
-
         pluginScope.launch {
-            when (val cost = getGachaSignUseCaseResult.gachaCost) {
-                is GachaCost.EventTicket -> {
-                    if (!takeEventTicketUseCase(player, cost.amount)) {
-                        return@launch
-                    }
-                }
-                is GachaCost.VoteTicket -> {
-                    if (!takeVoteTicketUseCase(player, cost.amount)) {
-                        return@launch
-                    }
-                }
-                is GachaCost.Key -> {
-                    if (!useKeyUseCase(player, cost.keyId)) {
-                        return@launch
-                    }
-                }
-                GachaCost.Free -> Unit
-            }
-
-            playGachaUseCase(player, getGachaSignUseCaseResult.gachaId)
+            clickGachaSignUseCase(player, location)
         }
     }
 
