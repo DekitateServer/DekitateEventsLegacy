@@ -3,8 +3,9 @@ package com.dekitateserver.events
 import com.dekitateserver.core.DekitatePlugin
 import com.dekitateserver.events.config.ConfigKeys
 import com.dekitateserver.events.config.Configuration
-import com.dekitateserver.events.data.*
-import com.dekitateserver.events.data.vo.GachaCost
+import com.dekitateserver.events.domain.repository.*
+import com.dekitateserver.events.domain.vo.GachaCost
+import com.dekitateserver.events.infrastructure.repository.*
 import com.dekitateserver.events.presentation.event.EventCommand
 import com.dekitateserver.events.presentation.event.EventController
 import com.dekitateserver.events.presentation.gacha.GachaCommand
@@ -66,18 +67,18 @@ class DekitateEventsPlugin : DekitateEvents, DekitatePlugin() {
                 password = configuration.get(ConfigKeys.DATABASE_PASSWORD)
         )
 
-        signMetaRepository = SignMetaRepository(this)
-        parkourRepository = ParkourRepository(this)
-        gachaRepository = GachaRepository(this)
-        keyRepository = KeyRepository(this)
-        passwordRepository = PasswordRepository(this)
-        loginBonusRepository = LoginBonusRepository(this)
-        eventTicketHistoryRepository = EventTicketHistoryRepository(this)
-        voteTicketHistoryRepository = VoteTicketHistoryRepository(this)
-        gachaHistoryRepository = GachaHistoryRepository(this)
-        loginBonusHistoryRepository = LoginBonusHistoryRepository(this)
+        signMetaRepository = SignMetaRepositoryImpl(this)
+        parkourRepository = ParkourRepositoryImpl(this)
+        gachaRepository = GachaRepositoryImpl(this)
+        keyRepository = KeyRepositoryImpl(this)
+        passwordRepository = PasswordRepositoryImpl(this)
+        loginBonusRepository = LoginBonusRepositoryImpl(this)
+        eventTicketHistoryRepository = EventTicketHistoryRepositoryImpl(this)
+        voteTicketHistoryRepository = VoteTicketHistoryRepositoryImpl(this)
+        gachaHistoryRepository = GachaHistoryRepositoryImpl(this)
+        loginBonusHistoryRepository = LoginBonusHistoryRepositoryImpl(this)
 
-        parkourActionHistoryRepository = ParkourActionHistoryRepository(this)
+        parkourActionHistoryRepository = ParkourActionHistoryRepositoryImpl(this)
 
         val eventController = EventController(this)
         val parkourController = ParkourController(this)

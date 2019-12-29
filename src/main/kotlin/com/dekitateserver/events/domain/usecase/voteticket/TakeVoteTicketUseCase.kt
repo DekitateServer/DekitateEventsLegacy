@@ -1,7 +1,7 @@
 package com.dekitateserver.events.domain.usecase.voteticket
 
-import com.dekitateserver.events.data.VoteTicketHistoryRepository
-import com.dekitateserver.events.data.entity.VoteTicket
+import com.dekitateserver.events.domain.entity.VoteTicket
+import com.dekitateserver.events.domain.repository.VoteTicketHistoryRepository
 import com.dekitateserver.events.util.Log
 import org.bukkit.entity.Player
 import org.bukkit.inventory.PlayerInventory
@@ -15,7 +15,7 @@ class TakeVoteTicketUseCase(
 
     suspend operator fun invoke(player: Player, amount: Int): Boolean {
         if (amount < 1) {
-            Log.error("1枚以上を指定して下さい [amount: ${amount}]")
+            Log.error("1枚以上を指定して下さい [amount: $amount]")
             return false
         }
 

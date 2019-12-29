@@ -6,11 +6,11 @@ import com.dekitateserver.events.domain.usecase.spawn.CreateSpawnSignUseCase
 import com.dekitateserver.events.domain.usecase.spawn.GetSetSpawnSignUseCase
 import com.dekitateserver.events.domain.usecase.spawn.RemoveBedSpawnUseCase
 import com.dekitateserver.events.domain.usecase.spawn.SetSpawnUseCase
+import com.dekitateserver.events.domain.vo.SignLines
 import com.dekitateserver.events.util.sendWarnMessage
 import com.dekitateserver.events.util.toDoubleOrError
 import org.bukkit.Location
 import org.bukkit.entity.Player
-import org.bukkit.event.block.SignChangeEvent
 
 class SpawnController(plugin: DekitateEventsPlugin) {
 
@@ -36,25 +36,23 @@ class SpawnController(plugin: DekitateEventsPlugin) {
         )
     }
 
-    fun createSign(event: SignChangeEvent) {
-        val player = event.player
-
-        val xyz = event.getLine(1).orEmpty().split(" ")
+    fun createSign(player: Player, location: Location, argLocation: String, argComment: String): SignLines? {
+        val xyz = argLocation.split(" ")
         if (xyz.size < 3) {
             player.sendWarnMessage("座標パラメータが不足しています")
-            return
+            return null
         }
 
         val createSpawnSignUseCaseResult = createSpawnSignUseCase(
-                location = event.block.location,
-                player = event.player,
-                x = xyz[0].toDoubleOrError() ?: return,
-                y = xyz[1].toDoubleOrError() ?: return,
-                z = xyz[2].toDoubleOrError() ?: return,
-                comment = event.getLine(2)
+                location = location,
+                player = player,
+                x = xyz[0].toDoubleOrError() ?: return null,
+                y = xyz[1].toDoubleOrError() ?: return null,
+                z = xyz[2].toDoubleOrError() ?: return null,
+                comment = argComment
 
-        ) ?: return
+        ) ?: return null
 
-        createSpawnSignUseCaseResult.signLines.apply(event)
+        return createSpawnSignUseCaseResult.signLines
     }
 }

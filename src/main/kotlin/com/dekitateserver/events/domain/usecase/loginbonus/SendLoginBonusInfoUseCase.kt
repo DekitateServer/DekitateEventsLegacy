@@ -1,7 +1,7 @@
 package com.dekitateserver.events.domain.usecase.loginbonus
 
-import com.dekitateserver.events.data.LoginBonusRepository
-import com.dekitateserver.events.data.vo.LoginBonusId
+import com.dekitateserver.events.domain.repository.LoginBonusRepository
+import com.dekitateserver.events.domain.vo.LoginBonusId
 import com.dekitateserver.events.util.sendLoginBonusIdNotFound
 import org.bukkit.command.CommandSender
 

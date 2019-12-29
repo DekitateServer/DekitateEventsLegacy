@@ -2,30 +2,43 @@ package com.dekitateserver.events.domain.usecase.parkour
 
 import com.dekitateserver.core.util.broadcastMessageWithoutMe
 import com.dekitateserver.core.util.sendMessageIfNotNull
-import com.dekitateserver.core.util.teleportIfNotNull
-import com.dekitateserver.events.data.ParkourActionHistoryRepository
-import com.dekitateserver.events.data.ParkourRepository
-import com.dekitateserver.events.data.vo.ParkourAction
-import com.dekitateserver.events.data.vo.ParkourId
+import com.dekitateserver.events.domain.repository.EventTicketHistoryRepository
+import com.dekitateserver.events.domain.repository.ParkourActionHistoryRepository
+import com.dekitateserver.events.domain.repository.ParkourRepository
+import com.dekitateserver.events.domain.usecase.eventticket.GiveEventTicketUseCase
+import com.dekitateserver.events.domain.usecase.spawn.SetSpawnUseCase
+import com.dekitateserver.events.domain.vo.ParkourAction
+import com.dekitateserver.events.domain.vo.ParkourId
 import com.dekitateserver.events.util.Log
 import org.apache.commons.lang.time.DurationFormatUtils
-import org.bukkit.Location
 import org.bukkit.entity.Player
 import java.time.Duration
 import java.time.LocalDateTime
 
 class EndParkourUseCase(
         private val parkourRepository: ParkourRepository,
-        private val parkourActionHistoryRepository: ParkourActionHistoryRepository
+        private val parkourActionHistoryRepository: ParkourActionHistoryRepository,
+        eventTicketHistoryRepository: EventTicketHistoryRepository
 ) {
-    suspend operator fun invoke(player: Player, parkourId: ParkourId): EndParkourUseCaseResult? {
+    private val setSpawnUseCase = SetSpawnUseCase()
+
+    private val giveEventTicketUseCase = GiveEventTicketUseCase(eventTicketHistoryRepository)
+
+    suspend operator fun invoke(player: Player, parkourId: ParkourId) {
         val endDateTime = LocalDateTime.now()
 
-        val parkour = parkourRepository.getOrError(parkourId) ?: return null
+        val parkour = parkourRepository.getOrError(parkourId) ?: return
 
-        player.teleportIfNotNull(parkour.exitLocation)
+        if (parkour.exitLocation != null) {
+            player.teleport(parkour.exitLocation)
 
-        // calc clear time
+            setSpawnUseCase(
+                    player = player,
+                    location = parkour.exitLocation
+            )
+        }
+
+        // calc start-end time
         val startDateTime = parkourActionHistoryRepository.getLatestActionedDateTime(player, parkourId, ParkourAction.START)
 
         val time = if (startDateTime != null) {
@@ -47,18 +60,15 @@ class EndParkourUseCase(
             player.broadcastMessageWithoutMe(message)
         }
 
+        if (parkour.hasEventTicketReward) {
+            giveEventTicketUseCase(
+                    player = player,
+                    amount = parkour.rewardEventTicketAmount
+            )
+        }
+
         Log.info("${player.name}がParkour(${parkourId.value})をクリア")
 
         parkourActionHistoryRepository.add(player, parkourId, ParkourAction.END, endDateTime)
-
-        return EndParkourUseCaseResult(
-                spawnLocation = parkour.exitLocation,
-                eventTicketAmount = parkour.rewardEventTicketAmount
-        )
     }
 }
-
-data class EndParkourUseCaseResult(
-        val spawnLocation: Location?,
-        val eventTicketAmount: Int
-)

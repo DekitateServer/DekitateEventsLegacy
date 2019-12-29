@@ -2,6 +2,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     kotlin("jvm") version "1.3.61"
+    id("org.jmailen.kotlinter") version "2.2.0"
 }
 
 group = "com.dekitateserver.events"

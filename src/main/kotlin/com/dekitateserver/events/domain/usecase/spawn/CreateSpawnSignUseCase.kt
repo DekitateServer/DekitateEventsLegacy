@@ -1,7 +1,7 @@
 package com.dekitateserver.events.domain.usecase.spawn
 
-import com.dekitateserver.events.data.SignMetaRepository
-import com.dekitateserver.events.data.vo.SignLines
+import com.dekitateserver.events.domain.repository.SignMetaRepository
+import com.dekitateserver.events.domain.vo.SignLines
 import com.dekitateserver.events.presentation.spawn.SpawnSignContracts
 import com.dekitateserver.events.util.sendSuccessMessage
 import kotlinx.coroutines.runBlocking

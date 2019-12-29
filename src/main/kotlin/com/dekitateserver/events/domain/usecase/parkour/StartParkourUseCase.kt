@@ -1,10 +1,10 @@
 package com.dekitateserver.events.domain.usecase.parkour
 
 import com.dekitateserver.core.util.sendMessageIfNotNull
-import com.dekitateserver.events.data.ParkourActionHistoryRepository
-import com.dekitateserver.events.data.ParkourRepository
-import com.dekitateserver.events.data.vo.ParkourAction
-import com.dekitateserver.events.data.vo.ParkourId
+import com.dekitateserver.events.domain.repository.ParkourActionHistoryRepository
+import com.dekitateserver.events.domain.repository.ParkourRepository
+import com.dekitateserver.events.domain.vo.ParkourAction
+import com.dekitateserver.events.domain.vo.ParkourId
 import org.bukkit.entity.Player
 import java.time.LocalDateTime
 

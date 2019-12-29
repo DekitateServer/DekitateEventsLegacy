@@ -2,10 +2,10 @@ package com.dekitateserver.events.domain.usecase.gacha
 
 import com.dekitateserver.core.util.broadcastMessageWithoutMe
 import com.dekitateserver.core.util.sendMessageIfNotNull
-import com.dekitateserver.events.data.GachaHistoryRepository
-import com.dekitateserver.events.data.GachaRepository
-import com.dekitateserver.events.data.entity.Gacha
-import com.dekitateserver.events.data.vo.GachaId
+import com.dekitateserver.events.domain.entity.Gacha
+import com.dekitateserver.events.domain.repository.GachaHistoryRepository
+import com.dekitateserver.events.domain.repository.GachaRepository
+import com.dekitateserver.events.domain.vo.GachaId
 import com.dekitateserver.events.util.Log
 import org.bukkit.Server
 import org.bukkit.Sound

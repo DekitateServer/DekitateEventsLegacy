@@ -1,8 +1,8 @@
 package com.dekitateserver.events.domain.usecase.key
 
-import com.dekitateserver.events.data.KeyRepository
-import com.dekitateserver.events.data.vo.KeyEditType
-import com.dekitateserver.events.data.vo.KeyId
+import com.dekitateserver.events.domain.repository.KeyRepository
+import com.dekitateserver.events.domain.vo.KeyEditType
+import com.dekitateserver.events.domain.vo.KeyId
 import com.dekitateserver.events.util.*
 import org.bukkit.command.CommandSender
 

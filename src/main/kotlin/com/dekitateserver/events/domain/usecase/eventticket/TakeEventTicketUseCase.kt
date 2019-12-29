@@ -1,9 +1,9 @@
 package com.dekitateserver.events.domain.usecase.eventticket
 
-import com.dekitateserver.events.data.EventTicketHistoryRepository
-import com.dekitateserver.events.data.VoteTicketHistoryRepository
-import com.dekitateserver.events.data.entity.EventTicket
-import com.dekitateserver.events.data.entity.VoteTicket
+import com.dekitateserver.events.domain.entity.EventTicket
+import com.dekitateserver.events.domain.entity.VoteTicket
+import com.dekitateserver.events.domain.repository.EventTicketHistoryRepository
+import com.dekitateserver.events.domain.repository.VoteTicketHistoryRepository
 import com.dekitateserver.events.util.Log
 import org.bukkit.entity.Player
 import org.bukkit.inventory.PlayerInventory
@@ -21,7 +21,7 @@ class TakeEventTicketUseCase(
 
     suspend operator fun invoke(player: Player, amount: Int): Boolean {
         if (amount < 1) {
-            Log.error("1枚以上を指定して下さい [amount: ${amount}]")
+            Log.error("1枚以上を指定して下さい [amount: $amount]")
             return false
         }
 
@@ -33,7 +33,6 @@ class TakeEventTicketUseCase(
             player.sendMessage(message)
             return false
         }
-
 
         val contents = playerInventory.contents.clone()
 

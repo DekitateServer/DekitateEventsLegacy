@@ -1,7 +1,7 @@
 package com.dekitateserver.events.util
 
 import com.dekitateserver.events.DekitateEvents
-import com.dekitateserver.events.data.vo.*
+import com.dekitateserver.events.domain.vo.*
 import org.bukkit.Bukkit
 import org.bukkit.Server
 import org.bukkit.command.CommandSender
@@ -46,13 +46,13 @@ fun String.toPlayerOrError(): Player? = Bukkit.getPlayerExact(this) ?: let {
 }
 
 fun String.toIntOrError(): Int? = toIntOrNull() ?: let {
-    Log.error("'${this}'をInt(数値)に変換できません")
+    Log.error("'$this'をInt(数値)に変換できません")
 
     return null
 }
 
 fun String.toDoubleOrError(): Double? = toDoubleOrNull() ?: let {
-    Log.error("'${this}'をDouble(数値)に変換できません")
+    Log.error("'$this'をDouble(数値)に変換できません")
 
     return null
 }
