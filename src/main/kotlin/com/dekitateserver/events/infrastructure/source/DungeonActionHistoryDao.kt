@@ -1,8 +1,8 @@
-package com.dekitateserver.events.data.source
+package com.dekitateserver.events.infrastructure.source
 
 import com.dekitateserver.core.data.source.AbstractDao
-import com.dekitateserver.events.data.vo.DungeonAction
-import com.dekitateserver.events.data.vo.DungeonId
+import com.dekitateserver.events.domain.vo.DungeonAction
+import com.dekitateserver.events.domain.vo.DungeonId
 import com.dekitateserver.events.util.Log
 import java.sql.SQLException
 import java.sql.Timestamp

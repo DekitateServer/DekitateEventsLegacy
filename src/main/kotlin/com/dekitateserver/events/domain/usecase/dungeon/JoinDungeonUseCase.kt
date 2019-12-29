@@ -3,10 +3,10 @@ package com.dekitateserver.events.domain.usecase.dungeon
 import com.dekitateserver.core.util.broadcastMessageWithoutMe
 import com.dekitateserver.core.util.sendMessageIfNotNull
 import com.dekitateserver.core.util.teleportIfNotNull
-import com.dekitateserver.events.data.DungeonRepository
-import com.dekitateserver.events.data.vo.DungeonAction
-import com.dekitateserver.events.data.vo.DungeonActionHistoryRepository
-import com.dekitateserver.events.data.vo.DungeonId
+import com.dekitateserver.events.domain.repository.DungeonActionHistoryRepository
+import com.dekitateserver.events.domain.repository.DungeonRepository
+import com.dekitateserver.events.domain.vo.DungeonAction
+import com.dekitateserver.events.domain.vo.DungeonId
 import com.dekitateserver.events.util.Log
 import org.bukkit.Location
 import org.bukkit.entity.Player

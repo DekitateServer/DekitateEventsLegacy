@@ -1,7 +1,7 @@
-package com.dekitateserver.events.data.entity
+package com.dekitateserver.events.domain.entity
 
-import com.dekitateserver.events.data.vo.DungeonId
-import com.dekitateserver.events.data.vo.GachaId
+import com.dekitateserver.events.domain.vo.DungeonId
+import com.dekitateserver.events.domain.vo.GachaId
 import org.bukkit.Location
 import java.time.LocalDateTime
 

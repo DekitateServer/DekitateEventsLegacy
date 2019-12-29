@@ -1,17 +1,20 @@
-package com.dekitateserver.events.data.vo
+package com.dekitateserver.events.infrastructure.repository
 
 import com.dekitateserver.events.DekitateEventsPlugin
-import com.dekitateserver.events.data.source.DungeonActionHistoryDao
+import com.dekitateserver.events.domain.repository.DungeonActionHistoryRepository
+import com.dekitateserver.events.domain.vo.DungeonAction
+import com.dekitateserver.events.domain.vo.DungeonId
+import com.dekitateserver.events.infrastructure.source.DungeonActionHistoryDao
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.bukkit.entity.Player
 import java.time.LocalDateTime
 
-class DungeonActionHistoryRepository(plugin: DekitateEventsPlugin) {
+class DungeonActionHistoryRepositoryImpl(plugin: DekitateEventsPlugin) : DungeonActionHistoryRepository {
 
     private val dungeonActionHistoryDao = DungeonActionHistoryDao(plugin.dataSource)
 
-    suspend fun getLatestActionedDateTime(
+    override suspend fun getLatestActionedDateTime(
             player: Player,
             dungeonId: DungeonId,
             action: DungeonAction
@@ -23,7 +26,7 @@ class DungeonActionHistoryRepository(plugin: DekitateEventsPlugin) {
         )
     }
 
-    suspend fun add(
+    override suspend fun add(
             player: Player,
             dungeonId: DungeonId,
             action: DungeonAction,

@@ -40,6 +40,7 @@ class DekitateEventsPlugin : DekitateEvents, DekitatePlugin() {
         get() = mariaDbPoolDataSource
 
     lateinit var signMetaRepository: SignMetaRepository
+    lateinit var dungeonRepository: DungeonRepository
     lateinit var parkourRepository: ParkourRepository
     lateinit var gachaRepository: GachaRepository
     lateinit var keyRepository: KeyRepository
@@ -50,6 +51,7 @@ class DekitateEventsPlugin : DekitateEvents, DekitatePlugin() {
     lateinit var gachaHistoryRepository: GachaHistoryRepository
     lateinit var loginBonusHistoryRepository: LoginBonusHistoryRepository
 
+    lateinit var dungeonActionHistoryRepository: DungeonActionHistoryRepository
     lateinit var parkourActionHistoryRepository: ParkourActionHistoryRepository
 
     override fun onEnable() {
@@ -68,6 +70,7 @@ class DekitateEventsPlugin : DekitateEvents, DekitatePlugin() {
         )
 
         signMetaRepository = SignMetaRepositoryImpl(this)
+        dungeonRepository = DungeonRepositoryImpl(this)
         parkourRepository = ParkourRepositoryImpl(this)
         gachaRepository = GachaRepositoryImpl(this)
         keyRepository = KeyRepositoryImpl(this)
@@ -78,6 +81,7 @@ class DekitateEventsPlugin : DekitateEvents, DekitatePlugin() {
         gachaHistoryRepository = GachaHistoryRepositoryImpl(this)
         loginBonusHistoryRepository = LoginBonusHistoryRepositoryImpl(this)
 
+        dungeonActionHistoryRepository = DungeonActionHistoryRepositoryImpl(this)
         parkourActionHistoryRepository = ParkourActionHistoryRepositoryImpl(this)
 
         val eventController = EventController(this)

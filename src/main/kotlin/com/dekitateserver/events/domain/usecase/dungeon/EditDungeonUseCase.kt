@@ -1,9 +1,9 @@
 package com.dekitateserver.events.domain.usecase.dungeon
 
-import com.dekitateserver.events.data.DungeonRepository
-import com.dekitateserver.events.data.vo.DungeonEditType
-import com.dekitateserver.events.data.vo.DungeonId
-import com.dekitateserver.events.data.vo.GachaId
+import com.dekitateserver.events.domain.repository.DungeonRepository
+import com.dekitateserver.events.domain.vo.DungeonEditType
+import com.dekitateserver.events.domain.vo.DungeonId
+import com.dekitateserver.events.domain.vo.GachaId
 import com.dekitateserver.events.util.*
 import org.bukkit.command.CommandSender
 

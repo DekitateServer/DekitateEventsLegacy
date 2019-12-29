@@ -1,9 +1,9 @@
-package com.dekitateserver.events.data.source
+package com.dekitateserver.events.infrastructure.source
 
 import com.dekitateserver.core.data.source.YamlStorage
-import com.dekitateserver.events.data.entity.Dungeon
-import com.dekitateserver.events.data.vo.DungeonId
-import com.dekitateserver.events.data.vo.GachaId
+import com.dekitateserver.events.domain.entity.Dungeon
+import com.dekitateserver.events.domain.vo.DungeonId
+import com.dekitateserver.events.domain.vo.GachaId
 import com.dekitateserver.events.util.Log
 import org.bukkit.Location
 import java.io.File
