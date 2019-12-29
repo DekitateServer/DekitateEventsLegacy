@@ -5,13 +5,13 @@ import com.dekitateserver.events.domain.usecase.parkour.*
 import com.dekitateserver.events.domain.vo.ParkourAction
 import com.dekitateserver.events.domain.vo.ParkourEditType
 import com.dekitateserver.events.domain.vo.ParkourId
+import com.dekitateserver.events.domain.vo.SignLines
 import com.dekitateserver.events.util.selectPlayersOrError
 import com.dekitateserver.events.util.sendWarnMessage
 import kotlinx.coroutines.launch
 import org.bukkit.Location
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
-import org.bukkit.event.block.SignChangeEvent
 
 class ParkourController(plugin: DekitateEventsPlugin) {
 
@@ -152,21 +152,21 @@ class ParkourController(plugin: DekitateEventsPlugin) {
         }
     }
 
-    fun createSign(event: SignChangeEvent) {
+    fun createSign(player: Player, location: Location, argParkourId: String, argParkourAction: String): SignLines? {
         val action = try {
-            ParkourAction.valueOf(event.getLine(3).orEmpty().toUpperCase())
+            ParkourAction.valueOf(argParkourAction.toUpperCase())
         } catch (e: IllegalArgumentException) {
-            event.player.sendWarnMessage("そのようなParkourActionは存在しません")
-            return
+            player.sendWarnMessage("そのようなParkourActionは存在しません")
+            return null
         }
 
         val createParkourSignUseCaseResult = createParkourSignUseCase(
-                location = event.block.location,
-                player = event.player,
-                parkourId = ParkourId(event.getLine(1).orEmpty()),
+                location = location,
+                player = player,
+                parkourId = ParkourId(argParkourId),
                 action = action
-        ) ?: return
+        ) ?: return null
 
-        createParkourSignUseCaseResult.signLines.apply(event)
+        return createParkourSignUseCaseResult.signLines
     }
 }

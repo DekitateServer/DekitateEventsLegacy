@@ -24,7 +24,12 @@ class ParkourEventListener(
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     fun onSignChanged(event: SignChangeEvent) {
         if (event.getLine(0) == ParkourSignContracts.CREATE_SIGN_INDEX && event.player.hasPermission("neko.event")) {
-            parkourController.createSign(event)
+            parkourController.createSign(
+                    player = event.player,
+                    location = event.block.location,
+                    argParkourId = event.getLine(1).orEmpty(),
+                    argParkourAction = event.getLine(3).orEmpty()
+            )?.apply(event)
         }
     }
 }
