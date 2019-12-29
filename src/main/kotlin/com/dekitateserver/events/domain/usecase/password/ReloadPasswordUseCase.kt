@@ -1,6 +1,6 @@
 package com.dekitateserver.events.domain.usecase.password
 
-import com.dekitateserver.events.data.PasswordRepository
+import com.dekitateserver.events.domain.repository.PasswordRepository
 
 class ReloadPasswordUseCase(
         private val passwordRepository: PasswordRepository
