@@ -21,7 +21,7 @@ class TakeEventTicketUseCase(
 
     suspend operator fun invoke(player: Player, amount: Int): Boolean {
         if (amount < 1) {
-            Log.error("1枚以上を指定して下さい [amount: ${amount}]")
+            Log.error("1枚以上を指定して下さい [amount: $amount]")
             return false
         }
 
@@ -33,7 +33,6 @@ class TakeEventTicketUseCase(
             player.sendMessage(message)
             return false
         }
-
 
         val contents = playerInventory.contents.clone()
 

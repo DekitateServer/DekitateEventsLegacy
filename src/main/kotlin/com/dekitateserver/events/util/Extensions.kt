@@ -46,13 +46,13 @@ fun String.toPlayerOrError(): Player? = Bukkit.getPlayerExact(this) ?: let {
 }
 
 fun String.toIntOrError(): Int? = toIntOrNull() ?: let {
-    Log.error("'${this}'をInt(数値)に変換できません")
+    Log.error("'$this'をInt(数値)に変換できません")
 
     return null
 }
 
 fun String.toDoubleOrError(): Double? = toDoubleOrNull() ?: let {
-    Log.error("'${this}'をDouble(数値)に変換できません")
+    Log.error("'$this'をDouble(数値)に変換できません")
 
     return null
 }

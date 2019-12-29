@@ -76,7 +76,6 @@ data class Key(
                 setLore(lore.dropLast(1))
             }
 
-
             if (!isSimilar(compareTarget) || expireDateTimeLine.length < DATE_FORMAT_LENGTH) {
                 return KeyCompareResult.NOT_MATCH
             }
@@ -103,9 +102,9 @@ data class Key(
         return if (target == itemStackInternal) {
             true
         } else {
-            itemStackInternal.type == target.type
-                    && itemStackInternal.hasItemMeta() == target.hasItemMeta()
-                    && (!itemStackInternal.hasItemMeta() || ITEM_FACTORY.equals(itemStackInternal.itemMeta, target.itemMeta))
+            itemStackInternal.type == target.type &&
+                    itemStackInternal.hasItemMeta() == target.hasItemMeta() &&
+                    (!itemStackInternal.hasItemMeta() || ITEM_FACTORY.equals(itemStackInternal.itemMeta, target.itemMeta))
         }
     }
 

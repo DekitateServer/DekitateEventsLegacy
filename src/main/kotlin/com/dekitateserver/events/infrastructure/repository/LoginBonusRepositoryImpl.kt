@@ -11,7 +11,6 @@ import kotlinx.coroutines.withContext
 import java.time.LocalDateTime
 import java.util.Collections.synchronizedList
 
-
 class LoginBonusRepositoryImpl(plugin: DekitateEventsPlugin) : LoginBonusRepository {
 
     private val loginBonusYamlSource = LoginBonusYamlSource(plugin.dataFolder)

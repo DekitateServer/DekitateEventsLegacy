@@ -24,9 +24,13 @@ class SignMetaRepositoryImpl(plugin: JavaPlugin) : SignMetaRepository {
 
     override fun getOrNew(location: Location): SignMeta = signMetaCacheMap.getOrDefault(location, SignMeta(location))
 
-    override fun getOrError(location: Location): SignMeta? = signMetaCacheMap[location] ?: let {
-        Log.error("SignMeta($location)が見つかりません")
-        return@let null
+    override fun getOrError(location: Location): SignMeta? {
+        val signMeta = signMetaCacheMap[location]
+        if (signMeta == null) {
+            Log.error("SignMeta($location)が見つかりません")
+        }
+
+        return signMeta
     }
 
     override suspend fun add(signMeta: SignMeta): Boolean = withContext(Dispatchers.IO) {
