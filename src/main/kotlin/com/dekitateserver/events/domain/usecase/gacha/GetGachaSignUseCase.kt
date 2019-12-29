@@ -1,8 +1,8 @@
 package com.dekitateserver.events.domain.usecase.gacha
 
+import com.dekitateserver.events.domain.repository.SignMetaRepository
 import com.dekitateserver.events.domain.vo.GachaCost
 import com.dekitateserver.events.domain.vo.GachaId
-import com.dekitateserver.events.infrastructure.repository.SignMetaRepository
 import org.bukkit.Location
 
 class GetGachaSignUseCase(

@@ -1,7 +1,7 @@
 package com.dekitateserver.events.domain.usecase.revive
 
+import com.dekitateserver.events.domain.repository.SignMetaRepository
 import com.dekitateserver.events.domain.vo.SignLines
-import com.dekitateserver.events.infrastructure.repository.SignMetaRepository
 import com.dekitateserver.events.presentation.revive.ReviveSignContracts
 import com.dekitateserver.events.util.sendSuccessMessage
 import com.dekitateserver.events.util.sendWarnMessage

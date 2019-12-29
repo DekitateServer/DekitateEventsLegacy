@@ -1,6 +1,6 @@
 package com.dekitateserver.events.domain.usecase.revive
 
-import com.dekitateserver.events.infrastructure.repository.SignMetaRepository
+import com.dekitateserver.events.domain.repository.SignMetaRepository
 import org.bukkit.Location
 
 class GetReviveSignUseCase(

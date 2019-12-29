@@ -1,8 +1,8 @@
 package com.dekitateserver.events.domain.usecase.parkour
 
+import com.dekitateserver.events.domain.repository.SignMetaRepository
 import com.dekitateserver.events.domain.vo.ParkourAction
 import com.dekitateserver.events.domain.vo.ParkourId
-import com.dekitateserver.events.infrastructure.repository.SignMetaRepository
 import org.bukkit.Location
 
 class GetParkourSignUseCase(
