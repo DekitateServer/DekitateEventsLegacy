@@ -1,9 +1,9 @@
 package com.dekitateserver.events.presentation.key
 
 import com.dekitateserver.events.DekitateEventsPlugin
-import com.dekitateserver.events.data.vo.KeyEditType
-import com.dekitateserver.events.data.vo.KeyId
 import com.dekitateserver.events.domain.usecase.key.*
+import com.dekitateserver.events.domain.vo.KeyEditType
+import com.dekitateserver.events.domain.vo.KeyId
 import com.dekitateserver.events.util.selectPlayersOrError
 import com.dekitateserver.events.util.sendWarnMessage
 import com.dekitateserver.events.util.toIntOrError

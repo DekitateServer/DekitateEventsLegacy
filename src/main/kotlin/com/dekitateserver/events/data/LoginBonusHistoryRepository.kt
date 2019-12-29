@@ -1,8 +1,8 @@
 package com.dekitateserver.events.data
 
 import com.dekitateserver.events.DekitateEventsPlugin
-import com.dekitateserver.events.data.source.LoginBonusHistoryDao
-import com.dekitateserver.events.data.vo.LoginBonusId
+import com.dekitateserver.events.domain.vo.LoginBonusId
+import com.dekitateserver.events.infrastructure.source.LoginBonusHistoryDao
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.bukkit.entity.Player

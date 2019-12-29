@@ -1,8 +1,8 @@
 package com.dekitateserver.events.data
 
 import com.dekitateserver.events.data.entity.Password
-import com.dekitateserver.events.data.source.PasswordYamlSource
-import com.dekitateserver.events.data.vo.PasswordId
+import com.dekitateserver.events.domain.vo.PasswordId
+import com.dekitateserver.events.infrastructure.source.PasswordYamlSource
 import com.dekitateserver.events.util.Log
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

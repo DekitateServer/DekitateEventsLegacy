@@ -1,10 +1,10 @@
-package com.dekitateserver.events.data.repository
+package com.dekitateserver.events.infrastructure.repository
 
 import com.dekitateserver.events.DekitateEventsPlugin
-import com.dekitateserver.events.data.source.ParkourActionHistoryDao
 import com.dekitateserver.events.domain.repository.ParkourActionHistoryRepository
 import com.dekitateserver.events.domain.vo.ParkourAction
 import com.dekitateserver.events.domain.vo.ParkourId
+import com.dekitateserver.events.infrastructure.source.ParkourActionHistoryDao
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.bukkit.entity.Player

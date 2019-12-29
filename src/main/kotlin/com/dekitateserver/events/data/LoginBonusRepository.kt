@@ -2,8 +2,8 @@ package com.dekitateserver.events.data
 
 import com.dekitateserver.events.DekitateEventsPlugin
 import com.dekitateserver.events.data.entity.LoginBonus
-import com.dekitateserver.events.data.source.LoginBonusYamlSource
-import com.dekitateserver.events.data.vo.LoginBonusId
+import com.dekitateserver.events.domain.vo.LoginBonusId
+import com.dekitateserver.events.infrastructure.source.LoginBonusYamlSource
 import com.dekitateserver.events.util.Log
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

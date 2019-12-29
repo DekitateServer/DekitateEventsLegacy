@@ -1,9 +1,9 @@
-package com.dekitateserver.events.data.repository
+package com.dekitateserver.events.infrastructure.repository
 
-import com.dekitateserver.events.data.source.ParkourYamlSource
 import com.dekitateserver.events.domain.entity.Parkour
 import com.dekitateserver.events.domain.repository.ParkourRepository
 import com.dekitateserver.events.domain.vo.ParkourId
+import com.dekitateserver.events.infrastructure.source.ParkourYamlSource
 import com.dekitateserver.events.util.Log
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

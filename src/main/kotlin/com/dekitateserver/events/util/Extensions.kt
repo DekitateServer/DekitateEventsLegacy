@@ -1,11 +1,7 @@
 package com.dekitateserver.events.util
 
 import com.dekitateserver.events.DekitateEvents
-import com.dekitateserver.events.data.vo.GachaId
-import com.dekitateserver.events.data.vo.KeyId
-import com.dekitateserver.events.data.vo.LoginBonusId
-import com.dekitateserver.events.data.vo.PasswordId
-import com.dekitateserver.events.domain.vo.ParkourId
+import com.dekitateserver.events.domain.vo.*
 import org.bukkit.Bukkit
 import org.bukkit.Server
 import org.bukkit.command.CommandSender

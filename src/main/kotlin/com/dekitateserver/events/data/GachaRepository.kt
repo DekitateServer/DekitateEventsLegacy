@@ -1,8 +1,8 @@
 package com.dekitateserver.events.data
 
 import com.dekitateserver.events.data.entity.Gacha
-import com.dekitateserver.events.data.source.GachaYamlSource
-import com.dekitateserver.events.data.vo.GachaId
+import com.dekitateserver.events.domain.vo.GachaId
+import com.dekitateserver.events.infrastructure.source.GachaYamlSource
 import com.dekitateserver.events.util.Log
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

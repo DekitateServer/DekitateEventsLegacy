@@ -1,6 +1,6 @@
 package com.dekitateserver.events.data.entity
 
-import com.dekitateserver.events.data.vo.LoginBonusId
+import com.dekitateserver.events.domain.vo.LoginBonusId
 import java.time.LocalDateTime
 
 data class LoginBonus(

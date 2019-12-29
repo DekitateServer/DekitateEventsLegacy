@@ -1,9 +1,9 @@
 package com.dekitateserver.events.data.entity
 
 import com.dekitateserver.core.dsl.itemMeta
-import com.dekitateserver.events.data.vo.KeyCompareResult
-import com.dekitateserver.events.data.vo.KeyId
-import com.dekitateserver.events.data.vo.MaterialLocation
+import com.dekitateserver.events.domain.vo.KeyCompareResult
+import com.dekitateserver.events.domain.vo.KeyId
+import com.dekitateserver.events.domain.vo.MaterialLocation
 import org.bukkit.Bukkit
 import org.bukkit.Location
 import org.bukkit.Material

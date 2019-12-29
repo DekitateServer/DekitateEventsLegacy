@@ -1,6 +1,6 @@
 package com.dekitateserver.events.domain.usecase.key
 
-import com.dekitateserver.events.data.vo.KeyEditType
+import com.dekitateserver.events.domain.vo.KeyEditType
 import org.bukkit.command.CommandSender
 
 class SendKeyEditTypeListUseCase {

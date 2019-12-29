@@ -1,7 +1,7 @@
 package com.dekitateserver.events.data
 
 import com.dekitateserver.events.DekitateEventsPlugin
-import com.dekitateserver.events.data.source.VoteTicketHistoryDao
+import com.dekitateserver.events.infrastructure.source.VoteTicketHistoryDao
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.bukkit.entity.Player

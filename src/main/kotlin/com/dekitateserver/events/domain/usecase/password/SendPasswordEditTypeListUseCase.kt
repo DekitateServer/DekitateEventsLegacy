@@ -1,6 +1,6 @@
 package com.dekitateserver.events.domain.usecase.password
 
-import com.dekitateserver.events.data.vo.PasswordEditType
+import com.dekitateserver.events.domain.vo.PasswordEditType
 import org.bukkit.command.CommandSender
 
 class SendPasswordEditTypeListUseCase {

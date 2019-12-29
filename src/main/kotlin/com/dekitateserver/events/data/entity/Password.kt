@@ -1,8 +1,8 @@
 package com.dekitateserver.events.data.entity
 
-import com.dekitateserver.events.data.vo.MaterialLocation
-import com.dekitateserver.events.data.vo.PasswordId
-import com.dekitateserver.events.data.vo.PasswordInputResult
+import com.dekitateserver.events.domain.vo.MaterialLocation
+import com.dekitateserver.events.domain.vo.PasswordId
+import com.dekitateserver.events.domain.vo.PasswordInputResult
 import org.bukkit.Location
 import org.bukkit.Material
 

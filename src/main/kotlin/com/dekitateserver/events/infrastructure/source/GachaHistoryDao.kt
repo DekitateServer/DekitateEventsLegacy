@@ -1,21 +1,23 @@
-package com.dekitateserver.events.data.source
+package com.dekitateserver.events.infrastructure.source
 
 import com.dekitateserver.core.data.source.AbstractDao
+import com.dekitateserver.events.domain.vo.GachaId
 import com.dekitateserver.events.util.Log
 import java.sql.SQLException
 import java.sql.Timestamp
 import java.util.*
 import javax.sql.DataSource
 
-class VoteTicketHistoryDao(dataSource: DataSource) : AbstractDao(dataSource) {
+class GachaHistoryDao(dataSource: DataSource) : AbstractDao(dataSource) {
 
     companion object {
-        private const val TABLE_NAME = "dekitateevents_vote_ticket_history"
+        private const val TABLE_NAME = "dekitateevents_gacha_history"
         private const val SQL_CREATE_TABLE_IF_NOT_EXISTS = """
             CREATE TABLE IF NOT EXISTS `$TABLE_NAME` (
               `id` INT NOT NULL AUTO_INCREMENT,
               `uuid` VARCHAR(36) NOT NULL,
-              `amount` INT NOT NULL,
+              `gacha_id` VARCHAR(128) NOT NULL,
+              `gacha_item_id` VARCHAR(128) NOT NULL,
               `created_date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
               PRIMARY KEY (`id`)
             )
@@ -38,41 +40,40 @@ class VoteTicketHistoryDao(dataSource: DataSource) : AbstractDao(dataSource) {
         }
     }
 
-    fun insert(uuid: UUID, amount: Int): Boolean {
+    fun insert(uuid: UUID, gachaId: GachaId, gachaItemId: String): Boolean {
         try {
             connection {
-                val st = prepareStatement("INSERT INTO $TABLE_NAME (uuid,amount) VALUES (?,?)")
+                val st = prepareStatement("INSERT INTO $TABLE_NAME (uuid,gacha_id,gacha_item_id) VALUES (?,?,?)")
                 st.setUuid(1, uuid)
-                st.setInt(2, amount)
+                st.setString(2, gachaId.value)
+                st.setString(3, gachaItemId)
 
                 val count = st.executeUpdate()
                 return count > 0
             }
         } catch (e: SQLException) {
-            Log.error("Failed to insert a vote ticket log", e)
+            Log.error("Failed to insert a gacha log", e)
         }
 
         return false
     }
 
-    fun getPositiveAmountBetween(uuid: UUID, start: Timestamp, end: Timestamp): Int {
+    fun exists(gachaId: GachaId, gachaItemId: String, start: Timestamp, end: Timestamp): Boolean {
         try {
             connection {
-                val st = prepareStatement("SELECT SUM(amount) FROM $TABLE_NAME WHERE (created_date BETWEEN ? AND ?) AND uuid=? AND amount>0")
+                val st = prepareStatement("SELECT EXISTS(SELECT 1 FROM $TABLE_NAME WHERE (created_date BETWEEN ? AND ?) AND gacha_id=? AND gacha_item_id=?)")
                 st.setTimestamp(1, start)
                 st.setTimestamp(2, end)
-                st.setUuid(3, uuid)
+                st.setString(3, gachaId.value)
+                st.setString(4, gachaItemId)
 
                 val result = st.executeQuery()
-                val amount = if (result.next()) result.getInt(1) else -1
-                st.close()
-
-                return amount
+                return result.next() && result.getInt(1) == 1
             }
         } catch (e: SQLException) {
-            Log.error("Failed to select vote ticket amount", e)
+            Log.error("Failed to select exists gacha log", e)
         }
 
-        return -1
+        return false
     }
 }

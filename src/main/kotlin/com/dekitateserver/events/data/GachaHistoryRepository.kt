@@ -1,8 +1,8 @@
 package com.dekitateserver.events.data
 
 import com.dekitateserver.events.DekitateEventsPlugin
-import com.dekitateserver.events.data.source.GachaHistoryDao
-import com.dekitateserver.events.data.vo.GachaId
+import com.dekitateserver.events.domain.vo.GachaId
+import com.dekitateserver.events.infrastructure.source.GachaHistoryDao
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.bukkit.entity.Player

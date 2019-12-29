@@ -1,11 +1,11 @@
 package com.dekitateserver.events.presentation.loginbonus
 
 import com.dekitateserver.events.DekitateEventsPlugin
-import com.dekitateserver.events.data.vo.LoginBonusId
 import com.dekitateserver.events.domain.usecase.loginbonus.GiveLoginBonusUseCase
 import com.dekitateserver.events.domain.usecase.loginbonus.ReloadLoginBonusUseCase
 import com.dekitateserver.events.domain.usecase.loginbonus.SendLoginBonusInfoUseCase
 import com.dekitateserver.events.domain.usecase.loginbonus.SendLoginBonusListUseCase
+import com.dekitateserver.events.domain.vo.LoginBonusId
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.bukkit.command.CommandSender

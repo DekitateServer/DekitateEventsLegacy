@@ -1,8 +1,8 @@
-package com.dekitateserver.events.data.source
+package com.dekitateserver.events.infrastructure.source
 
 import com.dekitateserver.core.data.source.YamlStorage
 import com.dekitateserver.events.data.entity.Password
-import com.dekitateserver.events.data.vo.PasswordId
+import com.dekitateserver.events.domain.vo.PasswordId
 import com.dekitateserver.events.util.Log
 import org.bukkit.Location
 import org.bukkit.Material

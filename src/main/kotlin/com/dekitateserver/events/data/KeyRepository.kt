@@ -1,8 +1,8 @@
 package com.dekitateserver.events.data
 
 import com.dekitateserver.events.data.entity.Key
-import com.dekitateserver.events.data.source.KeyYamlSource
-import com.dekitateserver.events.data.vo.KeyId
+import com.dekitateserver.events.domain.vo.KeyId
+import com.dekitateserver.events.infrastructure.source.KeyYamlSource
 import com.dekitateserver.events.util.Log
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

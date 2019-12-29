@@ -1,7 +1,7 @@
 package com.dekitateserver.events.data
 
 import com.dekitateserver.events.data.entity.SignMeta
-import com.dekitateserver.events.data.source.SignMetaYamlSource
+import com.dekitateserver.events.infrastructure.source.SignMetaYamlSource
 import com.dekitateserver.events.util.Log
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

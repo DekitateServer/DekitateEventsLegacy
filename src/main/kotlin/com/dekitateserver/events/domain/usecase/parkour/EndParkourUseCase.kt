@@ -2,7 +2,7 @@ package com.dekitateserver.events.domain.usecase.parkour
 
 import com.dekitateserver.core.util.broadcastMessageWithoutMe
 import com.dekitateserver.core.util.sendMessageIfNotNull
-import com.dekitateserver.events.data.EventTicketHistoryRepository
+import com.dekitateserver.events.domain.repository.EventTicketHistoryRepository
 import com.dekitateserver.events.domain.repository.ParkourActionHistoryRepository
 import com.dekitateserver.events.domain.repository.ParkourRepository
 import com.dekitateserver.events.domain.usecase.eventticket.GiveEventTicketUseCase

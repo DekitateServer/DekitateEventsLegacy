@@ -1,7 +1,7 @@
 package com.dekitateserver.events.domain.usecase.gacha
 
 import com.dekitateserver.events.data.GachaRepository
-import com.dekitateserver.events.data.vo.GachaId
+import com.dekitateserver.events.domain.vo.GachaId
 import com.dekitateserver.events.util.sendGachaIdNotFound
 import org.bukkit.command.CommandSender
 

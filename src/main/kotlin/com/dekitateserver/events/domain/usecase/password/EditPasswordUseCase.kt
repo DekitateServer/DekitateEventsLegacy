@@ -1,8 +1,8 @@
 package com.dekitateserver.events.domain.usecase.password
 
 import com.dekitateserver.events.data.PasswordRepository
-import com.dekitateserver.events.data.vo.PasswordEditType
-import com.dekitateserver.events.data.vo.PasswordId
+import com.dekitateserver.events.domain.vo.PasswordEditType
+import com.dekitateserver.events.domain.vo.PasswordId
 import com.dekitateserver.events.util.*
 import org.bukkit.command.CommandSender
 

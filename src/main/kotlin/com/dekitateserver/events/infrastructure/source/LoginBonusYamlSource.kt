@@ -1,8 +1,8 @@
-package com.dekitateserver.events.data.source
+package com.dekitateserver.events.infrastructure.source
 
 import com.dekitateserver.core.data.source.YamlStorage
 import com.dekitateserver.events.data.entity.LoginBonus
-import com.dekitateserver.events.data.vo.LoginBonusId
+import com.dekitateserver.events.domain.vo.LoginBonusId
 import com.dekitateserver.events.util.Log
 import java.io.File
 import java.time.LocalDateTime
