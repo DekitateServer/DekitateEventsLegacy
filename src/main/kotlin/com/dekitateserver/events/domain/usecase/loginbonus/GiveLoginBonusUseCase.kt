@@ -1,8 +1,8 @@
 package com.dekitateserver.events.domain.usecase.loginbonus
 
 import com.dekitateserver.core.util.sendMessageIfNotNull
-import com.dekitateserver.events.data.LoginBonusHistoryRepository
-import com.dekitateserver.events.data.LoginBonusRepository
+import com.dekitateserver.events.domain.repository.LoginBonusHistoryRepository
+import com.dekitateserver.events.domain.repository.LoginBonusRepository
 import org.bukkit.Server
 import org.bukkit.entity.Player
 

@@ -3,7 +3,9 @@ package com.dekitateserver.events
 import com.dekitateserver.core.DekitatePlugin
 import com.dekitateserver.events.config.ConfigKeys
 import com.dekitateserver.events.config.Configuration
-import com.dekitateserver.events.data.*
+import com.dekitateserver.events.data.PasswordRepository
+import com.dekitateserver.events.data.SignMetaRepository
+import com.dekitateserver.events.data.VoteTicketHistoryRepository
 import com.dekitateserver.events.domain.repository.*
 import com.dekitateserver.events.domain.vo.GachaCost
 import com.dekitateserver.events.infrastructure.repository.*
@@ -73,11 +75,11 @@ class DekitateEventsPlugin : DekitateEvents, DekitatePlugin() {
         gachaRepository = GachaRepositoryImpl(this)
         keyRepository = KeyRepositoryImpl(this)
         passwordRepository = PasswordRepository(this)
-        loginBonusRepository = LoginBonusRepository(this)
+        loginBonusRepository = LoginBonusRepositoryImpl(this)
         eventTicketHistoryRepository = EventTicketHistoryRepositoryImpl(this)
         voteTicketHistoryRepository = VoteTicketHistoryRepository(this)
         gachaHistoryRepository = GachaHistoryRepositoryImpl(this)
-        loginBonusHistoryRepository = LoginBonusHistoryRepository(this)
+        loginBonusHistoryRepository = LoginBonusHistoryRepositoryImpl(this)
 
         parkourActionHistoryRepository = ParkourActionHistoryRepositoryImpl(this)
 

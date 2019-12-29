@@ -24,9 +24,13 @@ class KeyRepositoryImpl(plugin: JavaPlugin) : KeyRepository {
 
     override fun getAll(): List<Key> = keyCacheMap.values.toList()
 
-    override fun getOrError(keyId: KeyId): Key? = keyCacheMap[keyId] ?: let {
-        Log.error("Key(${keyId.value})が見つかりません")
-        return@let null
+    override fun getOrError(keyId: KeyId): Key? {
+        val key = keyCacheMap[keyId]
+        if (key == null) {
+            Log.error("Key(${keyId.value})が見つかりません")
+        }
+
+        return key
     }
 
     override fun has(keyId: KeyId): Boolean = keyCacheMap.containsKey(keyId)
