@@ -6,15 +6,6 @@ import org.bukkit.command.CommandSender
 class SendKeyEditTypeListUseCase {
 
     operator fun invoke(sender: CommandSender) {
-        val messageList = mutableListOf("--------- KeyEditType ---------")
-
-        KeyEditType.values().forEach {
-            messageList.add("| §9${it.id} ${it.description}")
-        }
-
-        messageList.add("| §7必須: [], 任意: <>")
-        messageList.add("---------------------------------------")
-
-        sender.sendMessage(messageList.toTypedArray())
+        sender.sendMessage(KeyEditType.HELP_MESSAGES)
     }
 }
