@@ -5,10 +5,12 @@ import com.dekitateserver.events.config.ConfigKeys
 import com.dekitateserver.events.config.Configuration
 import com.dekitateserver.events.data.*
 import com.dekitateserver.events.domain.repository.EventTicketHistoryRepository
+import com.dekitateserver.events.domain.repository.GachaHistoryRepository
 import com.dekitateserver.events.domain.repository.ParkourActionHistoryRepository
 import com.dekitateserver.events.domain.repository.ParkourRepository
 import com.dekitateserver.events.domain.vo.GachaCost
 import com.dekitateserver.events.infrastructure.repository.EventTicketHistoryRepositoryImpl
+import com.dekitateserver.events.infrastructure.repository.GachaHistoryRepositoryImpl
 import com.dekitateserver.events.infrastructure.repository.ParkourActionHistoryRepositoryImpl
 import com.dekitateserver.events.infrastructure.repository.ParkourRepositoryImpl
 import com.dekitateserver.events.presentation.event.EventCommand
@@ -80,7 +82,7 @@ class DekitateEventsPlugin : DekitateEvents, DekitatePlugin() {
         loginBonusRepository = LoginBonusRepository(this)
         eventTicketHistoryRepository = EventTicketHistoryRepositoryImpl(this)
         voteTicketHistoryRepository = VoteTicketHistoryRepository(this)
-        gachaHistoryRepository = GachaHistoryRepository(this)
+        gachaHistoryRepository = GachaHistoryRepositoryImpl(this)
         loginBonusHistoryRepository = LoginBonusHistoryRepository(this)
 
         parkourActionHistoryRepository = ParkourActionHistoryRepositoryImpl(this)

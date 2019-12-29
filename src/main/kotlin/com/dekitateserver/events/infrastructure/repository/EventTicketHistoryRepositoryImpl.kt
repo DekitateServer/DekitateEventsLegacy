@@ -14,10 +14,6 @@ class EventTicketHistoryRepositoryImpl(plugin: DekitateEventsPlugin) : EventTick
 
     private val eventTicketHistoryDao = EventTicketHistoryDao(plugin.dataSource)
 
-    override suspend fun add(player: Player, amount: Int): Boolean = withContext(Dispatchers.IO) {
-        eventTicketHistoryDao.insert(player.uniqueId, amount)
-    }
-
     override suspend fun getGaveAmountToday(player: Player): Int = withContext(Dispatchers.IO) {
         val now = LocalDateTime.now()
 
@@ -26,5 +22,9 @@ class EventTicketHistoryRepositoryImpl(plugin: DekitateEventsPlugin) : EventTick
                 start = Timestamp.valueOf(now.with(LocalTime.MIN)),
                 end = Timestamp.valueOf(now.with(LocalTime.MAX))
         )
+    }
+
+    override suspend fun add(player: Player, amount: Int): Boolean = withContext(Dispatchers.IO) {
+        eventTicketHistoryDao.insert(player.uniqueId, amount)
     }
 }
