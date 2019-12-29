@@ -1,6 +1,7 @@
-package com.dekitateserver.events.data
+package com.dekitateserver.events.infrastructure.repository
 
-import com.dekitateserver.events.data.entity.Gacha
+import com.dekitateserver.events.domain.entity.Gacha
+import com.dekitateserver.events.domain.repository.GachaRepository
 import com.dekitateserver.events.domain.vo.GachaId
 import com.dekitateserver.events.infrastructure.source.GachaYamlSource
 import com.dekitateserver.events.util.Log
@@ -9,7 +10,7 @@ import kotlinx.coroutines.withContext
 import org.bukkit.plugin.java.JavaPlugin
 import java.util.concurrent.ConcurrentHashMap
 
-class GachaRepository(plugin: JavaPlugin) {
+class GachaRepositoryImpl(plugin: JavaPlugin) : GachaRepository {
 
     private val gachaYamlSource = GachaYamlSource(plugin.dataFolder)
 
@@ -19,16 +20,20 @@ class GachaRepository(plugin: JavaPlugin) {
         createCache()
     }
 
-    fun get(gachaId: GachaId): Gacha? = gachaCacheMap[gachaId]
+    override fun get(gachaId: GachaId): Gacha? = gachaCacheMap[gachaId]
 
-    fun getAll(): List<Gacha> = gachaCacheMap.values.toList()
+    override fun getAll(): List<Gacha> = gachaCacheMap.values.toList()
 
-    fun getOrError(gachaId: GachaId): Gacha? = gachaCacheMap[gachaId] ?: let {
-        Log.error("Gacha(${gachaId.value})が見つかりません")
-        return@let null
+    override fun getOrError(gachaId: GachaId): Gacha? {
+        val gacha = gachaCacheMap[gachaId]
+        if (gacha == null) {
+            Log.error("Gacha(${gachaId.value})が見つかりません")
+        }
+
+        return gacha
     }
 
-    suspend fun refreshCache() = withContext(Dispatchers.IO) {
+    override suspend fun refreshCache() = withContext(Dispatchers.IO) {
         gachaCacheMap.clear()
         createCache()
     }

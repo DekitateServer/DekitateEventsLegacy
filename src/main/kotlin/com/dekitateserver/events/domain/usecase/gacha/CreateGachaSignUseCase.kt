@@ -1,8 +1,8 @@
 package com.dekitateserver.events.domain.usecase.gacha
 
-import com.dekitateserver.events.data.GachaRepository
 import com.dekitateserver.events.data.KeyRepository
 import com.dekitateserver.events.data.SignMetaRepository
+import com.dekitateserver.events.domain.repository.GachaRepository
 import com.dekitateserver.events.domain.vo.GachaCost
 import com.dekitateserver.events.domain.vo.GachaId
 import com.dekitateserver.events.domain.vo.SignLines
