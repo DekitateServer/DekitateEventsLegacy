@@ -27,6 +27,7 @@ class DungeonController(plugin: DekitateEventsPlugin) {
     )
     private val exitDungeonUseCase = ExitDungeonUseCase(plugin.dungeonRepository, plugin.dungeonActionHistoryRepository)
     private val lockDungeonUseCase = LockDungeonUseCase(plugin.dungeonRepository)
+    private val unlockDungeonUseCase = UnlockDungeonUseCase(plugin.dungeonRepository)
     private val createDungeonUseCase = CreateDungeonUseCase(plugin.dungeonRepository)
     private val deleteDungeonUseCase = DeleteDungeonUseCase(plugin.dungeonRepository)
     private val editDungeonUseCase = EditDungeonUseCase(plugin.dungeonRepository)
@@ -68,6 +69,14 @@ class DungeonController(plugin: DekitateEventsPlugin) {
             lockDungeonUseCase(
                     dungeonId = DungeonId((argDungeonId)),
                     seconds = seconds
+            )
+        }
+    }
+
+    fun unlock(argDungeonId: String) {
+        pluginScope.launch {
+            unlockDungeonUseCase(
+                    dungeonId = DungeonId((argDungeonId))
             )
         }
     }

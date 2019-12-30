@@ -25,6 +25,9 @@ data class Dungeon(
 ) {
     val hasEventTicketReward = rewardEventTicketAmount > 0
 
+    val isLocked: Boolean
+        get() = lockEndDateTime != null && lockEndDateTime.isAfter(LocalDateTime.now())
+
     val formattedJoinMessage = joinMessage?.format()
     val formattedJoinBroadcastMessage = joinBroadcastMessage?.format()
     val formattedCompleteMessage = completeMessage?.format()
