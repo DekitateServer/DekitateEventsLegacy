@@ -8,7 +8,7 @@ class LockDungeonUseCase(
         private val dungeonRepository: DungeonRepository
 ) {
     suspend operator fun invoke(dungeonId: DungeonId, seconds: Long) {
-        if (seconds > 0) {
+        if (seconds < 1) {
             Log.error("ロック時間は1以上を指定してください [seconds: $seconds]")
             return
         }

@@ -3,6 +3,7 @@ package com.dekitateserver.events.domain.entity
 import com.dekitateserver.events.domain.vo.DungeonId
 import com.dekitateserver.events.domain.vo.GachaId
 import org.bukkit.Location
+import java.time.Duration
 import java.time.LocalDateTime
 
 data class Dungeon(
@@ -33,8 +34,18 @@ data class Dungeon(
     val formattedCompleteMessage = completeMessage?.format()
     val formattedCompleteBroadcastMessage = completeBroadcastMessage?.format()
     val formattedExitMessage = exitMessage?.format()
-    val formattedLockMessage = lockMessage?.format()
     val formattedUnlockBroadcastMessage = unlockBroadcastMessage?.format()
+
+    private val formattedLockMessageInternal = lockMessage?.format()
+    val formattedLockMessage: String?
+        get() {
+            val time = if (lockEndDateTime != null) {
+                val seconds = (Duration.between(LocalDateTime.now(), lockEndDateTime).toMillis() / 1000L) + 1L
+                if (seconds >= 60) "${seconds / 60}分" else "${seconds}秒"
+            } else "0秒"
+
+            return formattedLockMessageInternal?.replace("{time}", time)
+        }
 
     private fun String.format() = replace("{name}", name)
 }

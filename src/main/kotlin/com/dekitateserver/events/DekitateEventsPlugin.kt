@@ -8,6 +8,7 @@ import com.dekitateserver.events.domain.vo.GachaCost
 import com.dekitateserver.events.infrastructure.repository.*
 import com.dekitateserver.events.presentation.dungeon.DungeonCommand
 import com.dekitateserver.events.presentation.dungeon.DungeonController
+import com.dekitateserver.events.presentation.dungeon.DungeonEventListener
 import com.dekitateserver.events.presentation.event.EventCommand
 import com.dekitateserver.events.presentation.event.EventController
 import com.dekitateserver.events.presentation.gacha.GachaCommand
@@ -104,6 +105,7 @@ class DekitateEventsPlugin : DekitateEvents, DekitatePlugin() {
         registerCommand(PasswordCommand(passwordController))
         registerCommand(LoginBonusCommand(loginBonusController))
 
+        server.pluginManager.registerEvents(DungeonEventListener(dungeonController), this)
         server.pluginManager.registerEvents(ParkourEventListener(parkourController), this)
         server.pluginManager.registerEvents(GachaEventListener(gachaController), this)
         server.pluginManager.registerEvents(SpawnEventListener(spawnController), this)

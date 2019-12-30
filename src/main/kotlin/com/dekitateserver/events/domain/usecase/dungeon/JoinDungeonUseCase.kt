@@ -20,6 +20,11 @@ class JoinDungeonUseCase(
     suspend operator fun invoke(player: Player, dungeonId: DungeonId) {
         val dungeon = dungeonRepository.getOrError(dungeonId) ?: return
 
+        if (dungeon.isLocked) {
+            player.sendMessageIfNotNull(dungeon.formattedLockMessage)
+            return
+        }
+
         val joinLocation = dungeon.joinLocation
         if (joinLocation != null) {
             player.teleport(joinLocation)
