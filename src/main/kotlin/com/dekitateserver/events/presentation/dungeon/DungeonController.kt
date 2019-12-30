@@ -31,6 +31,7 @@ class DungeonController(plugin: DekitateEventsPlugin) {
     private val createDungeonUseCase = CreateDungeonUseCase(plugin.dungeonRepository)
     private val deleteDungeonUseCase = DeleteDungeonUseCase(plugin.dungeonRepository)
     private val editDungeonUseCase = EditDungeonUseCase(plugin.dungeonRepository)
+    private val sendDungeonEditTypeUseCase = SendDungeonEditTypeListUseCase()
 
     fun join(sender: CommandSender, argSelector: String, argDungeonId: String) {
         val dungeonId = DungeonId(argDungeonId)
@@ -116,5 +117,9 @@ class DungeonController(plugin: DekitateEventsPlugin) {
                     args = argArgs
             )
         }
+    }
+
+    fun sendEditTypeList(sender: CommandSender) {
+        sendDungeonEditTypeUseCase(sender)
     }
 }
