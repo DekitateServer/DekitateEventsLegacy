@@ -76,6 +76,7 @@ class DungeonCommand(
                         argDungeonId = args[1]
                 )
             }
+            "reload" -> dungeonController.reload()
             else -> return false
         }
 
