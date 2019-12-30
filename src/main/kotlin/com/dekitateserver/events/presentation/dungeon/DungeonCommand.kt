@@ -69,6 +69,7 @@ class DungeonCommand(
                 )
             }
             "edittype" -> dungeonController.sendEditTypeList(sender)
+            "list" -> dungeonController.sendList(sender)
             else -> return false
         }
 
