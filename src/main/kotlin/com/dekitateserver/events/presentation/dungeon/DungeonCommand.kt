@@ -70,6 +70,12 @@ class DungeonCommand(
             }
             "edittype" -> dungeonController.sendEditTypeList(sender)
             "list" -> dungeonController.sendList(sender)
+            "info" -> sender.requireArguments(args, 2) {
+                dungeonController.sendInfo(
+                        sender = sender,
+                        argDungeonId = args[1]
+                )
+            }
             else -> return false
         }
 
