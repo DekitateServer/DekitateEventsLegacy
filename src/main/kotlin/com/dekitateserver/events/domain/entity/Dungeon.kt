@@ -21,7 +21,6 @@ data class Dungeon(
         val exitMessage: String? = null,
         val lockEndDateTime: LocalDateTime? = null,
         val lockMessage: String? = "{name}§rは§cロック中§rです! §b{time}§rお待ちください...",
-        val lockBroadcastMessage: String? = null,
         val unlockBroadcastMessage: String? = null
 ) {
     val hasEventTicketReward = rewardEventTicketAmount > 0
@@ -32,7 +31,6 @@ data class Dungeon(
     val formattedCompleteBroadcastMessage = completeBroadcastMessage?.format()
     val formattedExitMessage = exitMessage?.format()
     val formattedLockMessage = lockMessage?.format()
-    val formattedLockBroadcastMessage = lockBroadcastMessage?.format()
     val formattedUnlockBroadcastMessage = unlockBroadcastMessage?.format()
 
     private fun String.format() = replace("{name}", name)

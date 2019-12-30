@@ -46,7 +46,6 @@ class EditDungeonUseCase(
                 }
                 DungeonEditType.EXIT_MESSAGE -> dungeon.copy(exitMessage = EditArgumentsHelper.getString(args))
                 DungeonEditType.LOCK_MESSAGE -> dungeon.copy(lockMessage = EditArgumentsHelper.getString(args))
-                DungeonEditType.LOCK_BROADCAST_MESSAGE -> dungeon.copy(lockBroadcastMessage = EditArgumentsHelper.getString(args))
                 DungeonEditType.UNLOCK_BROADCAST_MESSAGE -> dungeon.copy(unlockBroadcastMessage = EditArgumentsHelper.getString(args))
             }
         } catch (e: IllegalArgumentException) {

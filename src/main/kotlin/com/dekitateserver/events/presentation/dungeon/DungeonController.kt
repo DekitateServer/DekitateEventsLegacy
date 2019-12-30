@@ -6,6 +6,7 @@ import com.dekitateserver.events.domain.vo.DungeonEditType
 import com.dekitateserver.events.domain.vo.DungeonId
 import com.dekitateserver.events.util.selectPlayersOrError
 import com.dekitateserver.events.util.sendWarnMessage
+import com.dekitateserver.events.util.toLongOrError
 import kotlinx.coroutines.launch
 import org.bukkit.command.CommandSender
 
@@ -25,6 +26,7 @@ class DungeonController(plugin: DekitateEventsPlugin) {
             plugin.eventTicketHistoryRepository
     )
     private val exitDungeonUseCase = ExitDungeonUseCase(plugin.dungeonRepository, plugin.dungeonActionHistoryRepository)
+    private val lockDungeonUseCase = LockDungeonUseCase(plugin.dungeonRepository)
     private val createDungeonUseCase = CreateDungeonUseCase(plugin.dungeonRepository)
     private val deleteDungeonUseCase = DeleteDungeonUseCase(plugin.dungeonRepository)
     private val editDungeonUseCase = EditDungeonUseCase(plugin.dungeonRepository)
@@ -56,6 +58,17 @@ class DungeonController(plugin: DekitateEventsPlugin) {
             server.selectPlayersOrError(sender, argSelector)?.forEach { player ->
                 exitDungeonUseCase(player, dungeonId)
             }
+        }
+    }
+
+    fun lock(argDungeonId: String, argSeconds: String) {
+        val seconds = argSeconds.toLongOrError() ?: return
+
+        pluginScope.launch {
+            lockDungeonUseCase(
+                    dungeonId = DungeonId((argDungeonId)),
+                    seconds = seconds
+            )
         }
     }
 

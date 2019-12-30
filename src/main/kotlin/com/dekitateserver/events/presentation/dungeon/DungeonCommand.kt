@@ -36,6 +36,12 @@ class DungeonCommand(
                         argDungeonId = args[2]
                 )
             }
+            "lock" -> sender.requireArguments(args, 3) {
+                dungeonController.lock(
+                        argDungeonId = args[1],
+                        argSeconds = args[2]
+                )
+            }
             "create" -> sender.requireArguments(args, 3) {
                 dungeonController.create(
                         sender = sender,
