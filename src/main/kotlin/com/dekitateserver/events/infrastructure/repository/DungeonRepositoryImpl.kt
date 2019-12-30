@@ -54,13 +54,10 @@ class DungeonRepositoryImpl(plugin: JavaPlugin) : DungeonRepository {
                 return@compute oldDungeon
             }
 
-            if (!dungeonYamlSource.set(dungeon)) {
-                return@compute null
-            }
-
-            isSuccessful = true
-
-            return@compute dungeon
+            return@compute if (dungeonYamlSource.set(dungeon)) {
+                isSuccessful = true
+                dungeon
+            } else null
         }
 
         return@withContext isSuccessful
@@ -74,15 +71,11 @@ class DungeonRepositoryImpl(plugin: JavaPlugin) : DungeonRepository {
                 return@compute null
             }
 
-            if (!dungeonYamlSource.set(dungeon)) {
-                return@compute oldDungeon
-            }
-
-            isSuccessful = true
-
-            cancelDungeonLockTimedOutEventIfNeeded(dungeon)
-
-            return@compute dungeon
+            return@compute if (dungeonYamlSource.set(dungeon)) {
+                isSuccessful = true
+                cancelDungeonLockTimedOutEventIfNeeded(dungeon)
+                dungeon
+            } else oldDungeon
         }
 
         return@withContext isSuccessful
@@ -96,13 +89,10 @@ class DungeonRepositoryImpl(plugin: JavaPlugin) : DungeonRepository {
                 return@compute null
             }
 
-            if (!dungeonYamlSource.delete(dungeonId)) {
-                return@compute oldDungeon
-            }
-
-            isSuccessful = true
-
-            return@compute null
+            return@compute if (dungeonYamlSource.delete(dungeonId)) {
+                isSuccessful = true
+                null
+            } else oldDungeon
         }
 
         return@withContext isSuccessful

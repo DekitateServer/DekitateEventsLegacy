@@ -36,42 +36,54 @@ class PasswordRepositoryImpl(plugin: JavaPlugin) : PasswordRepository {
     }
 
     override suspend fun add(password: Password): Boolean = withContext(Dispatchers.IO) {
-        if (passwordCacheMap.containsKey(password.id)) {
-            return@withContext false
+        var isSuccessful = false
+
+        passwordCacheMap.compute(password.id) { _, oldPassword: Password? ->
+            if (oldPassword != null) {
+                return@compute oldPassword
+            }
+
+            return@compute if (passwordYamlSource.set(password)) {
+                isSuccessful = true
+                password
+            } else null
         }
 
-        return@withContext if (passwordYamlSource.set(password)) {
-            passwordCacheMap[password.id] = password
-            true
-        } else {
-            false
-        }
+        return@withContext isSuccessful
     }
 
     override suspend fun update(password: Password): Boolean = withContext(Dispatchers.IO) {
-        if (!passwordCacheMap.containsKey(password.id)) {
-            return@withContext false
+        var isSuccessful = false
+
+        passwordCacheMap.compute(password.id) { _, oldPassword: Password? ->
+            if (oldPassword == null) {
+                return@compute null
+            }
+
+            return@compute if (passwordYamlSource.set(password)) {
+                isSuccessful = true
+                password
+            } else oldPassword
         }
 
-        return@withContext if (passwordYamlSource.set(password)) {
-            passwordCacheMap[password.id] = password
-            true
-        } else {
-            false
-        }
+        return@withContext isSuccessful
     }
 
     override suspend fun remove(passwordId: PasswordId): Boolean = withContext(Dispatchers.IO) {
-        if (!passwordCacheMap.containsKey(passwordId)) {
-            return@withContext false
+        var isSuccessful = false
+
+        passwordCacheMap.compute(passwordId) { _, oldPassword: Password? ->
+            if (oldPassword == null) {
+                return@compute null
+            }
+
+            return@compute if (passwordYamlSource.delete(passwordId)) {
+                isSuccessful = true
+                null
+            } else oldPassword
         }
 
-        return@withContext if (passwordYamlSource.delete(passwordId)) {
-            passwordCacheMap.remove(passwordId)
-            true
-        } else {
-            false
-        }
+        return@withContext isSuccessful
     }
 
     override suspend fun refreshCache() = withContext(Dispatchers.IO) {

@@ -36,42 +36,54 @@ class ParkourRepositoryImpl(plugin: JavaPlugin) : ParkourRepository {
     }
 
     override suspend fun add(parkour: Parkour): Boolean = withContext(Dispatchers.IO) {
-        if (parkourCacheMap.containsKey(parkour.id)) {
-            return@withContext false
+        var isSuccessful = false
+
+        parkourCacheMap.compute(parkour.id) { _, oldParkour: Parkour? ->
+            if (oldParkour != null) {
+                return@compute oldParkour
+            }
+
+            return@compute if (parkourYamlSource.set(parkour)) {
+                isSuccessful = true
+                parkour
+            } else null
         }
 
-        return@withContext if (parkourYamlSource.set(parkour)) {
-            parkourCacheMap[parkour.id] = parkour
-            true
-        } else {
-            false
-        }
+        return@withContext isSuccessful
     }
 
     override suspend fun update(parkour: Parkour): Boolean = withContext(Dispatchers.IO) {
-        if (!parkourCacheMap.containsKey(parkour.id)) {
-            return@withContext false
+        var isSuccessful = false
+
+        parkourCacheMap.compute(parkour.id) { _, oldParkour: Parkour? ->
+            if (oldParkour == null) {
+                return@compute null
+            }
+
+            return@compute if (parkourYamlSource.set(parkour)) {
+                isSuccessful = true
+                parkour
+            } else oldParkour
         }
 
-        return@withContext if (parkourYamlSource.set(parkour)) {
-            parkourCacheMap[parkour.id] = parkour
-            true
-        } else {
-            false
-        }
+        return@withContext isSuccessful
     }
 
     override suspend fun remove(parkourId: ParkourId): Boolean = withContext(Dispatchers.IO) {
-        if (!parkourCacheMap.containsKey(parkourId)) {
-            return@withContext false
+        var isSuccessful = false
+
+        parkourCacheMap.compute(parkourId) { _, oldParkour: Parkour? ->
+            if (oldParkour == null) {
+                return@compute null
+            }
+
+            return@compute if (parkourYamlSource.delete(parkourId)) {
+                isSuccessful = true
+                null
+            } else oldParkour
         }
 
-        return@withContext if (parkourYamlSource.delete(parkourId)) {
-            parkourCacheMap.remove(parkourId)
-            true
-        } else {
-            false
-        }
+        return@withContext isSuccessful
     }
 
     override suspend fun refreshCache() = withContext(Dispatchers.IO) {

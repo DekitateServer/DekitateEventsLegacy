@@ -20,6 +20,8 @@ class KeyRepositoryImpl(plugin: JavaPlugin) : KeyRepository {
         createCache()
     }
 
+    override fun has(keyId: KeyId): Boolean = keyCacheMap.containsKey(keyId)
+
     override fun get(keyId: KeyId): Key? = keyCacheMap[keyId]
 
     override fun getAll(): List<Key> = keyCacheMap.values.toList()
@@ -33,45 +35,55 @@ class KeyRepositoryImpl(plugin: JavaPlugin) : KeyRepository {
         return key
     }
 
-    override fun has(keyId: KeyId): Boolean = keyCacheMap.containsKey(keyId)
-
     override suspend fun add(key: Key): Boolean = withContext(Dispatchers.IO) {
-        if (keyCacheMap.containsKey(key.id)) {
-            return@withContext false
+        var isSuccessful = false
+
+        keyCacheMap.compute(key.id) { _, oldKey: Key? ->
+            if (oldKey != null) {
+                return@compute oldKey
+            }
+
+            return@compute if (keyYamlSource.set(key)) {
+                isSuccessful = true
+                key
+            } else null
         }
 
-        return@withContext if (keyYamlSource.set(key)) {
-            keyCacheMap[key.id] = key
-            true
-        } else {
-            false
-        }
+        return@withContext isSuccessful
     }
 
     override suspend fun update(key: Key): Boolean = withContext(Dispatchers.IO) {
-        if (!keyCacheMap.containsKey(key.id)) {
-            return@withContext false
+        var isSuccessful = false
+
+        keyCacheMap.compute(key.id) { _, oldKey: Key? ->
+            if (oldKey == null) {
+                return@compute null
+            }
+
+            return@compute if (keyYamlSource.set(key)) {
+                isSuccessful = true
+                key
+            } else oldKey
         }
 
-        return@withContext if (keyYamlSource.set(key)) {
-            keyCacheMap[key.id] = key
-            true
-        } else {
-            false
-        }
+        return@withContext isSuccessful
     }
 
     override suspend fun remove(keyId: KeyId): Boolean = withContext(Dispatchers.IO) {
-        if (!keyCacheMap.containsKey(keyId)) {
-            return@withContext false
+        var isSuccessful = false
+
+        keyCacheMap.compute(keyId) { _, oldKey: Key? ->
+            if (oldKey == null) {
+                return@compute null
+            }
+
+            return@compute if (keyYamlSource.delete(keyId)) {
+                isSuccessful = true
+                null
+            } else oldKey
         }
 
-        return@withContext if (keyYamlSource.delete(keyId)) {
-            keyCacheMap.remove(keyId)
-            true
-        } else {
-            false
-        }
+        return@withContext isSuccessful
     }
 
     override suspend fun refreshCache() = withContext(Dispatchers.IO) {
