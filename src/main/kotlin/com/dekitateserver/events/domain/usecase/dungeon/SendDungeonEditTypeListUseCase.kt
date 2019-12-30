@@ -1,13 +1,13 @@
-package com.dekitateserver.events.domain.usecase.key
+package com.dekitateserver.events.domain.usecase.dungeon
 
-import com.dekitateserver.events.domain.vo.KeyEditType
+import com.dekitateserver.events.domain.vo.DungeonEditType
 import org.bukkit.command.CommandSender
 
-class SendKeyEditTypeListUseCase {
+class SendDungeonEditTypeListUseCase {
 
     operator fun invoke(sender: CommandSender) {
-        val messages = mutableListOf("--------- KeyEditType ---------").apply {
-            KeyEditType.values().forEach {
+        val messages = mutableListOf("--------- DungeonEditType ---------").apply {
+            DungeonEditType.values().forEach {
                 add("| §9${it.id} ${it.description}")
             }
 

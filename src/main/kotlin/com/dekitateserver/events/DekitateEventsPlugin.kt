@@ -6,6 +6,9 @@ import com.dekitateserver.events.config.Configuration
 import com.dekitateserver.events.domain.repository.*
 import com.dekitateserver.events.domain.vo.GachaCost
 import com.dekitateserver.events.infrastructure.repository.*
+import com.dekitateserver.events.presentation.dungeon.DungeonCommand
+import com.dekitateserver.events.presentation.dungeon.DungeonController
+import com.dekitateserver.events.presentation.dungeon.DungeonEventListener
 import com.dekitateserver.events.presentation.event.EventCommand
 import com.dekitateserver.events.presentation.event.EventController
 import com.dekitateserver.events.presentation.gacha.GachaCommand
@@ -40,6 +43,7 @@ class DekitateEventsPlugin : DekitateEvents, DekitatePlugin() {
         get() = mariaDbPoolDataSource
 
     lateinit var signMetaRepository: SignMetaRepository
+    lateinit var dungeonRepository: DungeonRepository
     lateinit var parkourRepository: ParkourRepository
     lateinit var gachaRepository: GachaRepository
     lateinit var keyRepository: KeyRepository
@@ -50,6 +54,7 @@ class DekitateEventsPlugin : DekitateEvents, DekitatePlugin() {
     lateinit var gachaHistoryRepository: GachaHistoryRepository
     lateinit var loginBonusHistoryRepository: LoginBonusHistoryRepository
 
+    lateinit var dungeonActionHistoryRepository: DungeonActionHistoryRepository
     lateinit var parkourActionHistoryRepository: ParkourActionHistoryRepository
 
     override fun onEnable() {
@@ -68,6 +73,7 @@ class DekitateEventsPlugin : DekitateEvents, DekitatePlugin() {
         )
 
         signMetaRepository = SignMetaRepositoryImpl(this)
+        dungeonRepository = DungeonRepositoryImpl(this)
         parkourRepository = ParkourRepositoryImpl(this)
         gachaRepository = GachaRepositoryImpl(this)
         keyRepository = KeyRepositoryImpl(this)
@@ -78,9 +84,11 @@ class DekitateEventsPlugin : DekitateEvents, DekitatePlugin() {
         gachaHistoryRepository = GachaHistoryRepositoryImpl(this)
         loginBonusHistoryRepository = LoginBonusHistoryRepositoryImpl(this)
 
+        dungeonActionHistoryRepository = DungeonActionHistoryRepositoryImpl(this)
         parkourActionHistoryRepository = ParkourActionHistoryRepositoryImpl(this)
 
         val eventController = EventController(this)
+        val dungeonController = DungeonController(this)
         val parkourController = ParkourController(this)
         val gachaController = GachaController(this)
         val keyController = KeyController(this)
@@ -90,12 +98,14 @@ class DekitateEventsPlugin : DekitateEvents, DekitatePlugin() {
         val reviveController = ReviveController(this)
 
         registerCommand(EventCommand(eventController))
+        registerCommand(DungeonCommand(dungeonController))
         registerCommand(ParkourCommand(parkourController))
         registerCommand(GachaCommand(gachaController))
         registerCommand(KeyCommand(keyController))
         registerCommand(PasswordCommand(passwordController))
         registerCommand(LoginBonusCommand(loginBonusController))
 
+        server.pluginManager.registerEvents(DungeonEventListener(dungeonController), this)
         server.pluginManager.registerEvents(ParkourEventListener(parkourController), this)
         server.pluginManager.registerEvents(GachaEventListener(gachaController), this)
         server.pluginManager.registerEvents(SpawnEventListener(spawnController), this)

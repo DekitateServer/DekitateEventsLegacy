@@ -2,7 +2,6 @@ package com.dekitateserver.events.util
 
 import com.dekitateserver.events.DekitateEvents
 import com.dekitateserver.events.domain.vo.*
-import org.bukkit.Bukkit
 import org.bukkit.Server
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
@@ -11,6 +10,7 @@ import org.bukkit.inventory.ItemStack
 fun CommandSender.sendSuccessMessage(message: String) = sendMessage("${DekitateEvents.PREFIX}§a$message")
 fun CommandSender.sendWarnMessage(message: String) = sendMessage("${DekitateEvents.PREFIX}§e$message")
 
+fun CommandSender.sendDungeonIdNotFound(dungeonId: DungeonId) = sendWarnMessage("Dungeon(${dungeonId.value})は存在しません")
 fun CommandSender.sendParkourIdNotFound(parkourId: ParkourId) = sendWarnMessage("Parkour(${parkourId.value})は存在しません")
 fun CommandSender.sendGachaIdNotFound(gachaId: GachaId) = sendWarnMessage("Gacha(${gachaId.value})は存在しません")
 fun CommandSender.sendKeyIdNotFound(keyId: KeyId) = sendWarnMessage("Key(${keyId.value})は存在しません")
@@ -40,21 +40,31 @@ fun Player.addItemOrDrop(vararg items: ItemStack) {
     }
 }
 
-fun String.toPlayerOrError(): Player? = Bukkit.getPlayerExact(this) ?: let {
-    Log.error("Player($it)が見つかりません")
-    return null
+fun String.toIntOrError(): Int? {
+    val int = toIntOrNull()
+    if (int == null) {
+        Log.error("'$this'をInt(数値)に変換できません")
+    }
+
+    return int
 }
 
-fun String.toIntOrError(): Int? = toIntOrNull() ?: let {
-    Log.error("'$this'をInt(数値)に変換できません")
+fun String.toLongOrError(): Long? {
+    val long = toLongOrNull()
+    if (long == null) {
+        Log.error("'$this'をLong(数値)に変換できません")
+    }
 
-    return null
+    return long
 }
 
-fun String.toDoubleOrError(): Double? = toDoubleOrNull() ?: let {
-    Log.error("'$this'をDouble(数値)に変換できません")
+fun String.toDoubleOrError(): Double? {
+    val double = toDoubleOrNull()
+    if (double == null) {
+        Log.error("'$this'をDouble(数値)に変換できません")
+    }
 
-    return null
+    return double
 }
 
 fun Server.selectPlayersOrError(sender: CommandSender, selector: String) = try {
