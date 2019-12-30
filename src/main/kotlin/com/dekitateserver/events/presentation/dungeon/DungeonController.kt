@@ -24,6 +24,7 @@ class DungeonController(plugin: DekitateEventsPlugin) {
             plugin.gachaHistoryRepository,
             plugin.eventTicketHistoryRepository
     )
+    private val exitDungeonUseCase = ExitDungeonUseCase(plugin.dungeonRepository, plugin.dungeonActionHistoryRepository)
     private val createDungeonUseCase = CreateDungeonUseCase(plugin.dungeonRepository)
     private val deleteDungeonUseCase = DeleteDungeonUseCase(plugin.dungeonRepository)
     private val editDungeonUseCase = EditDungeonUseCase(plugin.dungeonRepository)
@@ -44,6 +45,16 @@ class DungeonController(plugin: DekitateEventsPlugin) {
         pluginScope.launch {
             server.selectPlayersOrError(sender, argSelector)?.forEach { player ->
                 completeDungeonUseCase(player, dungeonId)
+            }
+        }
+    }
+
+    fun exit(sender: CommandSender, argSelector: String, argDungeonId: String) {
+        val dungeonId = DungeonId(argDungeonId)
+
+        pluginScope.launch {
+            server.selectPlayersOrError(sender, argSelector)?.forEach { player ->
+                exitDungeonUseCase(player, dungeonId)
             }
         }
     }
