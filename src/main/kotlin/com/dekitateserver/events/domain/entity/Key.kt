@@ -4,6 +4,7 @@ import com.dekitateserver.core.dsl.itemMeta
 import com.dekitateserver.events.domain.vo.KeyCompareResult
 import com.dekitateserver.events.domain.vo.KeyId
 import com.dekitateserver.events.domain.vo.MaterialLocation
+import com.dekitateserver.events.util.Log
 import org.bukkit.Bukkit
 import org.bukkit.Location
 import org.bukkit.Material
@@ -26,6 +27,7 @@ data class Key(
     companion object {
         private val DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")
         private const val DATE_FORMAT_LENGTH = 26 // 'expired @ yyyy-MM-dd HH:mm' is 26 chars
+        private const val DATE_FORMAT_SUBSTRING = 10 // 'expired @ ' is 10 chars
         private val ITEM_FACTORY = Bukkit.getItemFactory()
     }
 
@@ -110,9 +112,10 @@ data class Key(
 
     private fun isExpired(expireDateTimeLine: String): Boolean {
         try {
-            val dateTime = LocalDateTime.parse(expireDateTimeLine, DATE_FORMATTER)
+            val dateTime = LocalDateTime.parse(expireDateTimeLine.substring(DATE_FORMAT_SUBSTRING), DATE_FORMATTER)
             return dateTime < LocalDateTime.now()
         } catch (e: Exception) {
+            Log.error("Failed to parse date time [expireDateTimeLine: $expireDateTimeLine]", e)
         }
 
         return false
