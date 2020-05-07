@@ -1,7 +1,7 @@
 package com.dekitateserver.events.domain.usecase.parkour
 
-import com.dekitateserver.core.util.broadcastMessageWithoutMe
-import com.dekitateserver.core.util.sendMessageIfNotNull
+import com.dekitateserver.core.bukkit.util.broadcastMessageWithoutMe
+import com.dekitateserver.core.bukkit.util.sendMessageIfNotNull
 import com.dekitateserver.events.domain.repository.ParkourActionHistoryRepository
 import com.dekitateserver.events.domain.repository.ParkourRepository
 import com.dekitateserver.events.domain.usecase.spawn.SetSpawnUseCase

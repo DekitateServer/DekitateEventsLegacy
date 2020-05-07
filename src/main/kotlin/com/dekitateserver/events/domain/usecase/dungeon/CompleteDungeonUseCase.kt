@@ -1,7 +1,7 @@
 package com.dekitateserver.events.domain.usecase.dungeon
 
-import com.dekitateserver.core.util.broadcastMessageWithoutMe
-import com.dekitateserver.core.util.sendMessageIfNotNull
+import com.dekitateserver.core.bukkit.util.broadcastMessageWithoutMe
+import com.dekitateserver.core.bukkit.util.sendMessageIfNotNull
 import com.dekitateserver.events.domain.repository.*
 import com.dekitateserver.events.domain.usecase.eventticket.GiveEventTicketUseCase
 import com.dekitateserver.events.domain.usecase.gacha.PlayGachaUseCase

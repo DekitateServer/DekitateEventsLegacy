@@ -1,6 +1,6 @@
 package com.dekitateserver.events.domain.entity
 
-import com.dekitateserver.core.util.MersenneTwisterFast
+import com.dekitateserver.core.common.util.MersenneTwisterFast
 import com.dekitateserver.events.domain.vo.GachaId
 
 data class Gacha(

@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.3.61"
+    kotlin("jvm") version "1.3.72"
     id("org.jmailen.kotlinter") version "2.2.0"
 }
 
@@ -19,7 +19,7 @@ repositories {
 }
 
 dependencies {
-    implementation("com.dekitateserver.core:DekitateCore:1.0.0-SNAPSHOT")
+    implementation("com.dekitateserver.core:dekitatecore-bukkit:1.0.0-SNAPSHOT")
 }
 
 val compileKotlin: KotlinCompile by tasks

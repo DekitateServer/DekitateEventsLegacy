@@ -1,12 +1,12 @@
 package com.dekitateserver.events.presentation.dungeon
 
-import com.dekitateserver.core.command.AbstractCommand
+import com.dekitateserver.core.bukkit.presentation.BaseCommand
 import org.bukkit.command.Command
 import org.bukkit.command.CommandSender
 
 class DungeonCommand(
-        private val dungeonController: DungeonController
-) : AbstractCommand("dungeon") {
+    private val dungeonController: DungeonController
+) : BaseCommand("dungeon") {
 
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<String>): Boolean {
         if (args.isHelpCommand()) {

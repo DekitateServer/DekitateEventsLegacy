@@ -1,6 +1,6 @@
 package com.dekitateserver.events.domain.usecase.dungeon
 
-import com.dekitateserver.core.util.formatColorCodes
+import com.dekitateserver.core.bukkit.util.formatColorCodes
 import com.dekitateserver.events.domain.entity.Dungeon
 import com.dekitateserver.events.domain.repository.DungeonRepository
 import com.dekitateserver.events.domain.vo.DungeonId

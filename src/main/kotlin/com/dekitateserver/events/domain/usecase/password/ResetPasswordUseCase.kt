@@ -1,6 +1,6 @@
 package com.dekitateserver.events.domain.usecase.password
 
-import com.dekitateserver.core.util.sendMessageIfNotNull
+import com.dekitateserver.core.bukkit.util.sendMessageIfNotNull
 import com.dekitateserver.events.domain.repository.PasswordRepository
 import com.dekitateserver.events.domain.vo.PasswordId
 import org.bukkit.entity.Player

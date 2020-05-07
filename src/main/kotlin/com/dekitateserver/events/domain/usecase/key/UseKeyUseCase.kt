@@ -1,6 +1,6 @@
 package com.dekitateserver.events.domain.usecase.key
 
-import com.dekitateserver.core.util.sendMessageIfNotNull
+import com.dekitateserver.core.bukkit.util.sendMessageIfNotNull
 import com.dekitateserver.events.domain.repository.KeyRepository
 import com.dekitateserver.events.domain.vo.KeyCompareResult
 import com.dekitateserver.events.domain.vo.KeyId

@@ -1,6 +1,6 @@
 package com.dekitateserver.events
 
-import com.dekitateserver.core.DekitatePlugin
+import com.dekitateserver.core.bukkit.DekitatePlugin
 import com.dekitateserver.events.config.ConfigKeys
 import com.dekitateserver.events.config.Configuration
 import com.dekitateserver.events.domain.repository.*

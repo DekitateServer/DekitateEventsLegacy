@@ -1,8 +1,9 @@
 package com.dekitateserver.events.config
 
-import com.dekitateserver.core.config.AbstractConfigKeys
+import com.dekitateserver.core.common.config.BaseConfigKeys
 
-object ConfigKeys : AbstractConfigKeys() {
+object ConfigKeys : BaseConfigKeys() {
+
     val DATABASE_URL = stringKey("database.url", "")
     val DATABASE_USER = stringKey("database.user", "")
     val DATABASE_PASSWORD = stringKey("database.password", "")

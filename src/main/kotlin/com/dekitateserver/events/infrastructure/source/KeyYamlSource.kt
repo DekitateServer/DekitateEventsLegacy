@@ -1,6 +1,6 @@
 package com.dekitateserver.events.infrastructure.source
 
-import com.dekitateserver.core.data.source.YamlStorage
+import com.dekitateserver.core.bukkit.infrastructure.source.YamlStorage
 import com.dekitateserver.events.domain.entity.Key
 import com.dekitateserver.events.domain.vo.KeyId
 import com.dekitateserver.events.util.Log
@@ -9,6 +9,7 @@ import org.bukkit.Material
 import java.io.File
 
 class KeyYamlSource(dataFolder: File) {
+
     private val storage = YamlStorage(File(dataFolder, "key.yml"))
 
     fun getAll(): List<Key> {

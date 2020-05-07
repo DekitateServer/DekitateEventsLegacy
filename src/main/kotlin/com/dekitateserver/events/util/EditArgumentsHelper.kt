@@ -1,6 +1,6 @@
 package com.dekitateserver.events.util
 
-import com.dekitateserver.core.util.formatColorCodes
+import com.dekitateserver.core.bukkit.util.formatColorCodes
 import org.bukkit.Location
 import org.bukkit.Material
 import org.bukkit.entity.Player

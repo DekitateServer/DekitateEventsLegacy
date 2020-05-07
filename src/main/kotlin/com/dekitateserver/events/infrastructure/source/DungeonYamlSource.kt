@@ -1,6 +1,6 @@
 package com.dekitateserver.events.infrastructure.source
 
-import com.dekitateserver.core.data.source.YamlStorage
+import com.dekitateserver.core.bukkit.infrastructure.source.YamlStorage
 import com.dekitateserver.events.domain.entity.Dungeon
 import com.dekitateserver.events.domain.vo.DungeonId
 import com.dekitateserver.events.domain.vo.GachaId

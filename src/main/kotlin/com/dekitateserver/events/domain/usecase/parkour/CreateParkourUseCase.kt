@@ -1,6 +1,6 @@
 package com.dekitateserver.events.domain.usecase.parkour
 
-import com.dekitateserver.core.util.formatColorCodes
+import com.dekitateserver.core.bukkit.util.formatColorCodes
 import com.dekitateserver.events.domain.entity.Parkour
 import com.dekitateserver.events.domain.repository.ParkourRepository
 import com.dekitateserver.events.domain.vo.ParkourId

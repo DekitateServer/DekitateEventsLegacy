@@ -1,7 +1,7 @@
 package com.dekitateserver.events.domain.entity
 
-import com.dekitateserver.core.dsl.itemMeta
-import com.dekitateserver.core.dsl.lore
+import com.dekitateserver.core.bukkit.dsl.itemMeta
+import com.dekitateserver.core.bukkit.dsl.lore
 import org.bukkit.Material
 import org.bukkit.enchantments.Enchantment
 import org.bukkit.entity.Player

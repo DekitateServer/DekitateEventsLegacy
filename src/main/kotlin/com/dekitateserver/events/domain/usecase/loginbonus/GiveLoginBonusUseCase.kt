@@ -1,6 +1,6 @@
 package com.dekitateserver.events.domain.usecase.loginbonus
 
-import com.dekitateserver.core.util.sendMessageIfNotNull
+import com.dekitateserver.core.bukkit.util.sendMessageIfNotNull
 import com.dekitateserver.events.domain.repository.LoginBonusHistoryRepository
 import com.dekitateserver.events.domain.repository.LoginBonusRepository
 import org.bukkit.Server

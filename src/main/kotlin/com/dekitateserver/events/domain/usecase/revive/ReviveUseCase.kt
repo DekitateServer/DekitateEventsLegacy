@@ -1,7 +1,7 @@
 package com.dekitateserver.events.domain.usecase.revive
 
-import com.dekitateserver.core.util.getExperience
-import com.dekitateserver.core.util.takeExperience
+import com.dekitateserver.core.bukkit.util.getExperience
+import com.dekitateserver.core.bukkit.util.takeExperience
 import com.dekitateserver.events.util.Log
 import org.bukkit.Location
 import org.bukkit.Particle

@@ -1,12 +1,12 @@
 package com.dekitateserver.events.presentation.password
 
-import com.dekitateserver.core.command.AbstractCommand
+import com.dekitateserver.core.bukkit.presentation.BaseCommand
 import org.bukkit.command.Command
 import org.bukkit.command.CommandSender
 
 class PasswordCommand(
-        private val passwordController: PasswordController
-) : AbstractCommand("password") {
+    private val passwordController: PasswordController
+) : BaseCommand("password") {
 
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<String>): Boolean {
         if (args.isHelpCommand()) {

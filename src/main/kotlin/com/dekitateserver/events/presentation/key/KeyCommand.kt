@@ -1,12 +1,12 @@
 package com.dekitateserver.events.presentation.key
 
-import com.dekitateserver.core.command.AbstractCommand
+import com.dekitateserver.core.bukkit.presentation.BaseCommand
 import org.bukkit.command.Command
 import org.bukkit.command.CommandSender
 
 class KeyCommand(
-        private val keyController: KeyController
-) : AbstractCommand("key") {
+    private val keyController: KeyController
+) : BaseCommand("key") {
 
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<String>): Boolean {
         if (args.isHelpCommand()) {

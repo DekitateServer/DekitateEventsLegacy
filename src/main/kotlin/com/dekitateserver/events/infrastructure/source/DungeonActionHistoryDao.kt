@@ -1,6 +1,6 @@
 package com.dekitateserver.events.infrastructure.source
 
-import com.dekitateserver.core.data.source.AbstractDao
+import com.dekitateserver.core.common.infrastructure.source.Dao
 import com.dekitateserver.events.domain.vo.DungeonAction
 import com.dekitateserver.events.domain.vo.DungeonId
 import com.dekitateserver.events.util.Log
@@ -10,7 +10,7 @@ import java.time.LocalDateTime
 import java.util.*
 import javax.sql.DataSource
 
-class DungeonActionHistoryDao(dataSource: DataSource) : AbstractDao(dataSource) {
+class DungeonActionHistoryDao(dataSource: DataSource) : Dao(dataSource) {
 
     companion object {
         private const val TABLE_NAME = "dekitateevents_dungeon_action_history"

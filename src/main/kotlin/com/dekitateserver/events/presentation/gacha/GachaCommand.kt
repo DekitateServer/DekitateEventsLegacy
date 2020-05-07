@@ -1,12 +1,12 @@
 package com.dekitateserver.events.presentation.gacha
 
-import com.dekitateserver.core.command.AbstractCommand
+import com.dekitateserver.core.bukkit.presentation.BaseCommand
 import org.bukkit.command.Command
 import org.bukkit.command.CommandSender
 
 class GachaCommand(
-        private val gachaController: GachaController
-) : AbstractCommand("gacha") {
+    private val gachaController: GachaController
+) : BaseCommand("gacha") {
 
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<String>): Boolean {
         if (args.isHelpCommand()) {

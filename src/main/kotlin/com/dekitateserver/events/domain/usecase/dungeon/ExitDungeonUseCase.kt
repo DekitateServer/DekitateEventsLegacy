@@ -1,6 +1,6 @@
 package com.dekitateserver.events.domain.usecase.dungeon
 
-import com.dekitateserver.core.util.sendMessageIfNotNull
+import com.dekitateserver.core.bukkit.util.sendMessageIfNotNull
 import com.dekitateserver.events.domain.repository.DungeonActionHistoryRepository
 import com.dekitateserver.events.domain.repository.DungeonRepository
 import com.dekitateserver.events.domain.usecase.spawn.SetSpawnUseCase

@@ -1,7 +1,7 @@
 package com.dekitateserver.events.domain.usecase.gacha
 
-import com.dekitateserver.core.util.broadcastMessageWithoutMe
-import com.dekitateserver.core.util.sendMessageIfNotNull
+import com.dekitateserver.core.bukkit.util.broadcastMessageWithoutMe
+import com.dekitateserver.core.bukkit.util.sendMessageIfNotNull
 import com.dekitateserver.events.domain.entity.Gacha
 import com.dekitateserver.events.domain.repository.GachaHistoryRepository
 import com.dekitateserver.events.domain.repository.GachaRepository

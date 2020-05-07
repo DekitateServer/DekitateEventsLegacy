@@ -1,13 +1,13 @@
 package com.dekitateserver.events.infrastructure.source
 
-import com.dekitateserver.core.data.source.AbstractDao
+import com.dekitateserver.core.common.infrastructure.source.Dao
 import com.dekitateserver.events.util.Log
 import java.sql.SQLException
 import java.sql.Timestamp
 import java.util.*
 import javax.sql.DataSource
 
-class VoteTicketHistoryDao(dataSource: DataSource) : AbstractDao(dataSource) {
+class VoteTicketHistoryDao(dataSource: DataSource) : Dao(dataSource) {
 
     companion object {
         private const val TABLE_NAME = "dekitateevents_vote_ticket_history"

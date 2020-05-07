@@ -1,13 +1,13 @@
 package com.dekitateserver.events.infrastructure.source
 
-import com.dekitateserver.core.data.source.AbstractDao
+import com.dekitateserver.core.common.infrastructure.source.Dao
 import com.dekitateserver.events.domain.vo.LoginBonusId
 import com.dekitateserver.events.util.Log
 import java.sql.SQLException
 import java.util.*
 import javax.sql.DataSource
 
-class LoginBonusHistoryDao(dataSource: DataSource) : AbstractDao(dataSource) {
+class LoginBonusHistoryDao(dataSource: DataSource) : Dao(dataSource) {
 
     companion object {
         private const val TABLE_NAME = "dekitateevents_login_bonus_history"

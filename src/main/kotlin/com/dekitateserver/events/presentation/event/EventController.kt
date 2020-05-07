@@ -37,6 +37,10 @@ class EventController(plugin: DekitateEventsPlugin) {
         }
     }
 
+    fun teleport(sender: CommandSender, argSelector: String, argX: String, argY: String, argZ: String, argYaw: String?, argPitch: String?) {
+
+    }
+
     fun setSpawn(sender: CommandSender, argSelector: String, argX: String, argY: String, argZ: String) {
         if (sender !is BlockCommandSender) {
             sender.sendCommandBlockOnly()
@@ -44,14 +48,39 @@ class EventController(plugin: DekitateEventsPlugin) {
         }
 
         val location = Location(
-                sender.block.world,
-                argX.toDoubleOrError() ?: return,
-                argY.toDoubleOrError() ?: return,
-                argZ.toDoubleOrError() ?: return
+            sender.block.world,
+            argX.toDoubleOrError() ?: return,
+            argY.toDoubleOrError() ?: return,
+            argZ.toDoubleOrError() ?: return
         )
 
         server.selectPlayersOrError(sender, argSelector)?.forEach { player ->
             setSpawnUseCase(player, location)
         }
+    }
+
+    fun sendUnsupported(sender: CommandSender) {
+
+    }
+
+    private fun createLocation(pivot: Location, x: String, y: String, z: String, yaw: String?, pitch: String?) {
+        Location(
+            pivot.world,
+            parseCoordinate(pivot.x, x) ?: return,
+            parseCoordinate(pivot.y, y) ?: return,
+            parseCoordinate(pivot.z, z) ?: return
+        )
+    }
+
+    private fun parseCoordinate(p: Double, arg: String): Double? {
+        if (arg.startsWith('~')) {
+            val sub = arg.substring(1)
+
+            return if (sub.isNotEmpty()) {
+                sub.toDoubleOrError()?.plus(p)
+            } else p
+        }
+
+        return arg.toDoubleOrError()
     }
 }
